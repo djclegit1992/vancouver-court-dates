@@ -41,6 +41,9 @@ def main():
 
     print("User-Agent: %s" % scrape.USER_AGENT)
     print("trust store: %s" % scrape.TRUST_STORE)
+    from urllib.parse import urlparse
+    print("tls chain  : %s"
+          % scrape.ensure_tls(urlparse(scrape.INDEX_URL).hostname))
     print()
 
     # -- 1. index ---------------------------------------------------

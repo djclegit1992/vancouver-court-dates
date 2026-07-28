@@ -52,6 +52,24 @@ try:
 except Exception:
     TRUST_STORE = "certifi"
 
+# Some servers omit an intermediate certificate and rely on the client
+# to fetch it via the AIA extension. Windows and browsers do that
+# silently; OpenSSL does not, so Python fails on a site that works
+# perfectly in a browser. This repairs the chain if, and only if, it is
+# currently broken. Verification is never disabled: the fetched
+# intermediate still has to chain to an already-trusted root.
+TLS_REPAIR = "not attempted"
+
+
+def ensure_tls(host):
+    global TLS_REPAIR
+    try:
+        import tlsfix
+        TLS_REPAIR = tlsfix.ensure(host)
+    except Exception as e:
+        TLS_REPAIR = "skipped: %s" % e
+    return TLS_REPAIR
+
 # --------------------------------------------------------------------------
 # Per-jurisdiction constants. See playbook section 11.
 # --------------------------------------------------------------------------
@@ -331,7 +349,7 @@ def check_document(session, doc, prev):
     text = extract_text(content, doc["kind"])
     rec["readable"] = text is not None
     rec["text_hash"] = sha256(text.encode("utf-8")) if text is not None else None
-    archive(content, rec["bytes_hash"], doc)
+    rec["archive_path"] = archive(content, rec, doc)
 
     # Bytes are compared first, deliberately. An image-only PDF can never
     # be read, but it can still be seen to be unchanged. Checking
@@ -378,16 +396,18 @@ def parse_document(rec, doc, prev):
     never fails the fetch: fetching and reading are separate layers and
     conflating them would let a template change take the whole run down.
     """
-    digest = rec.get("bytes_hash")
+    digest = rec.get("text_hash") or rec.get("bytes_hash")
     if not digest or rec["status"] == "FETCH_FAILED":
         return None
 
+    # Cache keyed on content: a re-export with identical text reuses
+    # the existing parse rather than repeating the work.
     cache = os.path.join(PARSED, "%s.json" % digest[:16])
     cached = load_json(cache, None)
     if cached:
         return cached
 
-    path = archive_path(digest, doc)
+    path = rec.get("archive_path") or archive_path(digest, doc)
     if not os.path.exists(path):
         return None
 
@@ -428,19 +448,32 @@ def parse_document(rec, doc, prev):
     return info
 
 
-def archive(content, digest, doc):
+def archive(content, rec, doc):
     """
-    Content-addressed archive. An unchanged document costs no extra
-    storage, and every distinct version is kept forever. Raw bytes are
-    the one thing that cannot be added retroactively.
+    Content-addressed archive. Raw bytes are the one thing that cannot
+    be added retroactively: find a parser bug in month four and you can
+    reprocess months one to four instead of losing them.
+
+    Keyed on text_hash, not bytes_hash, when the document is readable.
+    A PDF re-exported with no substantive edit gets fresh bytes but
+    identical text, so keying on bytes would store a new copy every
+    night. Over a year that is hundreds of megabytes of byte-different,
+    word-identical files in a repository that has to stay clonable.
+    Keying on content keeps exactly one copy per distinct version,
+    which is what reprocessing actually needs.
+
+    Unreadable files fall back to bytes_hash, since content is the one
+    thing we cannot compare on those.
     """
-    d = os.path.join(RAW, digest[:2])
-    os.makedirs(d, exist_ok=True)
-    path = os.path.join(d, "%s-%s.%s" % (digest[:16], slugify(doc["title"]),
-                                         doc["kind"]))
+    digest = rec.get("text_hash") or rec.get("bytes_hash")
+    if not digest:
+        return None
+    path = archive_path(digest, doc)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     if not os.path.exists(path):
         with open(path, "wb") as f:
             f.write(content)
+    return path
 
 
 # --------------------------------------------------------------------------
@@ -662,8 +695,10 @@ def main():
         return 0
 
     run_id = now().strftime("%Y%m%dT%H%M%SZ")
-    session = make_session()
     print("run %s" % run_id)
+    print("tls: %s | %s" % (TRUST_STORE,
+                            ensure_tls(urlparse(INDEX_URL).hostname)))
+    session = make_session()
 
     # One request for the index.
     try:

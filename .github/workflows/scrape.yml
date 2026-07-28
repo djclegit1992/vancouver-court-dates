@@ -63,6 +63,13 @@ jobs:
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
         run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL/start" || true
 
+      - name: Diagnose TLS chain
+        # bccourts.ca appears to omit an intermediate certificate.
+        # Windows hides this by fetching it via AIA; OpenSSL does not.
+        # Non-fatal: this only reports what the server presents.
+        continue-on-error: true
+        run: python diagnose_tls.py
+
       - name: Run tests
         # The suites are fast and offline. If the diff logic is broken
         # we would rather fail here than publish wrong data.
