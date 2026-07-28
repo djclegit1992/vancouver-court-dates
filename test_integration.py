@@ -250,6 +250,30 @@ def main():
     check("only that document moved",
           cell(latest3, "MVA", "2 Days")["earliest_date"], "2026-09-21")
 
+    # -- run 4, the court regenerates with identical availability ----
+    print("\nrun 4, court regenerates: new timestamp, same dates")
+    st = scrape.load_json("data/state.json", {})[url]
+    same_dates = st["dates"]
+    regenerated = make_bcsc_pdf("2 Days, Civil", same_dates,
+                                "Wednesday, July 29, 2026 5:03 pm")
+    sess.files[url] = (regenerated, '"regen:0"')
+    scrape.main()
+    latest4 = scrape.load_json("data/latest.json", {})
+    d4 = {x["title"]: x for x in latest4["documents"]}["2 Day Civil Trials"]
+    check("regeneration is not an alert", d4["status"], "REEXPORTED")
+    check("earliest date unmoved", d4["earliest_date"], same_dates[0])
+
+    # And a regeneration that DOES move a date must still alert.
+    moved = make_bcsc_pdf("2 Days, Civil", same_dates[1:],
+                          "Thursday, July 30, 2026 5:03 pm")
+    sess.files[url] = (moved, '"regen2:0"')
+    scrape.main()
+    latest5 = scrape.load_json("data/latest.json", {})
+    d5 = {x["title"]: x for x in latest5["documents"]}["2 Day Civil Trials"]
+    check("a real change still alerts", d5["status"], "UPDATED")
+    check("and the grid follows",
+          cell(latest5, "Civil", "2 Days")["earliest_date"], same_dates[1])
+
     print("\n%d passed, %d failed" % (len(PASS), len(FAIL)))
     shutil.rmtree(tmp, ignore_errors=True)
     return 1 if FAIL else 0
