@@ -138,6 +138,18 @@ def main():
     sess = FakeSession()
     scrape.make_session = lambda: sess
     scrape.REQUEST_DELAY = 0
+
+    # This suite must make no network calls at all. ensure_tls opens
+    # real sockets, and main() runs a dozen times below, so leaving it
+    # live turns an offline suite into a dozen round trips and can hang
+    # a CI runner for minutes.
+    os.environ["SKIP_TLS_CHECK"] = "1"
+    def no_network(*a, **k):
+        raise AssertionError("the offline suite attempted a real network "
+                             "call: %r" % (a,))
+    scrape.requests.Session = no_network
+    import socket as _socket
+    _socket.create_connection = no_network
     scrape.MIN_DOCUMENTS = 3
 
     V = "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/"

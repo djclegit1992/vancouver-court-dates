@@ -59,15 +59,31 @@ except Exception:
 # currently broken. Verification is never disabled: the fetched
 # intermediate still has to chain to an already-trusted root.
 TLS_REPAIR = "not attempted"
+_TLS_DONE = {}
 
 
 def ensure_tls(host):
+    """
+    Repair the certificate chain for `host`, once per process.
+
+    Cached deliberately. This opens real sockets, so calling it on every
+    run of main() would make the offline test suite do a network round
+    trip per call. Set SKIP_TLS_CHECK=1 to disable it entirely, which
+    is what the tests do.
+    """
     global TLS_REPAIR
+    if os.environ.get("SKIP_TLS_CHECK") == "1":
+        TLS_REPAIR = "skipped by SKIP_TLS_CHECK"
+        return TLS_REPAIR
+    if host in _TLS_DONE:
+        TLS_REPAIR = _TLS_DONE[host]
+        return TLS_REPAIR
     try:
         import tlsfix
         TLS_REPAIR = tlsfix.ensure(host)
     except Exception as e:
         TLS_REPAIR = "skipped: %s" % e
+    _TLS_DONE[host] = TLS_REPAIR
     return TLS_REPAIR
 
 # --------------------------------------------------------------------------
