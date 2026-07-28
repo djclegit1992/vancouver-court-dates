@@ -24,23 +24,43 @@ import tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scrape
 
-INDEX = "/mnt/user-data/uploads/bc-index.html"
+# Where to find the court's index page. Checked in order, so this
+# works both locally and in the sandbox it was written in.
+INDEX_CANDIDATES = [
+    "bc-index.html",
+    os.path.join("data", "bc-index.html"),
+    "/mnt/user-data/uploads/bc-index.html",
+]
+
+
+def find_index():
+    for p in INDEX_CANDIDATES:
+        if os.path.exists(p):
+            return p
+    return None
 
 
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
     out = sys.argv[2] if len(sys.argv) > 2 else "sample_latest.json"
     out = os.path.abspath(out)
-    index_path = sys.argv[3] if len(sys.argv) > 3 else INDEX
+    index_path = sys.argv[3] if len(sys.argv) > 3 else find_index()
 
     if not os.path.isdir(src):
         print("No such directory: %s" % src)
         return 1
-    if not os.path.exists(index_path):
-        print("Need the court's index HTML at %s" % index_path)
+    if not index_path or not os.path.exists(index_path):
+        print("Cannot find the court's index HTML. Looked for:")
+        for p in INDEX_CANDIDATES:
+            print("   %s" % p)
+        print()
+        print("Download it with:")
+        print("  curl.exe -s https://www.bccourts.ca/supreme_court/"
+              "scheduling/index.aspx -o bc-index.html")
         return 1
 
     src = os.path.abspath(src)
+    index_path = os.path.abspath(index_path)
     html = open(index_path, encoding="utf-8", errors="replace").read()
 
     tmp = tempfile.mkdtemp(prefix="vcdfix-")

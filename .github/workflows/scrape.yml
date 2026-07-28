@@ -15,10 +15,17 @@ name: scrape
 #                      shift with Pacific daylight saving, which is
 #                      exactly why it is the backup.
 #
-#   healthchecks.io    Watchdog. No ping in the grace window and we get
-#                      an email. This is the layer that protects alert
-#                      subscribers, because a silently dead pipeline is
-#                      the failure that actually does damage.
+#   healthchecks.io    Watchdog. Success pings only, no /start and no
+#                      /fail, so a single dropped connection does not
+#                      raise an alarm. Configure the check in CRON mode
+#                      with '15 8-17 * * *' and timezone
+#                      America/Vancouver, so it expects a ping after
+#                      each scheduled run and stays quiet overnight.
+#                      A period-based check would alarm every night,
+#                      because there is a 15 hour gap with no runs.
+#                      This is the layer that protects alert
+#                      subscribers: a silently dead pipeline is the
+#                      failure that actually does damage.
 #
 # The skip guard in scrape.py means the backup exits in seconds if the
 # primary already ran. Manual and dispatched runs force through it.
@@ -62,12 +69,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Signal start
-        if: env.HEALTHCHECK_URL != ''
-        env:
-          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
-        run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL/start" || true
 
       - name: Diagnose TLS chain
         # bccourts.ca appears to omit an intermediate certificate.
@@ -134,8 +135,15 @@ jobs:
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
         run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL" || true
 
-      - name: Signal failure
-        if: failure() && env.HEALTHCHECK_URL != ''
-        env:
-          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
-        run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL/fail" || true
+      # No /fail ping, deliberately.
+      #
+      # bccourts.ca occasionally drops a connection: one run timed out
+      # three times at 45 seconds and the next hour was clean. Pinging
+      # /fail would email on every such blip, and an alarm that fires on
+      # noise gets muted, which defeats the point of having a watchdog.
+      #
+      # Staying silent instead lets the grace window do the work. One
+      # failure is absorbed; several consecutive hours with no success
+      # ping trips the alarm, which is the condition actually worth
+      # knowing about. The run still shows red in Actions either way,
+      # so nothing is hidden.

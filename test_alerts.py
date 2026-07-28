@@ -155,7 +155,8 @@ def reset(payload, **kw):
 def main():
     src = sys.argv[1] if len(sys.argv) > 1 else None
     if not src or not os.path.isdir(src):
-        print("Usage: python test_alerts.py <dir-of-real-pdfs>")
+        print("Usage: python test_alerts.py <dir-of-real-pdfs> "
+          "[path-to-bc-index.html]")
         return 1
     src = os.path.abspath(src)
 
@@ -164,10 +165,10 @@ def main():
 
     import subprocess
     here = os.path.dirname(os.path.abspath(__file__))
-    r = subprocess.run(
-        [sys.executable, os.path.join(here, "make_fixture.py"), src, fixture,
-         "/mnt/user-data/uploads/bc-index.html"],
-        capture_output=True, text=True)
+    cmd = [sys.executable, os.path.join(here, "make_fixture.py"), src, fixture]
+    if len(sys.argv) > 2:
+        cmd.append(os.path.abspath(sys.argv[2]))
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=os.getcwd())
     if not os.path.exists(fixture):
         print("could not build fixture:\n%s\n%s" % (r.stdout, r.stderr))
         return 1
