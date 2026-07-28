@@ -98,6 +98,14 @@ REQUEST_DELAY = 2.0
 REQUEST_TIMEOUT = 45
 RETRIES = 3
 SKIP_GUARD_MINUTES = 20
+# Bump when the shape of a cached parse record changes. Entries written
+# by an older version are discarded and re-derived rather than trusted.
+# Without this, adding a field to the cache is a silent no-op: existing
+# entries never expire, so the new field never appears for any document
+# that has not changed since, and code depending on it quietly does
+# nothing.
+PARSE_SCHEMA = 2
+
 FAILURE_STREAK_LIMIT = 3
 MAX_FAILURE_RATIO = 0.20
 STALE_MONTHS = 3
@@ -325,6 +333,10 @@ def check_document(session, doc, prev):
         for k in ("bytes_hash", "text_hash", "size_bytes",
                   "last_modified", "etag", "readable"):
             rec[k] = prev.get(k)
+        # The archived copy is still on disk under the carried hash, so
+        # a stale-schema cache entry can be re-derived without a fetch.
+        rec["archive_path"] = archive_path(
+            prev.get("text_hash") or prev.get("bytes_hash") or "", doc)
         return rec
 
     if r.status_code != 200:
@@ -429,7 +441,7 @@ def parse_document(rec, doc, prev):
     # the existing parse rather than repeating the work.
     cache = os.path.join(PARSED, "%s.json" % digest[:16])
     cached = load_json(cache, None)
-    if cached:
+    if cached and cached.get("schema") == PARSE_SCHEMA:
         return cached
 
     path = rec.get("archive_path") or archive_path(digest, doc)
@@ -441,6 +453,7 @@ def parse_document(rec, doc, prev):
         with open(path, "rb") as f:
             result = parser.parse_pdf(f.read(), LOCATION_NAME)
         info = {
+            "schema": PARSE_SCHEMA,
             "parse_status": result.status,
             "parse_reason": result.reason,
             "category_raw": result.category_raw,
@@ -487,6 +500,7 @@ def parse_document(rec, doc, prev):
         }
     except Exception as e:
         info = {
+            "schema": PARSE_SCHEMA,
             "parse_status": "UNREADABLE",
             "parse_reason": "parser raised %s: %s" % (type(e).__name__, e),
             "earliest_date": None,

@@ -250,6 +250,24 @@ def main():
     check("only that document moved",
           cell(latest3, "MVA", "2 Days")["earliest_date"], "2026-09-21")
 
+    # -- stale cache must be re-derived, not trusted -----------------
+    print("\nparse cache schema")
+    import glob as _glob, json as _json
+    files = _glob.glob("data/parsed/*.json")
+    check("cache written", len(files) > 0, True)
+    # Simulate entries written by an older version of the code.
+    for f in files:
+        d = _json.load(open(f))
+        d.pop("content_hash", None)
+        d["schema"] = 1
+        _json.dump(d, open(f, "w"))
+    scrape.main()
+    after = _json.load(open(files[0]))
+    check("stale entry re-derived", after.get("schema"),
+          scrape.PARSE_SCHEMA)
+    check("and the new field is present",
+          "content_hash" in after, True)
+
     # -- run 4, the court regenerates with identical availability ----
     print("\nrun 4, court regenerates: new timestamp, same dates")
     st = scrape.load_json("data/state.json", {})[url]
