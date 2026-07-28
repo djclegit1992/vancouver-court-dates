@@ -1,0 +1,769 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#vcd-tool-wrapper, #vcd-tool-wrapper *:not(svg):not(svg *), #vcd-tool-wrapper *:not(svg):not(svg *)::before, #vcd-tool-wrapper *:not(svg):not(svg *)::after { margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important; line-height: 1.6 !important; border: none !important; outline: none !important; text-decoration: none !important; list-style: none !important; background: none !important; font-size: 15px !important; font-weight: 400 !important; font-style: normal !important; color: #2f2f2f !important; text-transform: none !important; letter-spacing: normal !important; text-align: left !important; float: none !important; }
+#vcd-tool-wrapper { max-width: 960px !important; margin: 0 auto !important; padding: 0 20px 40px !important; display: block !important; }
+#vcd-tool-wrapper .vcd-container { max-width: 920px !important; margin: 0 auto !important; background: #ffffff !important; border-radius: 20px !important; overflow: hidden !important; position: relative !important; box-shadow: 0 1px 3px rgba(47,47,47,0.04), 0 24px 64px -16px rgba(47,47,47,0.14) !important; }
+#vcd-tool-wrapper .vcd-container::before { content: "" !important; display: block !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 3px !important; background: #e28a64 !important; z-index: 10 !important; }
+#vcd-tool-wrapper .vcd-ic { width: 15px !important; height: 15px !important; flex: 0 0 auto !important; vertical-align: -2px !important; }
+#vcd-tool-wrapper .vcd-ic-lg { width: 20px !important; height: 20px !important; }
+#vcd-tool-wrapper .vcd-header { background: radial-gradient(ellipse at 85% 15%, #3a3a3a 0%, #2f2f2f 55%) !important; padding: 54px 56px 44px !important; text-align: center !important; position: relative !important; overflow: hidden !important; }
+#vcd-tool-wrapper .vcd-hero-bg { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; z-index: 0 !important; pointer-events: none !important; }
+#vcd-tool-wrapper .vcd-header::before { content: "Supreme Court of British Columbia" !important; position: relative !important; z-index: 2 !important; display: inline-block !important; background: rgba(226,138,100,0.18) !important; color: #e28a64 !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; padding: 6px 16px !important; border-radius: 100px !important; margin-bottom: 20px !important; }
+#vcd-tool-wrapper .vcd-h1 { position: relative !important; z-index: 2 !important; max-width: 660px !important; font-family: 'Lora', Georgia, serif !important; font-size: clamp(27px, 3.6vw, 38px) !important; font-weight: 600 !important; color: #ffffff !important; line-height: 1.24 !important; margin: 0 auto 13px !important; text-align: center !important; }
+#vcd-tool-wrapper .vcd-h1 em { font-family: 'Lora', Georgia, serif !important; font-size: inherit !important; font-style: italic !important; font-weight: 500 !important; color: #e28a64 !important; line-height: inherit !important; }
+#vcd-tool-wrapper .vcd-sub { position: relative !important; z-index: 2 !important; font-size: 16.5px !important; font-weight: 300 !important; color: rgba(255,255,255,0.82) !important; max-width: 560px !important; margin: 0 auto !important; text-align: center !important; }
+#vcd-tool-wrapper .vcd-stamps { background: linear-gradient(135deg, #fdf6f0 0%, #fef9f5 100%) !important; border-bottom: 1px solid #e5e1db !important; padding: 15px 32px !important; display: flex !important; flex-wrap: wrap !important; gap: 10px 30px !important; align-items: center !important; }
+#vcd-tool-wrapper .vcd-stamp { font-size: 14px !important; color: #2f2f2f !important; font-weight: 600 !important; }
+#vcd-tool-wrapper .vcd-stamp-label { display: block !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: 1.4px !important; text-transform: uppercase !important; color: #c87040 !important; margin-bottom: 1px !important; }
+#vcd-tool-wrapper .vcd-spacer { flex: 1 1 auto !important; }
+#vcd-tool-wrapper .vcd-toplink { display: inline-flex !important; align-items: center !important; gap: 6px !important; color: #c87040 !important; font-weight: 600 !important; font-size: 13.5px !important; border-bottom: 1px solid rgba(200,112,64,0.4) !important; }
+#vcd-tool-wrapper .vcd-toplink:hover { color: #a8542f !important; }
+#vcd-tool-wrapper .vcd-content { padding: 30px 32px 24px !important; }
+#vcd-tool-wrapper .vcd-ask { font-family: 'Lora', Georgia, serif !important; font-size: 21px !important; font-weight: 600 !important; color: #2f2f2f !important; margin-bottom: 4px !important; }
+#vcd-tool-wrapper .vcd-ask-sub { display: block !important; font-size: 13.5px !important; color: #857a72 !important; line-height: 1.55 !important; margin-bottom: 16px !important; }
+#vcd-tool-wrapper .vcd-none-txt { display: block !important; font-family: 'Lora', Georgia, serif !important; font-style: italic !important; font-weight: 500 !important; font-size: 17px !important; color: #6b5a50 !important; line-height: 1.3 !important; }
+#vcd-tool-wrapper .vcd-unread-txt { display: block !important; font-family: 'Lora', Georgia, serif !important; font-style: italic !important; font-weight: 500 !important; font-size: 17px !important; color: #4e5a68 !important; line-height: 1.3 !important; }
+#vcd-tool-wrapper .vcd-legend { display: flex !important; flex-wrap: wrap !important; gap: 6px 16px !important; margin: 4px 0 20px !important; }
+#vcd-tool-wrapper .vcd-key { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 12px !important; color: #857a72 !important; }
+#vcd-tool-wrapper .vcd-dot { display: inline-block !important; width: 9px !important; height: 9px !important; border-radius: 100px !important; flex: 0 0 auto !important; }
+#vcd-tool-wrapper .vcd-d-soon { background: #5a8a5a !important; }
+#vcd-tool-wrapper .vcd-d-weeks { background: #c9962f !important; }
+#vcd-tool-wrapper .vcd-d-months { background: #e28a64 !important; }
+#vcd-tool-wrapper .vcd-d-none { background: #a89a90 !important; }
+#vcd-tool-wrapper .vcd-d-unread { background: #8a97a8 !important; }
+#vcd-tool-wrapper .vcd-key-hide { display: none !important; }
+#vcd-tool-wrapper .vcd-cats { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; gap: 10px !important; margin-bottom: 18px !important; }
+#vcd-tool-wrapper .vcd-cat { display: block !important; padding: 14px 10px !important; border: 1px solid #e0d8d0 !important; border-radius: 12px !important; background: #ffffff !important; cursor: pointer !important; text-align: center !important; }
+#vcd-tool-wrapper .vcd-cat:hover { border-color: #e28a64 !important; background: #fefaf7 !important; }
+#vcd-tool-wrapper .vcd-cat-on { background: #2f2f2f !important; border-color: #2f2f2f !important; }
+#vcd-tool-wrapper .vcd-cat-on:hover { background: #3a3a3a !important; border-color: #3a3a3a !important; }
+#vcd-tool-wrapper .vcd-cat-ic { display: block !important; width: 22px !important; height: 22px !important; margin: 0 auto 8px !important; color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-cat-on .vcd-cat-ic { color: #ffffff !important; }
+#vcd-tool-wrapper .vcd-cat-name { display: block !important; font-size: 13.5px !important; font-weight: 600 !important; color: #2f2f2f !important; line-height: 1.3 !important; text-align: center !important; }
+#vcd-tool-wrapper .vcd-cat-n { display: block !important; font-size: 12px !important; font-weight: 500 !important; color: #9a8d84 !important; margin-top: 2px !important; text-align: center !important; }
+#vcd-tool-wrapper .vcd-cat-on .vcd-cat-name { color: #ffffff !important; }
+#vcd-tool-wrapper .vcd-cat-on .vcd-cat-n { color: rgba(255,255,255,0.62) !important; }
+#vcd-tool-wrapper .vcd-cat-none { background: #faf6f2 !important; border-style: dashed !important; }
+#vcd-tool-wrapper .vcd-cat-none .vcd-cat-ic { color: #a8825f !important; }
+#vcd-tool-wrapper .vcd-cat-none .vcd-cat-name { color: #8a6a55 !important; }
+#vcd-tool-wrapper .vcd-cat-none.vcd-cat-on { background: #6b5a50 !important; border-color: #6b5a50 !important; border-style: solid !important; }
+#vcd-tool-wrapper .vcd-cat-none.vcd-cat-on .vcd-cat-name { color: #ffffff !important; }
+#vcd-tool-wrapper .vcd-cat-none.vcd-cat-on .vcd-cat-ic { color: #ffffff !important; }
+#vcd-tool-wrapper .vcd-toolbar { display: flex !important; gap: 10px !important; flex-wrap: wrap !important; align-items: center !important; }
+#vcd-tool-wrapper .vcd-searchwrap { flex: 1 1 250px !important; position: relative !important; display: block !important; }
+#vcd-tool-wrapper .vcd-searchicon { position: absolute !important; left: 14px !important; top: 50% !important; margin-top: -8px !important; color: #a89a90 !important; pointer-events: none !important; }
+#vcd-tool-wrapper .vcd-search { width: 100% !important; padding: 12px 14px 12px 38px !important; font-size: 15px !important; border: 1px solid #d4cdc3 !important; border-radius: 10px !important; background: #ffffff !important; color: #2f2f2f !important; }
+#vcd-tool-wrapper .vcd-search:focus { border-color: #e28a64 !important; box-shadow: 0 0 0 3px rgba(226,138,100,0.16) !important; }
+#vcd-tool-wrapper .vcd-sort { flex: 0 0 auto !important; padding: 12px 14px !important; font-size: 14px !important; border: 1px solid #d4cdc3 !important; border-radius: 10px !important; background: #ffffff !important; color: #2f2f2f !important; cursor: pointer !important; }
+#vcd-tool-wrapper .vcd-count { font-size: 13px !important; color: #857a72 !important; margin: 14px 0 12px !important; }
+#vcd-tool-wrapper .vcd-card { border: 1px solid #e5e1db !important; border-left: 5px solid #d4cdc3 !important; border-radius: 12px !important; padding: 18px 20px !important; margin-bottom: 12px !important; background: #ffffff !important; animation: vcdRise 0.34s ease-out both !important; }
+#vcd-tool-wrapper .vcd-card:hover { border-color: #d8d1c9 !important; box-shadow: 0 4px 18px -6px rgba(47,47,47,0.13) !important; }
+#vcd-tool-wrapper .vcd-b-soon { border-left-color: #5a8a5a !important; }
+#vcd-tool-wrapper .vcd-b-weeks { border-left-color: #c9962f !important; }
+#vcd-tool-wrapper .vcd-b-months { border-left-color: #e28a64 !important; }
+#vcd-tool-wrapper .vcd-b-none { border-left-color: #a89a90 !important; background: linear-gradient(135deg, #fdf6f0 0%, #fef9f5 100%) !important; }
+#vcd-tool-wrapper .vcd-b-unread { border-left-color: #8a97a8 !important; background: #f6f7f9 !important; }
+#vcd-tool-wrapper .vcd-top { display: flex !important; flex-wrap: wrap !important; gap: 10px 20px !important; justify-content: space-between !important; align-items: flex-start !important; }
+#vcd-tool-wrapper .vcd-main { flex: 1 1 250px !important; }
+#vcd-tool-wrapper .vcd-name { font-family: 'Lora', Georgia, serif !important; font-size: 21px !important; font-weight: 700 !important; color: #2f2f2f !important; line-height: 1.35 !important; }
+#vcd-tool-wrapper .vcd-tags { margin-top: 8px !important; display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
+#vcd-tool-wrapper .vcd-tag { display: inline-block !important; font-size: 10.5px !important; font-weight: 700 !important; letter-spacing: 1.1px !important; text-transform: uppercase !important; padding: 4px 10px !important; border-radius: 100px !important; background: #f0ece8 !important; color: #5a4a40 !important; line-height: 1.5 !important; }
+#vcd-tool-wrapper .vcd-g-trials { background: #fdf0e4 !important; color: #a3612e !important; }
+#vcd-tool-wrapper .vcd-g-conferences { background: #e9f0f6 !important; color: #3f5f7a !important; }
+#vcd-tool-wrapper .vcd-g-chambers { background: #f4ecf4 !important; color: #71527a !important; }
+#vcd-tool-wrapper .vcd-g-registrar { background: #e8f2ec !important; color: #38715a !important; }
+#vcd-tool-wrapper .vcd-g-criminal { background: #f1ebe7 !important; color: #6b5244 !important; }
+#vcd-tool-wrapper .vcd-g-guides { background: #eeecf7 !important; color: #545088 !important; }
+#vcd-tool-wrapper .vcd-g-other { background: #f0ece8 !important; color: #5a4a40 !important; }
+#vcd-tool-wrapper .vcd-when { flex: 0 0 auto !important; text-align: right !important; }
+#vcd-tool-wrapper .vcd-pill { display: inline-block !important; font-size: 10.5px !important; font-weight: 700 !important; letter-spacing: 1.1px !important; text-transform: uppercase !important; padding: 4px 11px !important; border-radius: 100px !important; margin-bottom: 6px !important; line-height: 1.5 !important; }
+#vcd-tool-wrapper .vcd-p-soon { background: #eaf3e9 !important; color: #3f6b3f !important; }
+#vcd-tool-wrapper .vcd-p-weeks { background: #fbf2dd !important; color: #8a6516 !important; }
+#vcd-tool-wrapper .vcd-p-months { background: #fce9df !important; color: #a8542f !important; }
+#vcd-tool-wrapper .vcd-p-none { background: #efeae6 !important; color: #6b5a50 !important; }
+#vcd-tool-wrapper .vcd-p-unread { background: #eaedf1 !important; color: #4e5a68 !important; }
+#vcd-tool-wrapper .vcd-big { display: block !important; font-family: 'Lora', Georgia, serif !important; font-size: 24px !important; font-weight: 600 !important; color: #c87040 !important; line-height: 1.2 !important; text-align: right !important; letter-spacing: -0.3px !important; }
+#vcd-tool-wrapper .vcd-relr { display: block !important; font-size: 12.5px !important; color: #857a72 !important; text-align: right !important; margin-top: 3px !important; }
+#vcd-tool-wrapper .vcd-dates { margin-top: 14px !important; padding-top: 14px !important; border-top: 1px solid #f2efec !important; display: flex !important; flex-wrap: wrap !important; gap: 7px !important; }
+#vcd-tool-wrapper .vcd-date { display: inline-block !important; font-size: 12.5px !important; font-weight: 500 !important; padding: 6px 11px !important; border-radius: 8px !important; background: #f7f4f1 !important; color: #4a4038 !important; white-space: nowrap !important; }
+#vcd-tool-wrapper .vcd-date-soon { background: #eaf3e9 !important; color: #3f6b3f !important; font-weight: 600 !important; }
+#vcd-tool-wrapper .vcd-date-q { background: #fdf3ec !important; color: #a8542f !important; }
+#vcd-tool-wrapper .vcd-links { margin-top: 13px !important; display: flex !important; flex-wrap: wrap !important; gap: 8px 18px !important; align-items: center !important; }
+#vcd-tool-wrapper .vcd-more { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 13px !important; font-weight: 600 !important; line-height: 1.5 !important; color: #c87040 !important; background: none !important; cursor: pointer !important; padding: 0 !important; }
+#vcd-tool-wrapper .vcd-more:hover { color: #a8542f !important; }
+#vcd-tool-wrapper .vcd-verify { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 13px !important; font-weight: 500 !important; line-height: 1.5 !important; color: #857a72 !important; }
+#vcd-tool-wrapper .vcd-verify:hover { color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-note-line { display: block !important; margin-top: 12px !important; padding: 10px 13px !important; background: #fdf6f0 !important; border: 1px solid #f2e4d9 !important; border-radius: 9px !important; font-size: 12.5px !important; line-height: 1.55 !important; color: #7a5a15 !important; }
+#vcd-tool-wrapper .vcd-live { display: inline-flex !important; align-items: center !important; gap: 7px !important; }
+#vcd-tool-wrapper .vcd-dot-live { display: inline-block !important; width: 8px !important; height: 8px !important; border-radius: 100px !important; background: #5a8a5a !important; flex: 0 0 auto !important; animation: vcdBreathe 2.4s ease-in-out infinite !important; }
+#vcd-tool-wrapper .vcd-dot-stale { background: #c9962f !important; }
+@keyframes vcdBreathe { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.82); } }
+@keyframes vcdRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+#vcd-tool-wrapper .vcd-warn { display: none !important; background: #fbf2dd !important; border: 1px solid #ecd9a8 !important; border-radius: 10px !important; padding: 12px 16px !important; margin-bottom: 18px !important; font-size: 13.5px !important; line-height: 1.55 !important; color: #7a5a15 !important; }
+#vcd-tool-wrapper .vcd-warn-on { display: block !important; }
+#vcd-tool-wrapper .vcd-warn b { font-size: 13.5px !important; font-weight: 700 !important; color: #6b4e12 !important; }
+#vcd-tool-wrapper .vcd-warn a { font-size: 13.5px !important; color: #8a6516 !important; font-weight: 600 !important; border-bottom: 1px solid rgba(138,101,22,0.4) !important; }
+#vcd-tool-wrapper .vcd-skel { border: 1px solid #e5e1db !important; border-left: 5px solid #ece7e1 !important; border-radius: 12px !important; padding: 18px 20px !important; margin-bottom: 12px !important; }
+#vcd-tool-wrapper .vcd-sk { display: block !important; height: 13px !important; border-radius: 6px !important; background: #efeae5 !important; background-image: linear-gradient(90deg, #efeae5 0%, #f8f5f2 50%, #efeae5 100%) !important; background-size: 300% 100% !important; animation: vcdShimmer 1.5s linear infinite !important; }
+#vcd-tool-wrapper .vcd-sk-t { width: 55% !important; height: 17px !important; margin-bottom: 11px !important; }
+#vcd-tool-wrapper .vcd-sk-s { width: 26% !important; margin-bottom: 16px !important; }
+#vcd-tool-wrapper .vcd-sk-r { width: 88% !important; }
+@keyframes vcdShimmer { from { background-position: 150% 0; } to { background-position: -150% 0; } }
+@media (prefers-reduced-motion: reduce) {
+#vcd-tool-wrapper .vcd-dot-live, #vcd-tool-wrapper .vcd-card, #vcd-tool-wrapper .vcd-sk { animation: none !important; }
+#vcd-tool-wrapper .vcd-card { opacity: 1 !important; transform: none !important; }
+}
+#vcd-tool-wrapper .vcd-status { padding: 40px 0 !important; text-align: center !important; color: #857a72 !important; font-size: 15px !important; }
+#vcd-tool-wrapper .vcd-status a { font-size: 15px !important; color: #c87040 !important; font-weight: 600 !important; border-bottom: 1px solid rgba(200,112,64,0.4) !important; }
+#vcd-tool-wrapper .vcd-help { margin: 0 32px !important; background: linear-gradient(135deg, #fdf6f0 0%, #fef9f5 100%) !important; border: 1px solid #f2e4d9 !important; border-radius: 14px !important; padding: 20px 22px !important; display: flex !important; align-items: center !important; gap: 18px !important; flex-wrap: wrap !important; }
+#vcd-tool-wrapper .vcd-help-ic { flex: 0 0 auto !important; width: 44px !important; height: 44px !important; border-radius: 100px !important; background: #ffffff !important; border: 1px solid #f0ddce !important; display: flex !important; align-items: center !important; justify-content: center !important; color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-help-txt { flex: 1 1 220px !important; }
+#vcd-tool-wrapper .vcd-help-h { display: block !important; font-family: 'Lora', Georgia, serif !important; font-size: 17px !important; font-weight: 600 !important; color: #2f2f2f !important; line-height: 1.35 !important; }
+#vcd-tool-wrapper .vcd-help-p { display: block !important; font-size: 13.5px !important; color: #7a6d64 !important; line-height: 1.5 !important; margin-top: 2px !important; }
+#vcd-tool-wrapper .vcd-help-num { flex: 0 0 auto !important; display: inline-flex !important; align-items: center !important; gap: 8px !important; font-family: 'Lora', Georgia, serif !important; font-size: 23px !important; font-weight: 600 !important; line-height: 1.3 !important; color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-help-num:hover { color: #a8542f !important; }
+#vcd-tool-wrapper .vcd-notes { padding: 24px 32px 0 !important; display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 18px !important; }
+#vcd-tool-wrapper .vcd-note-h { display: block !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 1.3px !important; text-transform: uppercase !important; color: #c87040 !important; margin-bottom: 5px !important; }
+#vcd-tool-wrapper .vcd-note-p { display: block !important; font-size: 12.5px !important; line-height: 1.65 !important; color: #857a72 !important; }
+#vcd-tool-wrapper .vcd-note-p a { font-size: 12.5px !important; color: #7a6d64 !important; font-weight: 600 !important; border-bottom: 1px solid #ded7d0 !important; }
+#vcd-tool-wrapper .vcd-note-p a:hover { color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-footer { background: linear-gradient(135deg, #f0ece8 0%, #f5f2ef 100%) !important; padding: 18px 32px !important; margin-top: 24px !important; font-size: 12px !important; color: #857a72 !important; text-align: center !important; line-height: 1.6 !important; }
+@media (max-width: 900px) {
+#vcd-tool-wrapper .vcd-cats { grid-template-columns: repeat(3, 1fr) !important; }
+#vcd-tool-wrapper .vcd-notes { grid-template-columns: 1fr !important; gap: 14px !important; }
+}
+@media (max-width: 720px) {
+#vcd-tool-wrapper { padding: 0 12px 24px !important; }
+#vcd-tool-wrapper .vcd-container { border-radius: 16px !important; }
+#vcd-tool-wrapper .vcd-header { padding: 40px 26px 32px !important; }
+#vcd-tool-wrapper .vcd-h1 { font-size: clamp(24px, 7vw, 30px) !important; }
+#vcd-tool-wrapper .vcd-sub { font-size: 15px !important; }
+#vcd-tool-wrapper .vcd-stamps { padding: 14px 18px !important; gap: 10px 20px !important; }
+#vcd-tool-wrapper .vcd-content { padding: 26px 18px 22px !important; }
+#vcd-tool-wrapper .vcd-ask { font-size: 19px !important; }
+#vcd-tool-wrapper .vcd-cats { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+#vcd-tool-wrapper .vcd-cat { padding: 12px 8px !important; }
+#vcd-tool-wrapper .vcd-cat-ic { width: 20px !important; height: 20px !important; margin-bottom: 6px !important; }
+#vcd-tool-wrapper .vcd-name { font-size: 19px !important; }
+#vcd-tool-wrapper .vcd-sort { width: 100% !important; }
+#vcd-tool-wrapper .vcd-card { padding: 16px 15px !important; }
+#vcd-tool-wrapper .vcd-top { flex-direction: column !important; }
+#vcd-tool-wrapper .vcd-main { flex: 0 0 auto !important; }
+#vcd-tool-wrapper .vcd-when { text-align: left !important; }
+#vcd-tool-wrapper .vcd-big, #vcd-tool-wrapper .vcd-relr { text-align: left !important; }
+#vcd-tool-wrapper .vcd-big { font-size: 21px !important; }
+#vcd-tool-wrapper .vcd-help { margin: 0 18px !important; padding: 18px !important; gap: 14px !important; }
+#vcd-tool-wrapper .vcd-help-num { font-size: 21px !important; }
+#vcd-tool-wrapper .vcd-notes { padding: 22px 18px 0 !important; }
+#vcd-tool-wrapper .vcd-footer { padding: 16px 18px !important; }
+}
+@media (max-width: 420px) {
+}
+</style>
+<div id="vcd-tool-wrapper">
+  <div class="vcd-container">
+    <div class="vcd-header">
+      <svg class="vcd-hero-bg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><pattern id="vcdGridPat" width="50" height="50" patternUnits="userSpaceOnUse"><rect x="0.5" y="0.5" width="49" height="49" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1"></rect></pattern><radialGradient id="vcdFade" cx="50%" cy="48%" r="72%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"></stop><stop offset="52%" stop-color="#ffffff" stop-opacity="0.55"></stop><stop offset="100%" stop-color="#ffffff" stop-opacity="1"></stop></radialGradient><mask id="vcdHeroMask"><rect width="800" height="300" fill="url(#vcdFade)"></rect></mask></defs><g mask="url(#vcdHeroMask)"><rect width="800" height="300" fill="url(#vcdGridPat)"></rect><rect x="50" y="50" width="50" height="50" fill="#e28a64" fill-opacity="0.13"></rect><rect x="150" y="200" width="50" height="50" fill="#e28a64" fill-opacity="0.09"></rect><rect x="650" y="100" width="50" height="50" fill="#e28a64" fill-opacity="0.13"></rect><rect x="700" y="250" width="50" height="50" fill="#e28a64" fill-opacity="0.08"></rect><rect x="0" y="150" width="50" height="50" fill="#ffffff" fill-opacity="0.035"></rect><rect x="600" y="0" width="50" height="50" fill="#ffffff" fill-opacity="0.035"></rect><rect x="250" y="0" width="50" height="50" fill="#ffffff" fill-opacity="0.025"></rect><rect x="750" y="50" width="50" height="50" fill="#ffffff" fill-opacity="0.03"></rect></g></svg>
+      <div class="vcd-h1">Courtready.ca's Vancouver Court Dates <em>Finder</em></div>
+      <div class="vcd-sub">The Supreme Court publishes Vancouver's available dates across 31 separate documents. This reads all of them, five times a day, and puts them on one page.</div>
+    </div>
+    <div class="vcd-stamps">
+      <div class="vcd-stamp"><span class="vcd-stamp-label">Court's lists last built</span><span id="vcdStampCourt">Loading</span></div>
+      <div class="vcd-stamp"><span class="vcd-stamp-label">We last checked</span><span class="vcd-live"><span class="vcd-dot-live" id="vcdDot"></span><span id="vcdStampUs">Loading</span></span></div>
+      <div class="vcd-spacer"></div>
+      <div class="vcd-stamp"><a class="vcd-toplink" href="https://www.bccourts.ca/supreme_court/scheduling/index.aspx" target="_blank" rel="noopener noreferrer"><svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path></svg>Court's scheduling page</a></div>
+    </div>
+    <div class="vcd-content">
+      <div class="vcd-warn" id="vcdWarn"></div>
+      <div class="vcd-warn" id="vcdUnread"></div>
+      <div class="vcd-ask">Start with your type of hearing</div>
+      <span class="vcd-ask-sub">Every date the Supreme Court is currently offering in Vancouver, gathered from the 28 lists it publishes separately. Dates are shown year first, as YYYY-MM-DD.</span>
+      <div class="vcd-cats" id="vcdCats"></div>
+      <div class="vcd-toolbar">
+        <span class="vcd-searchwrap">
+          <svg class="vcd-ic vcd-searchicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input type="text" class="vcd-search" id="vcdSearch" placeholder="Or search, for example: 3 day civil, registrar, chambers" aria-label="Search hearing types">
+        </span>
+        <select class="vcd-sort" id="vcdSort" aria-label="Sort results">
+          <option value="soonest">Soonest date first</option>
+          <option value="latest">Longest wait first</option>
+          <option value="most">Most dates available</option>
+          <option value="az">Name A to Z</option>
+        </select>
+      </div>
+      <div class="vcd-legend">
+        <span class="vcd-key"><span class="vcd-dot vcd-d-soon"></span>Within two weeks</span>
+        <span class="vcd-key"><span class="vcd-dot vcd-d-weeks"></span>Within six weeks</span>
+        <span class="vcd-key"><span class="vcd-dot vcd-d-months"></span>Months away</span>
+        <span class="vcd-key"><span class="vcd-dot vcd-d-none"></span>None offered</span>
+        <span class="vcd-key vcd-key-hide" id="vcdKeyUnread"><span class="vcd-dot vcd-d-unread"></span>Could not read</span>
+      </div>
+      <div class="vcd-count" id="vcdCount"></div>
+      <div id="vcdList"><div class="vcd-skel"><span class="vcd-sk vcd-sk-t"></span><span class="vcd-sk vcd-sk-s"></span><span class="vcd-sk vcd-sk-r"></span></div><div class="vcd-skel"><span class="vcd-sk vcd-sk-t"></span><span class="vcd-sk vcd-sk-s"></span><span class="vcd-sk vcd-sk-r"></span></div><div class="vcd-skel"><span class="vcd-sk vcd-sk-t"></span><span class="vcd-sk vcd-sk-s"></span><span class="vcd-sk vcd-sk-r"></span></div></div>
+    </div>
+    <div class="vcd-help">
+      <span class="vcd-help-ic"><svg class="vcd-ic vcd-ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+      <span class="vcd-help-txt"><span class="vcd-help-h">Need to speak to someone?</span><span class="vcd-help-p">Courtready.ca cannot book a date. Supreme Court Scheduling in Vancouver can.</span></span>
+      <a class="vcd-help-num" href="tel:+16046602853">604.660.2853</a>
+    </div>
+    <div class="vcd-notes">
+      <span class="vcd-note"><span class="vcd-note-h">Where this comes from</span><span class="vcd-note-p">The court's own <a href="https://www.bccourts.ca/supreme_court/scheduling/index.aspx" target="_blank" rel="noopener noreferrer">scheduling page</a>, read five times a day. Every list links back to the original document. Confirm any date before you rely on it.</span></span>
+      <span class="vcd-note"><span class="vcd-note-h">Dates and times</span><span class="vcd-note-p">Dates are written year first, as YYYY-MM-DD. So 2026-09-23 means 23 September 2026. Times are Vancouver time, whatever time zone you are reading from.</span></span>
+      <span class="vcd-note"><span class="vcd-note-h">Not legal advice</span><span class="vcd-note-p">A reference tool only, and not connected to the court. To report an error, email Tom at admin [at] courtready.ca.</span></span>
+    </div>
+    <div class="vcd-footer">Supreme Court of British Columbia, Vancouver registry. Not live: we check five times a day, and the court can change a list at any moment. Data from the Court's published scheduling documents.</div>
+  </div>
+</div>
+<script>
+(function() {
+  var VCD_DATA_URL = 'https://raw.githubusercontent.com/djclegit1992/vancouver-court-dates/main/data/latest.json';
+  var VCD_FALLBACK_URL = 'https://www.bccourts.ca/supreme_court/scheduling/index.aspx';
+  var VCD_PHONE = '604.660.2853';
+  var VCD_TEL = '+16046602853';
+  var VCD_PREVIEW = 12;
+  var STALE_AFTER_MS = 5 * 60 * 60 * 1000;
+  var RECHECK_MS = 10 * 60 * 1000;
+  var VCD_BOOK_URL = 'https://justice.gov.bc.ca/scjob/';
+  var VCD_GROUPS = { 'Case Planning Conference Available Dates': 'Conferences', 'Judicial Case Conference Available Dates': 'Conferences', 'Trial Management Conference Available Dates': 'Conferences', 'Settlement Conference Available Dates': 'Conferences', 'Pre-Trial Conference Available Dates': 'Criminal', 'SCA Available Dates': 'Criminal', 'Assize Chambers Dates': 'Chambers', 'Civil Lengthy Chambers Available Dates': 'Chambers', 'Family Lengthy Chambers Available Dates': 'Chambers', 'Bankruptcy Discharge': 'Registrar', 'One Day & Over Registrar Dates': 'Registrar', 'Pre Hearing Conference Available': 'Registrar', 'Registrar Available Dates': 'Registrar' };
+  var VCD_ORDER = ['All', 'Trials', 'Conferences', 'Chambers', 'Registrar', 'Criminal'];
+  var GCLASS = { 'Trials': 'vcd-g-trials', 'Conferences': 'vcd-g-conferences', 'Chambers': 'vcd-g-chambers', 'Registrar': 'vcd-g-registrar', 'Criminal': 'vcd-g-criminal', 'Other': 'vcd-g-other' };
+  var VCD_GRID_LENGTHS = { '2 Days': 1, '3 Days': 1, '4-5 Days': 1, '6-15 Days': 1, '16+ Days': 1 };
+  var VCD_GRID_MATTERS = { 'Civil': 1, 'Family': 1, 'MVA': 1 };
+  var MATTER_LABEL = { 'Civil': 'Civil', 'Family': 'Family', 'MVA': 'Motor vehicle' };
+  var LENGTH_LABEL = { '2 Days': '2 days', '3 Days': '3 days', '4-5 Days': '4-5 days', '6-15 Days': '6-15 days', '16+ Days': '16+ days' };
+  var BOOKABLE_ONLINE = { 'Trials': 1, 'Chambers': 1 };
+  var BOOKABLE_TITLES = { 'Case Planning Conference Available Dates': 1, 'Judicial Case Conference Available Dates': 1, 'Trial Management Conference Available Dates': 1 };
+  var GUIDES = { 'Trials': 'Booking Trials', 'Chambers': 'Booking Lengthy Chambers' };
+  var GUIDE_TITLE_BY_DOC = { 'Assize Chambers Dates': 'Booking Lengthy Assize Chambers' };
+  var EXPLAIN = { 'Case Planning Conference Available Dates': 'A 30 minute conference to set a plan for how the case will run.', 'Judicial Case Conference Available Dates': 'Required in most family cases before other applications can be made. Booked for 1.5 hours.', 'Trial Management Conference Available Dates': 'Held shortly before trial to sort out how the trial will run.', 'Settlement Conference Available Dates': 'A judge helps the parties try to settle.', 'Pre-Trial Conference Available Dates': 'Criminal pre-trial conferences.', 'SCA Available Dates': 'Summary conviction appeals, a criminal matter.', 'Assize Chambers Dates': 'Chambers applications over 2 hours, heard during an assize week.', 'Civil Lengthy Chambers Available Dates': 'Civil applications estimated to take over 2 hours.', 'Family Lengthy Chambers Available Dates': 'Family applications estimated to take over 2 hours.', 'Bankruptcy Discharge': 'Bankruptcy discharge hearings before a registrar.', 'One Day & Over Registrar Dates': 'Registrar hearings expected to run a full day or longer.', 'Pre Hearing Conference Available': 'Pre hearing conferences in registrar matters.', 'Registrar Available Dates': 'Assessments of costs, accounts, references and similar matters.' };
+  var MNAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var DNAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var IC_LINK = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path></svg>';
+  var IC_TEL = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>';
+  var IC_DOWN = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>';
+  var IC_UP = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"></path></svg>';
+  var IC_BOOK = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"></rect><path d="M8 2.5v4"></path><path d="M16 2.5v4"></path><path d="M3 10h18"></path><path d="m9.5 15.5 2 2 3.5-3.5"></path></svg>';
+  var IC_GUIDE = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>';
+  var CAT_ICONS = { 'All': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>', 'Trials': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17.5"></path><path d="M7.5 21h9"></path><path d="M4 7h16"></path><path d="M7 7 4 13h6z"></path><path d="M17 7l-3 6h6z"></path></svg>', 'Conferences': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"></circle><circle cx="16.5" cy="9.5" r="2.4"></circle><path d="M3 19.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"></path><path d="M15.5 14.2c2.7.3 4.5 2.5 4.5 5.3"></path></svg>', 'Chambers': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-4.5L19 8v13"></path><path d="M9.5 21v-6h5v6"></path></svg>', 'Registrar': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6"></path><path d="M9 17h4"></path></svg>', 'Criminal': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 12.5-8 8a2.1 2.1 0 1 1-3-3l8-8"></path><path d="m16 16 6-6"></path><path d="m8 8 6-6"></path><path d="m9 7 8 8"></path><path d="m21 11-8-8"></path></svg>', 'None offered': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 2.5v4"></path><path d="M16 2.5v4"></path><path d="M3 10h18"></path><path d="m9.5 14 5 4.5"></path><path d="m14.5 14-5 4.5"></path></svg>', 'Other': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 16.5v.01"></path><path d="M12 13.5v-1a2.5 2.5 0 1 0-2.5-2.5"></path></svg>' };
+  var rows = [];
+  var scrapedAt = null;
+  var absoluteStamp = '';
+  var lastRunId = '';
+  var activeGroup = 'All';
+  var searchTerm = '';
+  var sortMode = 'soonest';
+  var expanded = {};
+  function el(id) { return document.getElementById(id); }
+  function esc(s) {
+    if (s === null) { return ''; }
+    if (s === undefined) { return ''; }
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function trim(s) {
+    if (s === null) { return ''; }
+    if (s === undefined) { return ''; }
+    return String(s).replace(/^\s+/, '').replace(/\s+$/, '');
+  }
+  function midnight() {
+    var n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate());
+  }
+  function isoToDate(s) {
+    if (!s) { return null; }
+    var m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) { return null; }
+    var d = new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10));
+    if (isNaN(d.getTime())) { return null; }
+    return d;
+  }
+  function daysFromToday(iso) {
+    var d = isoToDate(iso);
+    if (d === null) { return null; }
+    return Math.round((d.getTime() - midnight().getTime()) / 86400000);
+  }
+  function weekday(iso) {
+    var d = isoToDate(iso);
+    if (d === null) { return ''; }
+    return DNAMES[d.getDay()];
+  }
+  function relText(n) {
+    if (n === null) { return ''; }
+    if (n < 0) { return 'that date has passed'; }
+    if (n === 0) { return 'today'; }
+    if (n === 1) { return 'tomorrow'; }
+    if (n < 7) { return 'in ' + n + ' days'; }
+    if (n < 14) { return 'in about a week'; }
+    if (n < 31) {
+      var w = Math.round(n / 7);
+      if (w === 1) { return 'in about a week'; }
+      return 'in about ' + w + ' weeks';
+    }
+    var mo = Math.round(n / 30);
+    if (mo === 1) { return 'in about a month'; }
+    if (mo < 24) { return 'in about ' + mo + ' months'; }
+    return 'in about ' + Math.round(mo / 12) + ' years';
+  }
+  function bandOf(days) {
+    if (days === null) { return 'none'; }
+    if (days <= 14) { return 'soon'; }
+    if (days <= 45) { return 'weeks'; }
+    return 'months';
+  }
+  function bandLabel(b) {
+    if (b === 'soon') { return 'Within two weeks'; }
+    if (b === 'weeks') { return 'Within six weeks'; }
+    if (b === 'months') { return 'Months away'; }
+    if (b === 'unread') { return 'Could not read'; }
+    return 'None offered';
+  }
+  function clock(hh, mm) {
+    var h = parseInt(hh, 10);
+    var ap = 'am';
+    if (h >= 12) { ap = 'pm'; }
+    var h12 = h % 12;
+    if (h12 === 0) { h12 = 12; }
+    return h12 + ':' + mm + ap;
+  }
+  function stampFromIso(s) {
+    var m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+    if (!m) {
+      var d = String(s).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (d) { return d[0]; }
+      return '';
+    }
+    return m[1] + '-' + m[2] + '-' + m[3] + ', ' + clock(m[4], m[5]);
+  }
+  function splitCategory(d) {
+    // The payload carries one string, for example "16+ Days, Civil"
+    // or "CPC, Civil". Split it here rather than expecting separate
+    // fields: category is what the court actually prints inside the
+    // document, so it is the single source of truth.
+    var out = { length: '', matter: '' };
+    if (!d.category) { return out; }
+    var parts = String(d.category).split(',');
+    if (parts.length > 0) { out.length = trim(parts[0]); }
+    if (parts.length > 1) { out.matter = trim(parts[1]); }
+    return out;
+  }
+  function isTrial(cat) {
+    // A trial list is one whose category is an actual matter-by-length
+    // pair. Testing for truthiness alone is wrong: a conference list
+    // reads "CPC, Civil", both parts non-empty.
+    if (VCD_GRID_LENGTHS[cat.length] !== 1) { return false; }
+    if (VCD_GRID_MATTERS[cat.matter] !== 1) { return false; }
+    return true;
+  }
+  function groupFor(d, cat) {
+    if (isTrial(cat)) { return 'Trials'; }
+    if (d.title in VCD_GROUPS) { return VCD_GROUPS[d.title]; }
+    return 'Other';
+  }
+  function guideUrlFor(d, group, guides) {
+    var want = GUIDE_TITLE_BY_DOC[d.title];
+    if (!want) { want = GUIDES[group]; }
+    if (!want) { return null; }
+    if (want in guides) { return guides[want]; }
+    return null;
+  }
+  function canBookOnline(d, group) {
+    if (BOOKABLE_ONLINE[group] === 1) { return true; }
+    if (BOOKABLE_TITLES[d.title] === 1) { return true; }
+    return false;
+  }
+  function decorate(docs) {
+    var out = [];
+    var guides = {};
+    var i;
+    for (i = 0; i < docs.length; i++) {
+      if (docs[i].is_instruction === true) { guides[docs[i].title] = docs[i].url; }
+    }
+    for (i = 0; i < docs.length; i++) {
+      var d = docs[i];
+      // The booking guides are instructions, not availability. They are
+      // linked from the cards they apply to rather than listed as
+      // hearing types of their own.
+      if (d.is_instruction === true) { continue; }
+      var cat = splitCategory(d);
+      var g = groupFor(d, cat);
+      if (g === 'Other') { continue; }
+      var unread = false;
+      if (d.status === 'FETCH_FAILED') { unread = true; }
+      if (d.parse_status === 'UNREADABLE') { unread = true; }
+      var dates = d.dates;
+      if (!dates) { dates = []; }
+      var qual = d.qualified_dates;
+      if (!qual) { qual = []; }
+      var matter = '';
+      var length = '';
+      if (g === 'Trials') {
+        matter = MATTER_LABEL[cat.matter];
+        length = LENGTH_LABEL[cat.length];
+      }
+      out.push({ title: d.title, url: d.url, group: g, matter: matter, length: length, unread: unread, dates: dates, qualified: qual, n: dates.length, first: d.earliest_date, days: daysFromToday(d.earliest_date), explain: EXPLAIN[d.title], notes: d.notes, book: canBookOnline(d, g), guide: guideUrlFor(d, g, guides) });
+    }
+    return out;
+  }
+  function matches(r) {
+    if (activeGroup === 'None offered') {
+      // A list we could not read is not the same as a list the court
+      // is offering nothing on. Only the second belongs here.
+      if (r.unread) { return false; }
+      if (r.n !== 0) { return false; }
+    } else {
+      if (activeGroup !== 'All') {
+        if (r.group !== activeGroup) { return false; }
+      }
+    }
+    if (searchTerm === '') { return true; }
+    var extra = '';
+    if (r.explain) { extra = r.explain; }
+    var hay = (r.title + ' ' + r.group + ' ' + r.matter + ' ' + r.length + ' ' + extra).toLowerCase();
+    return hay.indexOf(searchTerm) !== -1;
+  }
+  function sortRows(list) {
+    var big = 999999;
+    list.sort(function(a, b) {
+      if (sortMode === 'az') {
+        if (a.title < b.title) { return -1; }
+        if (a.title > b.title) { return 1; }
+        return 0;
+      }
+      if (sortMode === 'most') { return b.n - a.n; }
+      var ad = a.days;
+      var bd = b.days;
+      if (ad === null) { ad = big; }
+      if (bd === null) { bd = big; }
+      if (sortMode === 'latest') {
+        if (ad === big) {
+          if (bd === big) { return 0; }
+          return 1;
+        }
+        if (bd === big) { return -1; }
+        return bd - ad;
+      }
+      if (ad !== bd) { return ad - bd; }
+      if (a.title < b.title) { return -1; }
+      if (a.title > b.title) { return 1; }
+      return 0;
+    });
+    return list;
+  }
+  function isQualified(r, iso) {
+    var i;
+    for (i = 0; i < r.qualified.length; i++) {
+      if (r.qualified[i] === iso) { return true; }
+    }
+    return false;
+  }
+  function sourceLink(r) {
+    var href = r.url;
+    if (!href) { href = VCD_FALLBACK_URL; }
+    return '<a class="vcd-verify" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + IC_LINK + 'Open the court\u2019s document</a>';
+  }
+  function bookLink(r) {
+    if (!r.book) { return ''; }
+    return '<a class="vcd-verify" href="' + VCD_BOOK_URL + '" target="_blank" rel="noopener noreferrer">' + IC_BOOK + 'Book this online' + '</a>';
+  }
+  function guideLink(r) {
+    if (!r.guide) { return ''; }
+    return '<a class="vcd-verify" href="' + esc(r.guide) + '" target="_blank" rel="noopener noreferrer">' + IC_GUIDE + 'How to book' + '</a>';
+  }
+  function callLink() {
+    return '<a class="vcd-verify" href="tel:' + VCD_TEL + '">' + IC_TEL + 'Call to book, ' + VCD_PHONE + '</a>';
+  }
+  function datesHtml(r) {
+    var show = r.dates.length;
+    var isOpen = expanded[r.title] === true;
+    if (!isOpen) {
+      if (show > VCD_PREVIEW) { show = VCD_PREVIEW; }
+    }
+    var h = '<div class="vcd-dates">';
+    var i;
+    for (i = 0; i < show; i++) {
+      var iso = r.dates[i];
+      var n = daysFromToday(iso);
+      var cls = 'vcd-date';
+      if (isQualified(r, iso)) { cls = 'vcd-date vcd-date-q'; }
+      else {
+        if (n !== null) {
+          if (n <= 14) { cls = 'vcd-date vcd-date-soon'; }
+        }
+      }
+      h += '<span class="' + cls + '">' + esc(iso) + ' &middot; ' + esc(weekday(iso)) + '</span>';
+    }
+    h += '</div><div class="vcd-links">';
+    if (r.dates.length > VCD_PREVIEW) {
+      if (isOpen) { h += '<button type="button" class="vcd-more" data-more="' + esc(r.title) + '">' + IC_UP + 'Show fewer</button>'; }
+      else { h += '<button type="button" class="vcd-more" data-more="' + esc(r.title) + '">' + IC_DOWN + 'Show all ' + r.dates.length + ' dates</button>'; }
+    }
+    h += sourceLink(r);
+    h += bookLink(r);
+    h += guideLink(r);
+    h += callLink();
+    h += '</div>';
+    if (r.notes) {
+      if (r.notes.length > 0) {
+        h += '<span class="vcd-note-line">Some of these dates are marked "' + esc(r.notes.join('", "')) + '" by the court. Those are shown in orange.</span>';
+      }
+    }
+    return h;
+  }
+  function cardHtml(r) {
+    var band = 'none';
+    if (r.unread) { band = 'unread'; }
+    else {
+      if (r.n > 0) { band = bandOf(r.days); }
+    }
+    var h = '<div class="vcd-card vcd-b-' + band + '">';
+    h += '<div class="vcd-top"><div class="vcd-main">';
+    h += '<div class="vcd-name">' + esc(r.title) + '</div>';
+    h += '<div class="vcd-tags"><span class="vcd-tag ' + GCLASS[r.group] + '">' + esc(r.group) + '</span>';
+    if (r.matter) { h += '<span class="vcd-tag vcd-tag-code">' + esc(r.matter) + '</span>'; }
+    if (r.length) { h += '<span class="vcd-tag vcd-tag-code">' + esc(r.length) + '</span>'; }
+    h += '</div>';
+    if (r.explain) { h += '<span class="vcd-ask-sub">' + esc(r.explain) + '</span>'; }
+    h += '</div><div class="vcd-when">';
+    h += '<span class="vcd-pill vcd-p-' + band + '">' + esc(bandLabel(band)) + '</span>';
+    if (r.unread) { h += '<span class="vcd-unread-txt">Unknown</span>'; }
+    else {
+      if (r.n > 0) {
+        h += '<span class="vcd-big">' + esc(r.first) + '</span>';
+        var word = 'dates';
+        if (r.n === 1) { word = 'date'; }
+        h += '<span class="vcd-relr">' + esc(weekday(r.first)) + ' &middot; ' + esc(relText(r.days)) + ' &middot; ' + r.n + ' ' + word + '</span>';
+      } else {
+        h += '<span class="vcd-none-txt">None offered</span>';
+      }
+    }
+    h += '</div></div>';
+    if (r.unread) {
+      h += '<div class="vcd-links"><span class="vcd-verify">Our last check of this document did not come back, so we do not know what it holds.</span>' + sourceLink(r) + '</div>';
+    } else {
+      if (r.n > 0) { h += datesHtml(r); }
+      else {
+        h += '<div class="vcd-links"><span class="vcd-verify">The court is not offering any dates on this list at the moment.</span>' + sourceLink(r) + bookLink(r) + guideLink(r) + callLink() + '</div>';
+      }
+    }
+    h += '</div>';
+    return h;
+  }
+  function renderCats() {
+    var counts = {};
+    var without = 0;
+    var i;
+    for (i = 0; i < rows.length; i++) {
+      var g = rows[i].group;
+      if (!(g in counts)) { counts[g] = 0; }
+      counts[g]++;
+      if (!rows[i].unread) {
+        if (rows[i].n === 0) { without++; }
+      }
+    }
+    var list = [];
+    for (i = 0; i < VCD_ORDER.length; i++) {
+      var nm = VCD_ORDER[i];
+      if (nm === 'All') { list.push({ name: 'All', label: 'Everything', n: rows.length, extra: '' }); }
+      else {
+        if (nm in counts) { list.push({ name: nm, label: nm, n: counts[nm], extra: '' }); }
+      }
+    }
+    if (without > 0) { list.push({ name: 'None offered', label: 'None offered', n: without, extra: ' vcd-cat-none' }); }
+    var h = '';
+    for (i = 0; i < list.length; i++) {
+      var c = 'vcd-cat' + list[i].extra;
+      if (list[i].name === activeGroup) { c = c + ' vcd-cat-on'; }
+      h += '<button type="button" class="' + c + '" data-group="' + esc(list[i].name) + '">';
+      var ico = CAT_ICONS[list[i].name];
+      if (!ico) { ico = CAT_ICONS['Other']; }
+      h += ico;
+      h += '<span class="vcd-cat-name">' + esc(list[i].label) + '</span>';
+      h += '<span class="vcd-cat-n">' + list[i].n + '</span></button>';
+    }
+    el('vcdCats').innerHTML = h;
+    var anyUnread = false;
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].unread) { anyUnread = true; }
+    }
+    var key = el('vcdKeyUnread');
+    if (key) {
+      if (anyUnread) { key.className = 'vcd-key'; }
+      else { key.className = 'vcd-key vcd-key-hide'; }
+    }
+    var broken = [];
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].unread) { broken.push(rows[i].title); }
+    }
+    var box = el('vcdUnread');
+    if (box) {
+      if (broken.length > 0) {
+        var word = 'lists';
+        var them = 'them';
+        if (broken.length === 1) { word = 'list'; them = 'it'; }
+        box.innerHTML = '<b>We could not read ' + broken.length + ' ' + word + ' on our last pass.</b> ' + esc(broken.join(', ')) + '. We do not know what is available for ' + them + ', so please open the court\u2019s document directly. This is usually temporary.';
+        box.className = 'vcd-warn vcd-warn-on';
+      } else {
+        box.className = 'vcd-warn';
+      }
+    }
+  }
+  function renderList() {
+    var list = [];
+    var i;
+    for (i = 0; i < rows.length; i++) {
+      if (matches(rows[i])) { list.push(rows[i]); }
+    }
+    sortRows(list);
+    if (list.length === 0) {
+      el('vcdCount').innerHTML = '';
+      el('vcdList').innerHTML = '<div class="vcd-status">Nothing matches. Try a shorter word, or choose Everything above.</div>';
+      return;
+    }
+    var word = 'lists';
+    if (list.length === 1) { word = 'list'; }
+    el('vcdCount').innerHTML = 'Showing ' + list.length + ' ' + word + '.';
+    var h = '';
+    for (i = 0; i < list.length; i++) { h += cardHtml(list[i]); }
+    el('vcdList').innerHTML = h;
+  }
+  function agoText(ms) {
+    var mins = Math.floor(ms / 60000);
+    if (mins < 1) { return 'moments ago'; }
+    if (mins === 1) { return '1 minute ago'; }
+    if (mins < 60) { return mins + ' minutes ago'; }
+    var hrs = Math.round(mins / 60);
+    if (hrs === 1) { return 'about an hour ago'; }
+    if (hrs < 24) { return 'about ' + hrs + ' hours ago'; }
+    var days = Math.round(hrs / 24);
+    if (days === 1) { return 'yesterday'; }
+    return days + ' days ago';
+  }
+  function refreshStamp() {
+    if (scrapedAt === null) { return; }
+    var ms = new Date().getTime() - scrapedAt;
+    var node = el('vcdStampUs');
+    if (node) {
+      node.innerHTML = esc(agoText(ms));
+      node.setAttribute('title', absoluteStamp + ' Vancouver time');
+    }
+    var stale = ms > STALE_AFTER_MS;
+    var dot = el('vcdDot');
+    if (dot) {
+      if (stale) { dot.className = 'vcd-dot-live vcd-dot-stale'; }
+      else { dot.className = 'vcd-dot-live'; }
+    }
+    var warn = el('vcdWarn');
+    if (warn) {
+      if (stale) {
+        warn.innerHTML = '<b>These dates may be out of date.</b> Our last successful check was ' + esc(agoText(ms)) + ', and we normally check five times a day. Please confirm anything here on the <a href="' + VCD_FALLBACK_URL + '" target="_blank" rel="noopener noreferrer">court\u2019s scheduling page</a> before you rely on it.';
+        warn.className = 'vcd-warn vcd-warn-on';
+      } else {
+        warn.className = 'vcd-warn';
+      }
+    }
+  }
+  function courtStamp(docs) {
+    var best = '';
+    var i;
+    for (i = 0; i < docs.length; i++) {
+      var d = docs[i].date_created;
+      if (!d) { continue; }
+      if (d > best) { best = d; }
+    }
+    if (best === '') { return 'not published'; }
+    return stampFromIso(best);
+  }
+  function applyData(data) {
+    var docs = data.documents;
+    if (!docs) { docs = []; }
+    rows = decorate(docs);
+    el('vcdStampCourt').innerHTML = esc(courtStamp(docs));
+    absoluteStamp = stampFromIso(data.generated_at);
+    if (absoluteStamp === '') { absoluteStamp = 'not recorded'; }
+    var when = Date.parse(data.generated_at);
+    if (isNaN(when)) { scrapedAt = null; }
+    else { scrapedAt = when; }
+    if (scrapedAt === null) { el('vcdStampUs').innerHTML = esc(absoluteStamp); }
+    else { refreshStamp(); }
+    renderCats();
+    renderList();
+  }
+  function fail(msg) {
+    el('vcdCount').innerHTML = '';
+    el('vcdList').innerHTML = '<div class="vcd-status">' + msg + ' Please try again shortly, or go straight to the <a href="' + VCD_FALLBACK_URL + '" target="_blank" rel="noopener noreferrer">court\u2019s scheduling page</a>.</div>';
+  }
+  function load(quiet) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', VCD_DATA_URL + '?t=' + new Date().getTime(), true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) { return; }
+      if (xhr.status !== 200) {
+        if (!quiet) { fail('We could not load the court dates just now.'); }
+        return;
+      }
+      var data;
+      try { data = JSON.parse(xhr.responseText); }
+      catch (err) {
+        if (!quiet) { fail('We could not read the court dates just now.'); }
+        return;
+      }
+      if (!data.documents) {
+        if (!quiet) { fail('No court dates were returned.'); }
+        return;
+      }
+      if (quiet) {
+        if (data.run_id === lastRunId) {
+          refreshStamp();
+          return;
+        }
+      }
+      lastRunId = data.run_id;
+      applyData(data);
+    };
+    xhr.send();
+  }
+  var searchBox = el('vcdSearch');
+  if (searchBox) {
+    searchBox.addEventListener('input', function() {
+      searchTerm = trim(searchBox.value).toLowerCase();
+      renderList();
+    });
+  }
+  var sortBox = el('vcdSort');
+  if (sortBox) {
+    sortBox.addEventListener('change', function() {
+      sortMode = sortBox.value;
+      renderList();
+    });
+  }
+  function onClick(e) {
+    var node = e.target;
+    var hop = 0;
+    while (hop < 4) {
+      if (!node) { return; }
+      if (!node.getAttribute) { return; }
+      var g = node.getAttribute('data-group');
+      if (g) {
+        activeGroup = g;
+        renderCats();
+        renderList();
+        return;
+      }
+      var m = node.getAttribute('data-more');
+      if (m) {
+        if (expanded[m] === true) { expanded[m] = false; }
+        else { expanded[m] = true; }
+        renderList();
+        return;
+      }
+      node = node.parentNode;
+      hop++;
+    }
+  }
+  var wrapper = el('vcd-tool-wrapper');
+  if (wrapper) { wrapper.addEventListener('click', onClick); }
+  load(false);
+  setInterval(refreshStamp, 30000);
+  setInterval(function() { load(true); }, RECHECK_MS);
+})();</script>
