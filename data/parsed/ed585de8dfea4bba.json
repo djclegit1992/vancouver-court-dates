@@ -1,0 +1,22 @@
+{
+  "category_raw": "16+ Days, Civil",
+  "date_created": "2026-07-28T09:04",
+  "dates": [
+    "2027-06-21",
+    "2027-09-20"
+  ],
+  "dates_offered": 2,
+  "earliest_date": "2027-06-21",
+  "last_date": "2027-09-20",
+  "length": "16+ Days",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "slot_count": 2,
+  "unqualified_dates": [
+    "2027-06-21",
+    "2027-09-20"
+  ]
+}
