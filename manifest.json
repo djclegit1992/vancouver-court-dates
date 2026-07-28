@@ -1,5 +1,5 @@
 {
- "built": "2026-07-28T18:23:46Z",
+ "built": "2026-07-28T18:27:57Z",
  "files": {
   ".github/workflows/scrape.yml": "8de721b057773f82",
   ".gitignore": "c32150f74cc956bf",
@@ -14,13 +14,14 @@
   "preflight.py": "b005b2642727bd8e",
   "requirements.txt": "31d999b6cfbd2697",
   "scrape.py": "aa897ccf96a2ca86",
-  "test_block.js": "7ea7bf47ace7540b",
+  "test_block.js": "58594d320efb77be",
   "test_integration.py": "4bc130f8e30dc1be",
   "test_parse.py": "01589fc6cee74461",
   "test_scrape.py": "ac9592e6ce3e5dfc",
+  "test_stale.js": "4451d072e980ddf5",
   "testpdf.py": "180ffa675d3a9da5",
   "tlsfix.py": "119d59ee8e85f9cf",
-  "vcd-block.html": "f28d607c919621e3"
+  "vcd-block.html": "bec1858ea06484da"
  },
  "project": "Vancouver Court Dates Finder"
 }

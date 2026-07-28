@@ -155,6 +155,10 @@ setTimeout(() => {
     stamp.slice(0, 10), newest.slice(0, 10));
   checkTrue('our stamp is relative', /ago|moments/.test(text(d.querySelector('#vcdStampUs'))));
   check('staleness hidden when fresh', d.querySelector('#vcdWarn').className, 'vcd-warn');
+  checkTrue('copy says hourly, not five times a day',
+    !/five times a day/.test(d.body.textContent));
+  checkTrue('hero mentions hourly',
+    /every hour/.test(text(d.querySelector('.vcd-sub'))));
   check('unread key hidden', d.querySelector('#vcdKeyUnread').className, 'vcd-key vcd-key-hide');
 
   console.log('\nnone offered tile');
