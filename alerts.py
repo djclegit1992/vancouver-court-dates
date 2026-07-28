@@ -57,7 +57,6 @@ MAX_AGE_MINUTES = 75
 # signs up and hears nothing. This sweeps those up.
 CONFIRM_BACKSTOP_MINUTES = 60
 
-FROM_ADDRESS = "Courtready <alerts@courtready.ca>"
 REPLY_TO = "admin@courtready.ca"
 TOOL_URL = "https://courtready.ca/vancouver-court-dates-finder/"
 BOOK_URL = "https://justice.gov.bc.ca/scjob/"
@@ -87,6 +86,10 @@ SUPABASE_URL = env("SUPABASE_URL")
 SUPABASE_KEY = env("SUPABASE_SERVICE_KEY")
 POSTMARK_TOKEN = env("POSTMARK_TOKEN")
 POSTMARK_STREAM = env("POSTMARK_STREAM", "outbound")
+# Must be a verified sender on the Vancouver Postmark server.
+# A mismatch makes Postmark reject every send.
+FROM_ADDRESS = env("POSTMARK_FROM",
+                   "Courtready <alerts@courtready.ca>")
 DRY_RUN = env("ALERTS_DRY_RUN") == "1"
 
 

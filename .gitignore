@@ -9,6 +9,7 @@ extracted-text.txt
 sample_latest.json
 
 # Node, installed only to run the render tests locally.
+build/
 node_modules/
 package.json
 package-lock.json
