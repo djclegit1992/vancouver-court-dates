@@ -1,5 +1,6 @@
 {
   "category_raw": "Summary Conviction Appeal, Criminal",
+  "content_hash": "8caf553113bd2dab64150ac23db267509fbda3f411c77d919f9da4212ebaa561",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-08-05",
@@ -78,6 +79,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 128,
   "unqualified_dates": [
     "2026-08-05",

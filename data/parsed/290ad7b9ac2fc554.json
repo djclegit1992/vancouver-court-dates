@@ -1,5 +1,6 @@
 {
   "category_raw": "TMC, Civil",
+  "content_hash": "2600d770193ae6db269f2272d0fbca6d71ad05b86af5aa419d1f47bc27386686",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-08-04",
@@ -60,6 +61,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 112,
   "unqualified_dates": [
     "2026-08-04",

@@ -1,5 +1,6 @@
 {
   "category_raw": "2 Days, Family",
+  "content_hash": "b6c99f42f0e285ba08d81615959557b4cc7f1c08d2e63e249468efcce86328a1",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-09-23",
@@ -161,6 +162,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 149,
   "unqualified_dates": [
     "2026-09-23",

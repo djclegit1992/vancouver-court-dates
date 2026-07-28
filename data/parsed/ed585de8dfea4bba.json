@@ -1,5 +1,6 @@
 {
   "category_raw": "16+ Days, Civil",
+  "content_hash": "524b643fa56db50fdb221595b0ed40b24787f49c1c4803e2bde2c11033aab95b",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2027-06-21",
@@ -14,6 +15,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 2,
   "unqualified_dates": [
     "2027-06-21",

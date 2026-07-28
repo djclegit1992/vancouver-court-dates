@@ -1,5 +1,6 @@
 {
   "category_raw": "16+ Days, Family",
+  "content_hash": "b1c8e27a7534160dfb2e4f78155c42849631d05b2e66c062300f23c2c64d9339",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2027-03-22",
@@ -21,6 +22,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 9,
   "unqualified_dates": [
     "2027-03-22",

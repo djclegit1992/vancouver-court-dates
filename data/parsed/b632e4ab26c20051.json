@@ -1,5 +1,6 @@
 {
   "category_raw": "4-5 Days, Civil",
+  "content_hash": "bdc2f974e97b90f5c14133ea808084d521833dea0fc28c4a96028bc03a5ed80d",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2027-08-03",
@@ -26,6 +27,7 @@
     "2027-09-07",
     "2027-10-12"
   ],
+  "schema": 2,
   "slot_count": 8,
   "unqualified_dates": [
     "2027-10-18",

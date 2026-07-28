@@ -1,5 +1,6 @@
 {
   "category_raw": "4-5 Days, MVA",
+  "content_hash": "3216ce5d83351467d6ab25ee1857a96c18e4a3129e104863c99f9553e46d7251",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-09-21",
@@ -67,6 +68,7 @@
     "2027-09-07",
     "2027-10-12"
   ],
+  "schema": 2,
   "slot_count": 46,
   "unqualified_dates": [
     "2026-09-21",

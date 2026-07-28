@@ -1,5 +1,6 @@
 {
   "category_raw": "2 Days, Civil",
+  "content_hash": "8ddfdfd21eea5237b9f4945613dbd8a6d4b8d644c6dacd94d1cecef84b92b3fd",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2027-03-22",
@@ -102,6 +103,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 90,
   "unqualified_dates": [
     "2027-03-22",

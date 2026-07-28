@@ -1,5 +1,6 @@
 {
   "category_raw": "JCC, Family",
+  "content_hash": "a67f0bef6ce7be8100450e8cbe5fd810886a3b5fb106f283a1c527b4d5e1908d",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-08-04",
@@ -42,6 +43,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 69,
   "unqualified_dates": [
     "2026-08-04",

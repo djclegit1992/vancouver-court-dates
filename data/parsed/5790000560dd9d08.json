@@ -1,5 +1,6 @@
 {
   "category_raw": "6-15 Days, MVA",
+  "content_hash": "4cd83791b2d9b0607ce30c3189456b95d9311928238047bd9450d1a5cf5186de",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2027-02-08",
@@ -47,6 +48,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 35,
   "unqualified_dates": [
     "2027-02-08",

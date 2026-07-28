@@ -1,5 +1,6 @@
 {
   "category_raw": "3 Days, MVA",
+  "content_hash": "cc567726a91e07c2626c9fcce79891b8d9133579889737b65f50a242fde822c8",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2026-09-21",
@@ -150,6 +151,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 138,
   "unqualified_dates": [
     "2026-09-21",

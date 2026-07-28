@@ -1,5 +1,6 @@
 {
   "category_raw": "4-5 Days, Family",
+  "content_hash": "82a06eace65ce8960a9a9b47f9f1468ca4c651b7f0578217b79fabbe56dadb9e",
   "date_created": "2026-07-28T09:03",
   "dates": [
     "2026-10-13",
@@ -52,6 +53,7 @@
     "2027-09-07",
     "2027-10-12"
   ],
+  "schema": 2,
   "slot_count": 31,
   "unqualified_dates": [
     "2027-03-01",

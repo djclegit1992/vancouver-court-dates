@@ -1,5 +1,6 @@
 {
   "category_raw": "Registrars, Civil",
+  "content_hash": "4cddac89c3068448cb90142d9b30d67a0640c0acd479017c9d24f3157037c92b",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2026-08-05",
@@ -53,6 +54,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 71,
   "unqualified_dates": [
     "2026-08-05",

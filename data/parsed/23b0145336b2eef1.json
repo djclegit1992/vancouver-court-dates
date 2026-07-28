@@ -1,5 +1,6 @@
 {
   "category_raw": "PTC Criminal, Criminal",
+  "content_hash": "7b3cf0debffe9f62affce6ffb3fe2a802c86d13b1875be2fdd13301c12aac54e",
   "date_created": "2026-07-28T09:04",
   "dates": [
     "2026-07-30",
@@ -124,6 +125,7 @@
   "parse_reason": null,
   "parse_status": "PARSED",
   "qualified_dates": [],
+  "schema": 2,
   "slot_count": 211,
   "unqualified_dates": [
     "2026-07-30",
