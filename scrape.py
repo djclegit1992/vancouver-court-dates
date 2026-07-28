@@ -718,6 +718,11 @@ def build_latest(state, records, run_id, added, removed, healthy):
                 days = None
         docs.append({
             "title": e["title"],
+            # The subscription key. Published rather than computed in
+            # two places: the page submits it and the alert sender
+            # matches on it, and if each derived it independently they
+            # would eventually disagree.
+            "slug": slugify(e["title"]),
             "url": e["url"],
             "kind": e["kind"],
             "is_instruction": e.get("is_instruction", False),
