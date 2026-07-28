@@ -720,6 +720,12 @@ def build_latest(state, records, run_id, added, removed, healthy):
             "dates_offered": e.get("dates_offered"),
             "last_date": e.get("last_date"),
             "notes": e.get("notes") or [],
+            # The dates themselves. This is the content of the tool, so
+            # it belongs in the public payload rather than only in
+            # internal state. Roughly 1,500 across all lists, which is
+            # a few tens of kilobytes.
+            "dates": e.get("dates") or [],
+            "qualified_dates": e.get("qualified_dates") or [],
         })
 
     counts = {}
