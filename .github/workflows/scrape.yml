@@ -1,0 +1,115 @@
+name: scrape
+
+# Three-layer trigger.
+#
+#   workflow_dispatch  cron-job.org POSTs here. This is the PRIMARY.
+#                      Dispatched runs start immediately rather than
+#                      queueing behind GitHub's shared scheduler, and
+#                      cron-job.org's schedules are timezone-aware, so
+#                      daylight saving stops being our problem.
+#
+#   schedule           BACKUP only, 30 minutes behind each primary slot.
+#                      GitHub's scheduled workflows are best-effort and
+#                      are sometimes dropped entirely. Never rely on
+#                      this as the primary. Times are UTC and do NOT
+#                      shift with Pacific daylight saving, which is
+#                      exactly why it is the backup.
+#
+#   healthchecks.io    Watchdog. No ping in the grace window and we get
+#                      an email. This is the layer that protects alert
+#                      subscribers, because a silently dead pipeline is
+#                      the failure that actually does damage.
+#
+# The skip guard in scrape.py means the backup exits in seconds if the
+# primary already ran. Manual and dispatched runs force through it.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 30 minutes behind each cron-job.org slot. UTC.
+    # Pacific daylight time is UTC-7.
+    - cron: '30 14 * * *'   # 07:30 PT
+    - cron: '30 17 * * *'   # 10:30 PT
+    - cron: '30 20 * * *'   # 13:30 PT
+    - cron: '30 23 * * *'   # 16:30 PT
+    - cron: '0  1 * * *'    # 18:00 PT, after the 17:03 batch
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Signal start
+        if: env.HEALTHCHECK_URL != ''
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL/start" || true
+
+      - name: Run tests
+        # The suites are fast and offline. If the diff logic is broken
+        # we would rather fail here than publish wrong data.
+        run: |
+          python test_scrape.py
+
+      - name: Scrape
+        id: scrape
+        env:
+          # A dispatched run is the primary and must not be skipped.
+          # A scheduled run is the backup and should defer to the guard.
+          FORCE_RUN: ${{ github.event_name == 'schedule' && '0' || '1' }}
+        run: python scrape.py
+
+      - name: Commit data
+        run: |
+          git config user.name  "courtready-bot"
+          git config user.email "admin@courtready.ca"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "data: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            # Another run may have pushed while we worked.
+            for i in 1 2 3; do
+              git pull --rebase --autostash && git push && break
+              echo "retry $i"
+              sleep 5
+            done
+          fi
+
+      - name: Report repository size
+        # Early warning if the archive starts growing faster than
+        # expected. A repo nobody can clone is a dead repo.
+        run: |
+          echo "data/      $(du -sh data 2>/dev/null | cut -f1)"
+          echo "data/raw   $(du -sh data/raw 2>/dev/null | cut -f1)"
+          echo "archived   $(find data/raw -type f 2>/dev/null | wc -l) files"
+
+      - name: Signal success
+        if: success() && env.HEALTHCHECK_URL != ''
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL" || true
+
+      - name: Signal failure
+        if: failure() && env.HEALTHCHECK_URL != ''
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: curl -fsS -m 10 --retry 3 "$HEALTHCHECK_URL/fail" || true

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.tmp
+extracted-text.txt
+
+# Local reconnaissance artifacts. Not part of the project.
+# robots.txt in particular must not sit at the root of a public repo:
+# it is bccourts.ca's file, and publishing it here would read as ours.
+vancouver-pdfs.zip
+bc-index.html
+robots.txt
+headers.txt
+van-links.txt
