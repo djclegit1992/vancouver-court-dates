@@ -304,6 +304,16 @@ def main():
     print("\narchive and history")
     n = sum(len(files) for _, _, files in os.walk("data/raw"))
     check("every distinct version archived once", n >= 6, True)
+
+    # A re-export has new bytes but identical text. It must NOT create
+    # a second archive copy, or a nightly rebuild fills the repo with
+    # byte-different, word-identical files.
+    before = sum(len(f) for _, _, f in os.walk("data/raw"))
+    sess.put(U2, make_pdf(body_b, creation_date="another-producer"),
+             '"aaa9:0"')
+    scrape.main()
+    after = sum(len(f) for _, _, f in os.walk("data/raw"))
+    check("re-export adds no archive copy", after - before, 0)
     with open("data/history.csv") as f:
         rows = len(f.readlines())
     check("history has a header plus rows", rows > 20, True)

@@ -141,7 +141,18 @@ setTimeout(() => {
   check('no non-ISO date rendered', bad.length, 0);
 
   console.log('\nstamps');
-  check('court stamp', text(d.querySelector('#vcdStampCourt')), '2026-07-27, 5:03pm');
+  // Do not pin to a literal timestamp: the court rebuilds its lists
+  // several times a day, so any fixed value rots the moment the
+  // fixture is regenerated. Assert the shape, and that the page shows
+  // the NEWEST stamp across all documents.
+  const stamp = text(d.querySelector('#vcdStampCourt'));
+  checkTrue('court stamp is YYYY-MM-DD, h:mmam/pm',
+    /^\d{4}-\d{2}-\d{2}, \d{1,2}:\d{2}(am|pm)$/.test(stamp));
+  const created = JSON.parse(payload).documents
+    .map(x => x.date_created).filter(Boolean).sort();
+  const newest = created[created.length - 1];
+  check('court stamp is the newest date_created',
+    stamp.slice(0, 10), newest.slice(0, 10));
   checkTrue('our stamp is relative', /ago|moments/.test(text(d.querySelector('#vcdStampUs'))));
   check('staleness hidden when fresh', d.querySelector('#vcdWarn').className, 'vcd-warn');
   check('unread key hidden', d.querySelector('#vcdKeyUnread').className, 'vcd-key vcd-key-hide');

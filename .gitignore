@@ -5,6 +5,14 @@ venv/
 *.tmp
 extracted-text.txt
 
+# Generated. Rebuilt by make_fixture.py, so not source.
+sample_latest.json
+
+# Node, installed only to run the render tests locally.
+node_modules/
+package.json
+package-lock.json
+
 # Local reconnaissance artifacts. Not part of the project.
 # robots.txt in particular must not sit at the root of a public repo:
 # it is bccourts.ca's file, and publishing it here would read as ours.
