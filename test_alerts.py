@@ -369,6 +369,31 @@ def main():
         check("angle brackets escaped", "<b>" in h, False)
         checkTrue("ampersand escaped", "&amp;" in h)
 
+    # -- 18. the timestamp must be Vancouver time, not UTC -----------
+    print("\ntimestamp is stated in the court's timezone")
+    check("summer, 02:22 UTC is the previous evening in Vancouver",
+          alerts.court_time("2026-07-29T02:22:00+00:00"),
+          "2026-07-28, 7:22pm")
+    check("winter handles the DST change",
+          alerts.court_time("2026-01-15T20:30:00+00:00"),
+          "2026-01-15, 12:30pm")
+    check("midnight does not become 0",
+          alerts.court_time("2026-07-28T19:00:00+00:00"),
+          "2026-07-28, 12:00pm")
+    check("garbage returns empty rather than a wrong time",
+          alerts.court_time("not a date"), "")
+
+    w = reset(base)
+    w.add("s@example.com", full["slug"], full["title"])
+    alerts.main()
+    if w.emails:
+        body = w.emails[0]["TextBody"]
+        checkTrue("email carries a Vancouver stamp",
+                  "Vancouver time" in body)
+        import re as _re
+        m = _re.search(r"We checked at (\S+), (\S+) Vancouver", body)
+        checkTrue("and it parses as our format", bool(m))
+
     print("\n%d passed, %d failed" % (len(PASS), len(FAIL)))
     shutil.rmtree(tmp, ignore_errors=True)
     return 1 if FAIL else 0

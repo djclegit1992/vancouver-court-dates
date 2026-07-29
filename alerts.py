@@ -38,8 +38,14 @@ import os
 import sys
 import time
 from datetime import date, datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import requests
+
+# The court's own timezone. Everything shown to a subscriber is stated
+# in it, because the dates being discussed are Vancouver court dates
+# and a reader in Toronto or London does not want them shifted.
+COURT_TZ = ZoneInfo("America/Vancouver")
 
 # --------------------------------------------------------------------------
 
@@ -117,6 +123,29 @@ def weekday_of(iso):
 
 def plural(n, one, many):
     return one if n == 1 else many
+
+
+def court_time(iso):
+    """
+    Format a UTC timestamp in the court's local time.
+
+    generated_at is UTC. Printing it unconverted while labelling it
+    'Vancouver time' is worse than printing nothing: it tells the
+    reader the data is seven hours fresher than it is.
+    """
+    try:
+        dt = datetime.fromisoformat(iso)
+    except (TypeError, ValueError):
+        return ""
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    local = dt.astimezone(COURT_TZ)
+    hour = local.hour % 12
+    if hour == 0:
+        hour = 12
+    ampm = "am" if local.hour < 12 else "pm"
+    return "%s, %d:%02d%s" % (local.strftime("%Y-%m-%d"), hour,
+                              local.minute, ampm)
 
 
 # --------------------------------------------------------------------------
@@ -447,8 +476,7 @@ def main():
         if d.get("slug"):
             docs[d["slug"]] = d
 
-    checked_at = data.get("generated_at", "")
-    stamp = checked_at[:16].replace("T", ", ")
+    stamp = court_time(data.get("generated_at", ""))
 
     # -- alerts ------------------------------------------------------
     try:

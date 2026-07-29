@@ -167,6 +167,23 @@ setTimeout(() => {
   check('court stamp is the newest date_created',
     stamp.slice(0, 10), newest.slice(0, 10));
   checkTrue('our stamp is relative', /ago|moments/.test(text(d.querySelector('#vcdStampUs'))));
+  // generated_at is UTC and the tooltip claims Vancouver time, so it
+  // must actually be converted. Compute the expectation rather than
+  // pinning a literal, which would rot the next time the fixture is
+  // rebuilt.
+  const tip = d.querySelector('#vcdStampUs').getAttribute('title');
+  const genUtc = new Date(JSON.parse(payload).generated_at);
+  const wantVan = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit',
+    day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true,
+  }).formatToParts(genUtc).reduce((a, p) => (a[p.type] = p.value, a), {});
+  const wantAp = wantVan.dayPeriod.toLowerCase().replace(/[^a-z]/g, '')
+    .indexOf('p') === 0 ? 'pm' : 'am';
+  const want = `${wantVan.year}-${wantVan.month}-${wantVan.day}, ` +
+    `${wantVan.hour}:${wantVan.minute}${wantAp} Vancouver time`;
+  check('tooltip converts UTC to Vancouver time', tip, want);
+  check('and is not the raw UTC clock time',
+    tip.indexOf(JSON.parse(payload).generated_at.slice(11, 16)) !== -1, false);
   check('staleness hidden when fresh', d.querySelector('#vcdWarn').className, 'vcd-warn');
   checkTrue('copy says hourly, not five times a day',
     !/five times a day/.test(d.body.textContent));

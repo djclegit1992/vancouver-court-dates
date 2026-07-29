@@ -366,6 +366,33 @@
     if (h12 === 0) { h12 = 12; }
     return h12 + ':' + mm + ap;
   }
+  function vancouverStamp(iso) {
+    // generated_at is UTC. The court stamp beside it is already
+    // Vancouver local, because the court prints it inside its own
+    // documents. Showing one converted and the other not, both
+    // labelled Vancouver time, would make our check look seven hours
+    // fresher than it is.
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) { return ''; }
+    try {
+      var fmt = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Vancouver', year: 'numeric', month: '2-digit',
+        day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true
+      });
+      var arr = fmt.formatToParts(d);
+      var parts = {};
+      var i;
+      for (i = 0; i < arr.length; i++) { parts[arr[i].type] = arr[i].value; }
+      if (!parts.year) { return ''; }
+      var ap = String(parts.dayPeriod).toLowerCase().replace(/[^a-z]/g, '');
+      if (ap.indexOf('p') === 0) { ap = 'pm'; }
+      else { ap = 'am'; }
+      return parts.year + '-' + parts.month + '-' + parts.day + ', '
+             + parts.hour + ':' + parts.minute + ap;
+    } catch (e) {
+      return '';
+    }
+  }
   function stampFromIso(s) {
     var m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
     if (!m) {
@@ -905,7 +932,8 @@
     if (!docs) { docs = []; }
     rows = decorate(docs);
     el('vcdStampCourt').innerHTML = esc(courtStamp(docs));
-    absoluteStamp = stampFromIso(data.generated_at);
+    absoluteStamp = vancouverStamp(data.generated_at);
+    if (absoluteStamp === '') { absoluteStamp = stampFromIso(data.generated_at); }
     if (absoluteStamp === '') { absoluteStamp = 'not recorded'; }
     var when = Date.parse(data.generated_at);
     if (isNaN(when)) { scrapedAt = null; }

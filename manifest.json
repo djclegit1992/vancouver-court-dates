@@ -1,10 +1,10 @@
 {
- "built": "2026-07-29T02:05:37Z",
+ "built": "2026-07-29T02:25:27Z",
  "files": {
   ".github/workflows/scrape.yml": "022da9b9bf803e20",
   ".gitignore": "9016203bf549d297",
   "README.md": "93deb5bc7f2e5a2b",
-  "alerts.py": "09423c6a8e67689a",
+  "alerts.py": "ddd14bd0b8a6e3c2",
   "audit.py": "9620ef06199a2dc8",
   "check_block.py": "81bb1a0b21eb47b5",
   "deno.d.ts": "858f61c404441127",
@@ -18,8 +18,8 @@
   "requirements.txt": "31d999b6cfbd2697",
   "scrape.py": "263de067195d2a07",
   "supabase/functions/send-confirmation-bc/index.ts": "6f5fcd6cd0b86429",
-  "test_alerts.py": "dc92922185fd8702",
-  "test_block.js": "bb532c9b63baf395",
+  "test_alerts.py": "1eaf4f0500d4f878",
+  "test_block.js": "7d34f5df90714fda",
   "test_edge.mjs": "f30767474354d138",
   "test_integration.py": "4bc130f8e30dc1be",
   "test_parse.py": "01589fc6cee74461",
@@ -28,7 +28,7 @@
   "testpdf.py": "180ffa675d3a9da5",
   "tlsfix.py": "119d59ee8e85f9cf",
   "tsconfig.test.json": "006923ddebc13e01",
-  "vcd-block.html": "976276be41a0c093"
+  "vcd-block.html": "58dd606c1aa984b8"
  },
  "project": "Vancouver Court Dates Finder"
 }
