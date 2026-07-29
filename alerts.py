@@ -59,6 +59,9 @@ CONFIRM_BACKSTOP_MINUTES = 60
 
 REPLY_TO = "admin@courtready.ca"
 TOOL_URL = "https://courtready.ca/vancouver-court-dates-finder/"
+TOOL_NAME = "Courtready.ca's Vancouver Court Dates Finder"
+CONTACT_NAME = "Tom Macintosh Zheng"
+CONTACT_EMAIL = "tom@courtready.ca"
 BOOK_URL = "https://justice.gov.bc.ca/scjob/"
 PHONE = "604.660.2853"
 COURT_URL = "https://www.bccourts.ca/supreme_court/scheduling/index.aspx"
@@ -176,7 +179,7 @@ def mark(row_id, fields):
 # Postmark
 # --------------------------------------------------------------------------
 
-def send_email(to, subject, body):
+def send_email(to, subject, body, html=None):
     if DRY_RUN:
         log("      DRY RUN, not sending")
         return True, "dry-run"
@@ -188,6 +191,8 @@ def send_email(to, subject, body):
         "TextBody": body,
         "MessageStream": POSTMARK_STREAM,
     }
+    if html:
+        payload["HtmlBody"] = html
     r = requests.post(POSTMARK_URL, json=payload, timeout=TIMEOUT, headers={
         "X-Postmark-Server-Token": POSTMARK_TOKEN,
         "Content-Type": "application/json",
@@ -242,16 +247,86 @@ def qualifies(sub, doc):
 
 
 def booking_line(doc, group):
-    online = False
-    if group in BOOKABLE_GROUPS:
-        online = True
-    if doc.get("slug") in BOOKABLE_SLUGS:
-        online = True
-    if online:
+    if booking_online(doc, group):
         return ("To book, use the court's online booking system at %s, "
                 "or call Supreme Court Scheduling on %s."
                 % (BOOK_URL, PHONE))
     return "To book, call Supreme Court Scheduling on %s." % PHONE
+
+
+def esc_html(v):
+    return (str(v).replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+P = ('style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#2f2f2f;'
+     "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,"
+     'sans-serif"')
+A = 'style="color:#c87040;"'
+
+
+def alert_html(sub, doc, matched, checked_at):
+    """
+    HTML version of the alert.
+
+    A bare URL in a plain-text email is mangled by Outlook SafeLinks
+    into an unreadable blob of tracking parameters. Anchor text is
+    wrapped invisibly instead, so the reader sees a sentence.
+    """
+    name = esc_html(sub.get("hearing_name") or doc.get("title"))
+    dates = doc.get("dates") or []
+    n = len(dates)
+    wd = weekday_of(matched)
+    when = "%s%s" % (matched, " (%s)" % wd if wd else "")
+
+    p = []
+    p.append('<p %s>The Supreme Court is now offering a date for '
+             '<strong>%s</strong> in Vancouver.</p>' % (P, name))
+    if sub.get("wanted_by"):
+        p.append('<p %s>You asked to hear when a date opened on or before '
+                 '%s.</p>' % (P, esc_html(sub["wanted_by"])))
+    p.append('<p %s>Earliest date that works: <strong>%s</strong>'
+             % (P, esc_html(when)))
+    if n > 1:
+        p.append('<br>%d %s currently on offer for this hearing type.'
+                 % (n, plural(n, "date is", "dates are")))
+    p.append('</p>')
+
+    if booking_online(doc, sub.get("hearing_group") or ""):
+        p.append('<p %s>To book, use the court\u2019s '
+                 '<a href="%s" %s>online booking system</a>, or call '
+                 'Supreme Court Scheduling on %s.</p>'
+                 % (P, BOOK_URL, A, PHONE))
+    else:
+        p.append('<p %s>To book, call Supreme Court Scheduling on %s.</p>'
+                 % (P, PHONE))
+
+    p.append('<p %s>We checked at %s Vancouver time. The court can change '
+             'this list at any moment, so please confirm the date before '
+             'you rely on it.</p>' % (P, esc_html(checked_at)))
+    p.append('<p %s>This is the one email you asked for, and your alert is '
+             'now closed.</p>' % P)
+    p.append('<p %s>Questions: %s, <a href="mailto:%s" %s>%s</a></p>'
+             % (P, CONTACT_NAME, CONTACT_EMAIL, A, CONTACT_EMAIL))
+    p.append('<hr style="border:none;border-top:1px solid #e5e1db;'
+             'margin:22px 0 14px;">')
+    p.append('<p style="margin:0;font-size:13px;line-height:1.6;'
+             "color:#857a72;font-family:-apple-system,BlinkMacSystemFont,"
+             "'Segoe UI',Arial,sans-serif\">"
+             '<a href="%s" %s>%s</a><br>'
+             '<a href="%s" %s>The court\u2019s own scheduling page</a><br>'
+             'Courtready.ca is an independent organisation and is not '
+             'affiliated with the court.</p>'
+             % (TOOL_URL, A, TOOL_NAME, COURT_URL, A))
+    return '<div style="max-width:560px;">%s</div>' % "\n".join(p)
+
+
+def booking_online(doc, group):
+    if group in BOOKABLE_GROUPS:
+        return True
+    if doc.get("slug") in BOOKABLE_SLUGS:
+        return True
+    return False
 
 
 def alert_body(sub, doc, matched, checked_at):
@@ -276,8 +351,10 @@ def alert_body(sub, doc, matched, checked_at):
     lines.append("")
     lines.append(booking_line(doc, sub.get("hearing_group") or ""))
     lines.append("")
-    lines.append("See the full list: %s" % TOOL_URL)
-    lines.append("The court's own page: %s" % COURT_URL)
+    lines.append("Questions: %s, %s" % (CONTACT_NAME, CONTACT_EMAIL))
+    lines.append("")
+    lines.append(TOOL_NAME)
+    lines.append(TOOL_URL)
     lines.append("")
     lines.append("We checked at %s Vancouver time. The court can change "
                  "this list at any moment, so please confirm the date "
@@ -397,8 +474,9 @@ def main():
         subject = "A date has opened for %s" % (
             sub.get("hearing_name") or slug)
         body = alert_body(sub, doc, matched, stamp)
+        html = alert_html(sub, doc, matched, stamp)
 
-        good, detail = send_email(sub["email"], subject, body)
+        good, detail = send_email(sub["email"], subject, body, html)
         if not good:
             failed += 1
             log("   FAIL  %-52s %s" % (who, detail))

@@ -49,6 +49,10 @@ const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const FROM = Deno.env.get("POSTMARK_FROM_BC") ?? "";
 const REPLY_TO = "admin@courtready.ca";
 const TOOL_URL = "https://courtready.ca/vancouver-court-dates-finder/";
+const TOOL_NAME = "Courtready.ca's Vancouver Court Dates Finder";
+const CONTACT_NAME = "Tom Macintosh Zheng";
+const CONTACT_EMAIL = "tom@courtready.ca";
+const COURT_NAME = "the Supreme Court of British Columbia in Vancouver";
 const PHONE = "604.660.2853";
 const DATA_URL =
   "https://raw.githubusercontent.com/djclegit1992/vancouver-court-dates/main/data/latest.json";
@@ -106,6 +110,87 @@ async function currentDates(slug: string): Promise<string[] | null> {
   }
 }
 
+function esc(v: string): string {
+  return v
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+// A bare URL in a plain-text email is mangled by Outlook SafeLinks into
+// an unreadable blob. Anchor text in an HTML body gets wrapped
+// invisibly instead, so the reader sees a sentence rather than 300
+// characters of tracking parameters.
+function htmlBody(row: Row, dates: string[] | null): string {
+  const name = esc(row.hearing_name || row.hearing_code);
+  const P = 'style="margin:0 0 14px;font-size:15px;line-height:1.6;' +
+    'color:#2f2f2f;font-family:-apple-system,BlinkMacSystemFont,' +
+    "'Segoe UI',Arial,sans-serif\"";
+  const A = 'style="color:#c87040;"';
+
+  const parts: string[] = [];
+  parts.push(
+    `<p ${P}>This confirms you have signed up for an alert for ` +
+    `<strong>${name}</strong> at ${COURT_NAME}.</p>`,
+  );
+
+  if (row.wanted_by) {
+    parts.push(
+      `<p ${P}>We will email you once, from this address, when that list ` +
+      `next offers a date on or before <strong>${esc(row.wanted_by)}</strong>. ` +
+      `This is not a subscription and you will not hear from us about ` +
+      `anything else.</p>`,
+    );
+  } else {
+    parts.push(
+      `<p ${P}>We will email you once, from this address, when that list ` +
+      `next has an available date. This is not a subscription and you ` +
+      `will not hear from us about anything else.</p>`,
+    );
+  }
+
+  if (dates !== null) {
+    if (dates.length === 0) {
+      parts.push(
+        `<p ${P}>Right now that list has no dates on it at all. ` +
+        `We check every hour through the court's working day.</p>`,
+      );
+    } else {
+      parts.push(
+        `<p ${P}>Right now the earliest date on that list is ` +
+        `<strong>${esc(dates[0])}</strong>. We check every hour through ` +
+        `the court's working day.</p>`,
+      );
+    }
+  }
+
+  parts.push(
+    `<p ${P}>Courtready.ca cannot book a date. To book, call Supreme ` +
+    `Court Scheduling on ${PHONE}.</p>`,
+  );
+  parts.push(
+    `<p ${P}>If you did not sign up for this, reply to this email and we ` +
+    `will remove you.</p>`,
+  );
+  parts.push(
+    `<p ${P}>Questions: ${CONTACT_NAME}, ` +
+    `<a href="mailto:${CONTACT_EMAIL}" ${A}>${CONTACT_EMAIL}</a></p>`,
+  );
+  parts.push(
+    '<hr style="border:none;border-top:1px solid #e5e1db;margin:22px 0 14px;">',
+  );
+  parts.push(
+    `<p style="margin:0;font-size:13px;line-height:1.6;color:#857a72;` +
+    `font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,` +
+    `sans-serif"><a href="${TOOL_URL}" ${A}>${TOOL_NAME}</a><br>` +
+    `Courtready.ca is an independent organisation and is not affiliated ` +
+    `with the court.</p>`,
+  );
+
+  return '<div style="max-width:560px;">' + parts.join("\n") + "</div>";
+}
+
 function body(row: Row, dates: string[] | null): string {
   const name = row.hearing_name || row.hearing_code;
   const lines: string[] = [];
@@ -132,7 +217,12 @@ function body(row: Row, dates: string[] | null): string {
   lines.push("");
   lines.push(`To book, call Supreme Court Scheduling on ${PHONE}.`);
   lines.push("");
-  lines.push(`See the full list: ${TOOL_URL}`);
+  lines.push("If you did not sign up for this, reply to this email and we will remove you.");
+  lines.push("");
+  lines.push(`Questions: ${CONTACT_NAME}, ${CONTACT_EMAIL}`);
+  lines.push("");
+  lines.push(TOOL_NAME);
+  lines.push(TOOL_URL);
   lines.push("");
   lines.push(
     "Courtready.ca is an independent organisation and is not affiliated with the court.",
@@ -153,8 +243,9 @@ async function send(row: Row, dates: string[] | null) {
       From: FROM,
       To: row.email,
       ReplyTo: REPLY_TO,
-      Subject: `You're on the list for ${name}`,
+      Subject: `Alert confirmed: ${name}`,
       TextBody: body(row, dates),
+      HtmlBody: htmlBody(row, dates),
       MessageStream: POSTMARK_STREAM,
     }),
     signal: AbortSignal.timeout(15000),

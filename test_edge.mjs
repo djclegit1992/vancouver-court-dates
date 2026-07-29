@@ -206,7 +206,17 @@ check("status", r.status, 200);
 check("one email", world.postmarkCalls.length, 1);
 const mail = world.postmarkCalls[0];
 check("to the subscriber", mail.To, "someone@example.com");
-check("subject", mail.Subject, "You're on the list for 3 Day Civil Trials");
+check("subject", mail.Subject, "Alert confirmed: 3 Day Civil Trials");
+checkTrue("has an HTML body", !!mail.HtmlBody);
+checkTrue("html names the list", mail.HtmlBody.includes("3 Day Civil Trials"));
+checkTrue("html links the tool as anchor text, not a bare url",
+  /<a href="https:\/\/courtready\.ca\/vancouver-court-dates-finder\/"[^>]*>Courtready/.test(mail.HtmlBody));
+checkTrue("html offers a way out",
+  /reply to this email/.test(mail.HtmlBody));
+checkTrue("html has the independence line",
+  /independent organisation/.test(mail.HtmlBody));
+check("no em dash in the html", /\u2014/.test(mail.HtmlBody), false);
+check("no em dash in the text", /\u2014/.test(mail.TextBody), false);
 checkTrue("says any date", /offers any date/.test(mail.TextBody));
 checkTrue("quotes the current earliest", mail.TextBody.includes("2027-03-22"));
 checkTrue("mentions hourly checking", /every hour/.test(mail.TextBody));
@@ -222,8 +232,10 @@ checkTrue("sets confirmation_sent_at",
 console.log("\nvalid signup, with a threshold");
 reset();
 r = await handler(req({ ...VALID, wanted_by: "2027-06-01" }));
-checkTrue("quotes the threshold back",
+checkTrue("quotes the threshold back in text",
   world.postmarkCalls[0].TextBody.includes("on or before 2027-06-01"));
+checkTrue("quotes the threshold back in html",
+  world.postmarkCalls[0].HtmlBody.includes("2027-06-01"));
 
 // ---- an empty list -------------------------------------------------
 console.log("\nsignup to a list with no dates");
@@ -235,6 +247,8 @@ r = await handler(req({
 }));
 checkTrue("says the list is empty, not a false date",
   /no dates on it at all/.test(world.postmarkCalls[0].TextBody));
+checkTrue("html says so too",
+  /no dates on it at all/.test(world.postmarkCalls[0].HtmlBody));
 
 // ---- degraded but not broken ---------------------------------------
 console.log("\nlatest.json unreachable");
@@ -247,6 +261,14 @@ checkTrue("omits the current-dates line rather than guessing",
   !/earliest date on that list/.test(world.postmarkCalls[0].TextBody));
 
 // ---- failure paths --------------------------------------------------
+console.log("\nhtml escaping");
+reset();
+r = await handler(req({ ...VALID, hearing_name: 'Trials <b>& "Chambers"</b>' }));
+checkTrue("angle brackets escaped",
+  !/<b>/.test(world.postmarkCalls[0].HtmlBody));
+checkTrue("ampersand escaped",
+  /&amp;/.test(world.postmarkCalls[0].HtmlBody));
+
 console.log("\nPostmark refuses");
 reset();
 world.postmarkStatus = 422;

@@ -205,6 +205,16 @@ def main():
               "independent organisation" in body)
     checkTrue("offers online booking for a trial",
               alerts.BOOK_URL in body)
+    html = w.emails[0]["HtmlBody"]
+    checkTrue("has an html body", bool(html))
+    checkTrue("html links the tool as anchor text",
+              '>Courtready.ca&#39;s Vancouver' in html
+              or ">Courtready.ca's Vancouver" in html)
+    checkTrue("html carries the date", full["dates"][0] in html)
+    check("no em dash in html", "\u2014" in html, False)
+    check("no em dash in text", "\u2014" in body, False)
+    check("no bare tool url in the text body",
+          body.count(alerts.TOOL_URL), 1)
 
     # -- 3. threshold not yet met -----------------------------------
     print("\nthreshold earlier than anything on offer")
@@ -343,9 +353,21 @@ def main():
     if w.emails:
         body = w.emails[0]["TextBody"]
         check("no online booking link", alerts.BOOK_URL in body, False)
+        check("nor in the html",
+              alerts.BOOK_URL in w.emails[0]["HtmlBody"], False)
         checkTrue("phone number given", alerts.PHONE in body)
     else:
         check("bankruptcy had dates to alert on", True, False)
+
+    # -- 17. html escaping -------------------------------------------
+    print("\nhtml escaping in the alert")
+    w = reset(base)
+    w.add("r@example.com", full["slug"], 'Trials <b>& "X"</b>')
+    alerts.main()
+    if w.emails:
+        h = w.emails[0]["HtmlBody"]
+        check("angle brackets escaped", "<b>" in h, False)
+        checkTrue("ampersand escaped", "&amp;" in h)
 
     print("\n%d passed, %d failed" % (len(PASS), len(FAIL)))
     shutil.rmtree(tmp, ignore_errors=True)
