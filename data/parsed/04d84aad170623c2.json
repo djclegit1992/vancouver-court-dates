@@ -1,0 +1,39 @@
+{
+  "category_raw": "4-5 Days, Civil",
+  "content_hash": "bdc2f974e97b90f5c14133ea808084d521833dea0fc28c4a96028bc03a5ed80d",
+  "date_created": "2026-07-28T17:03",
+  "dates": [
+    "2027-08-03",
+    "2027-09-07",
+    "2027-10-12",
+    "2027-10-18",
+    "2027-11-22",
+    "2027-11-29",
+    "2027-12-06",
+    "2027-12-13"
+  ],
+  "dates_offered": 8,
+  "earliest_date": "2027-08-03",
+  "last_date": "2027-12-13",
+  "length": "4-5 Days",
+  "matter": "Civil",
+  "notes": [
+    "4 day hearings only"
+  ],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [
+    "2027-08-03",
+    "2027-09-07",
+    "2027-10-12"
+  ],
+  "schema": 2,
+  "slot_count": 8,
+  "unqualified_dates": [
+    "2027-10-18",
+    "2027-11-22",
+    "2027-11-29",
+    "2027-12-06",
+    "2027-12-13"
+  ]
+}
