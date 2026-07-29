@@ -40,46 +40,22 @@ def find_index():
     return None
 
 
-def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
-    out = sys.argv[2] if len(sys.argv) > 2 else "sample_latest.json"
-    out = os.path.abspath(out)
-    index_path = sys.argv[3] if len(sys.argv) > 3 else find_index()
+def from_state(state_path, src, out):
+    """Build the fixture from data/state.json rather than the index."""
+    state = json.load(open(state_path, encoding="utf-8"))
+    docs = []
+    for e in state.values():
+        docs.append({
+            "title": e["title"], "url": e["url"],
+            "kind": e.get("kind", "pdf"),
+            "is_instruction": e.get("is_instruction", False),
+        })
+    docs.sort(key=lambda d: d["title"].lower())
+    return build(docs, src, out)
 
-    if not os.path.isdir(src):
-        print("No such directory: %s" % src)
-        return 1
-    if not index_path or not os.path.exists(index_path):
-        print("Cannot find the court's index HTML. Looked for:")
-        for p in INDEX_CANDIDATES:
-            print("   %s" % p)
-        print()
-        print("Download it with:")
-        print("  curl.exe -s https://www.bccourts.ca/supreme_court/"
-              "scheduling/index.aspx -o bc-index.html")
-        return 1
 
-    src = os.path.abspath(src)
-    index_path = os.path.abspath(index_path)
-    html = open(index_path, encoding="utf-8", errors="replace").read()
-
-    tmp = tempfile.mkdtemp(prefix="vcdfix-")
-    os.chdir(tmp)
-    scrape.ensure_dirs()
-
-    # Copy the archived PDFs in so parse_document can read them.
-    for root, _d, files in os.walk(src):
-        for fn in files:
-            if not fn.lower().endswith(".pdf"):
-                continue
-            d = os.path.join(scrape.RAW, fn[:2])
-            os.makedirs(d, exist_ok=True)
-            shutil.copy(os.path.join(root, fn), os.path.join(d, fn))
-
-    docs = scrape.collect_links(html, scrape.INDEX_URL)
-    print("%d documents from the index" % len(docs))
-
-    # Map each link to its archived copy by slug.
+def build(docs, src, out):
+    """Shared tail: parse each archived PDF and emit the payload."""
     on_disk = {}
     for root, _d, files in os.walk(scrape.RAW):
         for fn in files:
@@ -117,7 +93,6 @@ def main():
 
     state = scrape.build_state(records, {}, "fixture")
     payload = scrape.build_latest(state, records, "fixture", [], [], True)
-
     with open(out, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=1, sort_keys=True)
 
@@ -126,17 +101,62 @@ def main():
     print("wrote %s" % out)
     print("documents: %d" % len(payload["documents"]))
     print("fields per document: %s" % ", ".join(keys))
-    trials = [d for d in payload["documents"]
-              if d.get("category") and
-              d["category"].split(",")[0].strip() in
-              ("2 Days", "3 Days", "4-5 Days", "6-15 Days", "16+ Days")]
-    print("trial lists: %d" % len(trials))
     print("instruction docs: %d"
           % sum(1 for d in payload["documents"] if d["is_instruction"]))
     print("empty lists: %d"
           % sum(1 for d in payload["documents"]
                 if not d["is_instruction"] and not d.get("dates")))
     return 0
+
+
+def main():
+    src = sys.argv[1] if len(sys.argv) > 1 else "data/raw"
+    out = sys.argv[2] if len(sys.argv) > 2 else "sample_latest.json"
+    out = os.path.abspath(out)
+    index_path = sys.argv[3] if len(sys.argv) > 3 else find_index()
+
+    if not os.path.isdir(src):
+        print("No such directory: %s" % src)
+        return 1
+    if not index_path or not os.path.exists(index_path):
+        # Fall back to the committed state file. It carries the title,
+        # url, slug and is_instruction flag for every document, which is
+        # everything the fixture needs. This is what lets the alert tests
+        # run on a CI runner, where the court's index HTML is not in the
+        # repository.
+        state_path = os.path.join("data", "state.json")
+        if os.path.exists(state_path):
+            print("No index HTML; building from %s instead" % state_path)
+            return from_state(state_path, src, out)
+        print("Cannot find the court's index HTML. Looked for:")
+        for p in INDEX_CANDIDATES:
+            print("   %s" % p)
+        print()
+        print("Download it with:")
+        print("  curl.exe -s https://www.bccourts.ca/supreme_court/"
+              "scheduling/index.aspx -o bc-index.html")
+        return 1
+
+    src = os.path.abspath(src)
+    index_path = os.path.abspath(index_path)
+    html = open(index_path, encoding="utf-8", errors="replace").read()
+
+    tmp = tempfile.mkdtemp(prefix="vcdfix-")
+    os.chdir(tmp)
+    scrape.ensure_dirs()
+
+    # Copy the archived PDFs in so parse_document can read them.
+    for root, _d, files in os.walk(src):
+        for fn in files:
+            if not fn.lower().endswith(".pdf"):
+                continue
+            d = os.path.join(scrape.RAW, fn[:2])
+            os.makedirs(d, exist_ok=True)
+            shutil.copy(os.path.join(root, fn), os.path.join(d, fn))
+
+    docs = scrape.collect_links(html, scrape.INDEX_URL)
+    print("%d documents from the index" % len(docs))
+    return build(docs, src, out)
 
 
 if __name__ == "__main__":

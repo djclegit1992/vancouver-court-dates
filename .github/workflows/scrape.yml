@@ -32,6 +32,11 @@ name: scrape
 
 on:
   workflow_dispatch:
+    inputs:
+      alerts_dry_run:
+        description: 'Work out who would be emailed, but send nothing'
+        type: boolean
+        default: false
   schedule:
     # Thirty minutes behind each cron-job.org slot, which runs hourly
     # at :15 past from 08:15 to 17:15 Pacific.
@@ -78,10 +83,12 @@ jobs:
         run: python diagnose_tls.py
 
       - name: Run tests
-        # The suites are fast and offline. If the diff logic is broken
-        # we would rather fail here than publish wrong data.
+        # Fast and offline. If the diff logic is broken we would rather
+        # fail here than publish wrong data, and if the alert matching
+        # is broken we would rather fail here than email someone.
         run: |
           python test_scrape.py
+          python test_alerts.py data/raw
 
       - name: Scrape
         id: scrape
@@ -120,6 +127,22 @@ jobs:
               exit 1
             fi
           fi
+
+      # After the commit, deliberately. The scraped data is the durable
+      # asset and must be saved whatever happens to the email layer. If
+      # sending fails, the job goes red and the data is still safe.
+      #
+      # alerts.py exits quietly when its credentials are absent, so this
+      # step is harmless until the secrets are set.
+      - name: Send alerts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          POSTMARK_TOKEN: ${{ secrets.POSTMARK_TOKEN }}
+          POSTMARK_FROM: ${{ secrets.POSTMARK_FROM }}
+          POSTMARK_STREAM: ${{ secrets.POSTMARK_STREAM }}
+          ALERTS_DRY_RUN: ${{ github.event.inputs.alerts_dry_run == 'true' && '1' || '0' }}
+        run: python alerts.py
 
       - name: Report repository size
         # Early warning if the archive starts growing faster than
