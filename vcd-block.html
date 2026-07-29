@@ -130,6 +130,27 @@
 #vcd-tool-wrapper .vcd-note-p a { font-size: 12.5px !important; color: #7a6d64 !important; font-weight: 600 !important; border-bottom: 1px solid #ded7d0 !important; }
 #vcd-tool-wrapper .vcd-note-p a:hover { color: #c87040 !important; }
 #vcd-tool-wrapper .vcd-footer { background: linear-gradient(135deg, #f0ece8 0%, #f5f2ef 100%) !important; padding: 18px 32px !important; margin-top: 24px !important; font-size: 12px !important; color: #857a72 !important; text-align: center !important; line-height: 1.6 !important; }
+#vcd-tool-wrapper .vcd-actions { margin-top: 14px !important; padding-top: 14px !important; border-top: 1px solid #f0e6dd !important; display: flex !important; flex-wrap: wrap !important; gap: 10px 16px !important; align-items: center !important; }
+#vcd-tool-wrapper .vcd-btn { display: inline-flex !important; align-items: center !important; gap: 8px !important; padding: 11px 18px !important; background: #2f2f2f !important; color: #ffffff !important; font-size: 13.5px !important; font-weight: 600 !important; line-height: 1.4 !important; border-radius: 10px !important; cursor: pointer !important; box-shadow: 0 4px 16px rgba(47,47,47,0.12) !important; }
+#vcd-tool-wrapper .vcd-btn:hover { background: #e28a64 !important; box-shadow: 0 8px 24px rgba(226,138,100,0.28) !important; }
+#vcd-tool-wrapper .vcd-tel { display: inline-flex !important; align-items: center !important; gap: 6px !important; font-size: 13.5px !important; font-weight: 600 !important; line-height: 1.5 !important; color: #5a4a40 !important; }
+#vcd-tool-wrapper .vcd-tel:hover { color: #c87040 !important; }
+#vcd-tool-wrapper .vcd-box { margin-top: 13px !important; padding: 16px 18px !important; background: #ffffff !important; border: 1px solid #e8d5c6 !important; border-radius: 10px !important; display: none !important; }
+#vcd-tool-wrapper .vcd-box-on { display: block !important; }
+#vcd-tool-wrapper .vcd-boxlab { display: block !important; font-size: 13px !important; color: #5a4a40 !important; margin-bottom: 12px !important; line-height: 1.55 !important; }
+#vcd-tool-wrapper .vcd-field { display: block !important; margin-bottom: 11px !important; }
+#vcd-tool-wrapper .vcd-fieldlab { display: block !important; font-size: 12.5px !important; font-weight: 600 !important; color: #5a4a40 !important; line-height: 1.5 !important; margin-bottom: 5px !important; }
+#vcd-tool-wrapper .vcd-fieldhint { display: block !important; font-size: 12px !important; font-weight: 400 !important; color: #857a72 !important; line-height: 1.5 !important; }
+#vcd-tool-wrapper .vcd-row { display: flex !important; gap: 8px !important; flex-wrap: wrap !important; }
+#vcd-tool-wrapper .vcd-input { flex: 1 1 200px !important; padding: 11px 14px !important; font-size: 14px !important; border: 1px solid #d4cdc3 !important; border-radius: 10px !important; background: #ffffff !important; color: #2f2f2f !important; }
+#vcd-tool-wrapper .vcd-input:focus { border-color: #e28a64 !important; box-shadow: 0 0 0 3px rgba(226,138,100,0.16) !important; }
+#vcd-tool-wrapper .vcd-dateinput { flex: 0 1 190px !important; padding: 11px 14px !important; font-size: 14px !important; border: 1px solid #d4cdc3 !important; border-radius: 10px !important; background: #ffffff !important; color: #2f2f2f !important; }
+#vcd-tool-wrapper .vcd-dateinput:focus { border-color: #e28a64 !important; box-shadow: 0 0 0 3px rgba(226,138,100,0.16) !important; }
+#vcd-tool-wrapper .vcd-send { flex: 0 0 auto !important; padding: 11px 20px !important; background: #2f2f2f !important; color: #ffffff !important; font-size: 13.5px !important; font-weight: 600 !important; line-height: 1.4 !important; border-radius: 10px !important; cursor: pointer !important; }
+#vcd-tool-wrapper .vcd-send:hover { background: #e28a64 !important; }
+#vcd-tool-wrapper .vcd-hp { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+#vcd-tool-wrapper .vcd-msg { display: block !important; font-size: 13px !important; margin-top: 10px !important; color: #3f6b3f !important; font-weight: 500 !important; line-height: 1.55 !important; }
+#vcd-tool-wrapper .vcd-msg-bad { color: #a8542f !important; }
 @media (max-width: 900px) {
 #vcd-tool-wrapper .vcd-cats { grid-template-columns: repeat(3, 1fr) !important; }
 #vcd-tool-wrapper .vcd-notes { grid-template-columns: 1fr !important; gap: 14px !important; }
@@ -235,6 +256,13 @@
   var COURT_CLOSES = 19;
   var RECHECK_MS = 10 * 60 * 1000;
   var VCD_BOOK_URL = 'https://justice.gov.bc.ca/scjob/';
+  var VCD_SUPABASE_URL = 'https://jiimeaykdofnldeucmsk.supabase.co';
+  var VCD_SUPABASE_KEY = 'sb_publishable_F7x1VHwqAmVPkr8pugWzWQ_LyFLo8pb';
+  var VCD_TABLE = 'court_alerts';
+  var VCD_JURISDICTION = 'BC';
+  var VCD_LOCATION_CODE = 'VA';
+  var VCD_LOCATION_NAME = 'Vancouver';
+  var VCD_MAX_AHEAD_DAYS = 1090;
   var VCD_GROUPS = { 'Case Planning Conference Available Dates': 'Conferences', 'Judicial Case Conference Available Dates': 'Conferences', 'Trial Management Conference Available Dates': 'Conferences', 'Settlement Conference Available Dates': 'Conferences', 'Pre-Trial Conference Available Dates': 'Criminal', 'SCA Available Dates': 'Criminal', 'Assize Chambers Dates': 'Chambers', 'Civil Lengthy Chambers Available Dates': 'Chambers', 'Family Lengthy Chambers Available Dates': 'Chambers', 'Bankruptcy Discharge': 'Registrar', 'One Day & Over Registrar Dates': 'Registrar', 'Pre Hearing Conference Available': 'Registrar', 'Registrar Available Dates': 'Registrar' };
   var VCD_ORDER = ['All', 'Trials', 'Conferences', 'Chambers', 'Registrar', 'Criminal'];
   var GCLASS = { 'Trials': 'vcd-g-trials', 'Conferences': 'vcd-g-conferences', 'Chambers': 'vcd-g-chambers', 'Registrar': 'vcd-g-registrar', 'Criminal': 'vcd-g-criminal', 'Other': 'vcd-g-other' };
@@ -253,6 +281,7 @@
   var IC_TEL = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>';
   var IC_DOWN = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>';
   var IC_UP = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"></path></svg>';
+  var IC_MAIL = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7.5 10 6 10-6"></path></svg>';
   var IC_BOOK = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"></rect><path d="M8 2.5v4"></path><path d="M16 2.5v4"></path><path d="M3 10h18"></path><path d="m9.5 15.5 2 2 3.5-3.5"></path></svg>';
   var IC_GUIDE = '<svg class="vcd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>';
   var CAT_ICONS = { 'All': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>', 'Trials': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17.5"></path><path d="M7.5 21h9"></path><path d="M4 7h16"></path><path d="M7 7 4 13h6z"></path><path d="M17 7l-3 6h6z"></path></svg>', 'Conferences': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"></circle><circle cx="16.5" cy="9.5" r="2.4"></circle><path d="M3 19.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"></path><path d="M15.5 14.2c2.7.3 4.5 2.5 4.5 5.3"></path></svg>', 'Chambers': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-4.5L19 8v13"></path><path d="M9.5 21v-6h5v6"></path></svg>', 'Registrar': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6"></path><path d="M9 17h4"></path></svg>', 'Criminal': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 12.5-8 8a2.1 2.1 0 1 1-3-3l8-8"></path><path d="m16 16 6-6"></path><path d="m8 8 6-6"></path><path d="m9 7 8 8"></path><path d="m21 11-8-8"></path></svg>', 'None offered': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M8 2.5v4"></path><path d="M16 2.5v4"></path><path d="M3 10h18"></path><path d="m9.5 14 5 4.5"></path><path d="m14.5 14-5 4.5"></path></svg>', 'Other': '<svg class="vcd-cat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 16.5v.01"></path><path d="M12 13.5v-1a2.5 2.5 0 1 0-2.5-2.5"></path></svg>' };
@@ -265,6 +294,7 @@
   var searchTerm = '';
   var sortMode = 'soonest';
   var expanded = {};
+  var openAlert = {};
   function el(id) { return document.getElementById(id); }
   function esc(s) {
     if (s === null) { return ''; }
@@ -411,7 +441,7 @@
         matter = MATTER_LABEL[cat.matter];
         length = LENGTH_LABEL[cat.length];
       }
-      out.push({ title: d.title, url: d.url, group: g, matter: matter, length: length, unread: unread, dates: dates, qualified: qual, n: dates.length, first: d.earliest_date, days: daysFromToday(d.earliest_date), explain: EXPLAIN[d.title], notes: d.notes, book: canBookOnline(d, g), guide: guideUrlFor(d, g, guides) });
+      out.push({ title: d.title, slug: d.slug, url: d.url, group: g, matter: matter, length: length, unread: unread, dates: dates, qualified: qual, n: dates.length, first: d.earliest_date, days: daysFromToday(d.earliest_date), explain: EXPLAIN[d.title], notes: d.notes, book: canBookOnline(d, g), guide: guideUrlFor(d, g, guides) });
     }
     return out;
   }
@@ -520,6 +550,54 @@
     }
     return h;
   }
+  function isoToday() {
+    var d = new Date();
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+  }
+  function isoPlusDays(n) {
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+  }
+  function alreadyMet(r, wanted) {
+    // Would this alert fire the moment it was created? If so it is not
+    // an alert, it is an email one second later, and the person is
+    // better served by being shown the date that is already there.
+    //
+    // A blank threshold means "any date at all", so on a list that
+    // already has dates it is always already met.
+    if (r.n === 0) { return null; }
+    if (!wanted) { return r.dates[0]; }
+    var i;
+    for (i = 0; i < r.dates.length; i++) {
+      if (r.dates[i] <= wanted) { return r.dates[i]; }
+    }
+    return null;
+  }
+  function alertHtml(r) {
+    var key = r.slug;
+    var cls = 'vcd-box';
+    if (openAlert[key] === true) { cls = 'vcd-box vcd-box-on'; }
+    var h = '<div class="vcd-actions">';
+    h += '<button type="button" class="vcd-btn" data-alert="' + esc(key) + '">' + IC_MAIL + 'Email me when a date opens</button>';
+    h += '<a class="vcd-tel" href="tel:' + VCD_TEL + '">' + IC_TEL + VCD_PHONE + '</a>';
+    h += '</div><div class="' + cls + '">';
+    h += '<span class="vcd-boxlab">We will email you once, when a date opens on this list. That is the only email you will get from this alert.</span>';
+    h += '<span class="vcd-field"><span class="vcd-fieldlab">Latest date that would still work for you<span class="vcd-fieldhint">Leave blank for any date.</span></span>';
+    h += '<input type="date" class="vcd-dateinput" data-by="' + esc(key) + '" min="' + isoPlusDays(1) + '" max="' + isoPlusDays(VCD_MAX_AHEAD_DAYS) + '" aria-label="Latest date that would still work for you"></span>';
+    h += '<span class="vcd-field"><span class="vcd-fieldlab">Your email</span>';
+    h += '<span class="vcd-row">';
+    h += '<input type="email" class="vcd-input" data-email="' + esc(key) + '" placeholder="you@example.com" aria-label="Your email address">';
+    h += '<input type="text" class="vcd-hp" data-hp="' + esc(key) + '" tabindex="-1" autocomplete="off" aria-hidden="true">';
+    h += '<button type="button" class="vcd-send" data-send="' + esc(key) + '">Notify me</button>';
+    h += '</span></span>';
+    h += '<span class="vcd-msg" data-msg="' + esc(key) + '"></span></div>';
+    return h;
+  }
   function cardHtml(r) {
     var band = 'none';
     if (r.unread) { band = 'unread'; }
@@ -553,11 +631,109 @@
     } else {
       if (r.n > 0) { h += datesHtml(r); }
       else {
-        h += '<div class="vcd-links"><span class="vcd-verify">The court is not offering any dates on this list at the moment.</span>' + sourceLink(r) + bookLink(r) + guideLink(r) + callLink() + '</div>';
+        h += '<div class="vcd-links"><span class="vcd-verify">The court is not offering any dates on this list at the moment.</span>' + sourceLink(r) + bookLink(r) + guideLink(r) + '</div>';
       }
+      h += alertHtml(r);
     }
     h += '</div>';
     return h;
+  }
+  function findRow(slug) {
+    var i;
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].slug === slug) { return rows[i]; }
+    }
+    return null;
+  }
+  function setMsg(key, text, bad) {
+    var nodes = document.querySelectorAll('[data-msg]');
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].getAttribute('data-msg') === key) {
+        nodes[i].innerHTML = esc(text);
+        if (bad) { nodes[i].className = 'vcd-msg vcd-msg-bad'; }
+        else { nodes[i].className = 'vcd-msg'; }
+      }
+    }
+  }
+  function readField(attr, key) {
+    var nodes = document.querySelectorAll('[' + attr + ']');
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].getAttribute(attr) === key) { return nodes[i].value; }
+    }
+    return '';
+  }
+  function validEmail(v) {
+    if (v.length < 6) { return false; }
+    if (v.length > 254) { return false; }
+    if (v.indexOf('@') < 1) { return false; }
+    var dot = v.lastIndexOf('.');
+    if (dot < v.indexOf('@')) { return false; }
+    if (dot === v.length - 1) { return false; }
+    return true;
+  }
+  function submitAlert(key) {
+    var r = findRow(key);
+    if (r === null) { return; }
+    if (trim(readField('data-hp', key)) !== '') {
+      setMsg(key, 'Thanks. We will be in touch.', false);
+      return;
+    }
+    var email = trim(readField('data-email', key));
+    if (!validEmail(email)) {
+      setMsg(key, 'That does not look like an email address.', true);
+      return;
+    }
+    var wanted = trim(readField('data-by', key));
+    if (wanted !== '') {
+      if (wanted <= isoToday()) {
+        setMsg(key, 'That date has already passed. Please choose a date in the future.', true);
+        return;
+      }
+      if (wanted > isoPlusDays(VCD_MAX_AHEAD_DAYS)) {
+        setMsg(key, 'That date is too far ahead. Please choose one within the next three years.', true);
+        return;
+      }
+    }
+    var met = alreadyMet(r, wanted);
+    if (met !== null) {
+      setMsg(key, 'There\u2019s already a date on ' + met + ' that meets this criteria. No alert is created in this case.', true);
+      return;
+    }
+    setMsg(key, 'Sending.', false);
+    var payload = {
+      jurisdiction: VCD_JURISDICTION,
+      location_code: VCD_LOCATION_CODE,
+      location_name: VCD_LOCATION_NAME,
+      hearing_code: r.slug,
+      hearing_name: r.title,
+      hearing_group: r.group,
+      email: email
+    };
+    if (wanted !== '') { payload.wanted_by = wanted; }
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', VCD_SUPABASE_URL + '/rest/v1/' + VCD_TABLE, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('apikey', VCD_SUPABASE_KEY);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + VCD_SUPABASE_KEY);
+    xhr.setRequestHeader('Prefer', 'return=minimal');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) { return; }
+      if (xhr.status >= 200) {
+        if (xhr.status < 300) {
+          setMsg(key, 'Done. Check your inbox for a confirmation. We will email you once more, when a date opens on this list.', false);
+          return;
+        }
+      }
+      if (xhr.status === 409) {
+        setMsg(key, 'You are already on the list for this one. Nothing more to do.', false);
+        return;
+      }
+      if (window.console) { console.log('Courtready signup failed', xhr.status, xhr.responseText); }
+      setMsg(key, 'That did not go through. Please call ' + VCD_PHONE + ' or email admin [at] courtready.ca.', true);
+    };
+    xhr.send(JSON.stringify(payload));
   }
   function renderCats() {
     var counts = {};
@@ -805,6 +981,18 @@
         if (expanded[m] === true) { expanded[m] = false; }
         else { expanded[m] = true; }
         renderList();
+        return;
+      }
+      var a = node.getAttribute('data-alert');
+      if (a) {
+        if (openAlert[a] === true) { openAlert[a] = false; }
+        else { openAlert[a] = true; }
+        renderList();
+        return;
+      }
+      var sd = node.getAttribute('data-send');
+      if (sd) {
+        submitAlert(sd);
         return;
       }
       node = node.parentNode;

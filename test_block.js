@@ -35,16 +35,28 @@ const dom = new JSDOM('<!DOCTYPE html><body>' + html + '</body>', {
     FakeDate.UTC = RealDate.UTC;
     w.Date = FakeDate;
 
+    // Captures POSTs so the signup box can be tested without a
+    // database. GETs return the fixture payload as before.
+    w.__posted = [];
     w.XMLHttpRequest = function () {
+      var self = this;
       this.readyState = 0;
       this.status = 0;
       this.responseText = '';
-      this.open = function () {};
-      this.send = function () {
-        this.readyState = 4;
-        this.status = 200;
-        this.responseText = payload;
-        if (this.onreadystatechange) { this.onreadystatechange(); }
+      this.__method = 'GET';
+      this.__url = '';
+      this.open = function (m, u) { self.__method = m; self.__url = u; };
+      this.send = function (b) {
+        self.readyState = 4;
+        if (self.__method === 'POST') {
+          w.__posted.push({ url: self.__url, body: b });
+          self.status = 201;
+          self.responseText = '';
+        } else {
+          self.status = 200;
+          self.responseText = payload;
+        }
+        if (self.onreadystatechange) { self.onreadystatechange(); }
       };
       this.setRequestHeader = function () {};
     };
@@ -53,6 +65,7 @@ const dom = new JSDOM('<!DOCTYPE html><body>' + html + '</body>', {
 });
 
 const d = dom.window.document;
+const posted = dom.window.__posted;
 const text = n => (n ? n.textContent.replace(/\s+/g, ' ').trim() : null);
 
 setTimeout(() => {
@@ -212,6 +225,98 @@ setTimeout(() => {
     checkTrue('expanding shows more',
       d.querySelector('#vcdList .vcd-card').querySelectorAll('.vcd-date').length > 12);
   }
+
+  // ---- signup box ------------------------------------------------
+  console.log('\nsignup box');
+  const cardsNow = d.querySelectorAll('#vcdList .vcd-card');
+  check('every card has a signup button',
+    Array.from(cardsNow).filter(c => c.querySelector('[data-alert]')).length, 28);
+  check('boxes start closed',
+    d.querySelectorAll('#vcdList .vcd-box-on').length, 0);
+
+  function cardFor(title) {
+    return Array.from(d.querySelectorAll('#vcdList .vcd-card'))
+      .find(c => text(c.querySelector('.vcd-name')) === title);
+  }
+  function openBox(title) {
+    cardFor(title).querySelector('[data-alert]')
+      .dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    return cardFor(title);
+  }
+  function submit(title) {
+    cardFor(title).querySelector('[data-send]')
+      .dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+    return text(cardFor(title).querySelector('[data-msg]'));
+  }
+
+  let card = openBox('6-15 Day Civil Trials');
+  checkTrue('box opens', !!card.querySelector('.vcd-box-on'));
+  checkTrue('date field is optional and says so',
+    /Leave blank for any date/.test(text(card.querySelector('.vcd-fieldlab'))));
+  check('no em dash anywhere in the box',
+    /\u2014/.test(card.querySelector('.vcd-box').textContent), false);
+  const dateInput = card.querySelector('[data-by]');
+  checkTrue('date input is bounded below', !!dateInput.getAttribute('min'));
+  checkTrue('date input is bounded above', !!dateInput.getAttribute('max'));
+  checkTrue('honeypot present and hidden',
+    card.querySelector('[data-hp]').className.indexOf('vcd-hp') !== -1);
+
+  // bad email
+  card.querySelector('[data-email]').value = 'not-an-email';
+  check('rejects a malformed address', submit('6-15 Day Civil Trials'),
+    'That does not look like an email address.');
+
+  // honeypot filled
+  card = cardFor('6-15 Day Civil Trials');
+  card.querySelector('[data-email]').value = 'real@example.com';
+  card.querySelector('[data-hp]').value = 'spam';
+  checkTrue('honeypot short-circuits silently',
+    /Thanks/.test(submit('6-15 Day Civil Trials')));
+  check('nothing posted', posted.length, 0);
+
+  // a populated list with no threshold is already satisfied
+  card = openBox('2 Day MVA Trials');
+  card.querySelector('[data-email]').value = 'real@example.com';
+  let msg = submit('2 Day MVA Trials');
+  checkTrue('blank threshold on a populated list is refused',
+    /already a date on 2026-09-21 that meets this criteria/.test(msg));
+  checkTrue('and explains no alert was made', /No alert is created/.test(msg));
+  check('nothing posted', posted.length, 0);
+
+  // threshold later than the earliest date is also already satisfied
+  card = cardFor('2 Day MVA Trials');
+  card.querySelector('[data-email]').value = 'real@example.com';
+  card.querySelector('[data-by]').value = '2027-01-01';
+  checkTrue('a threshold beyond the earliest date is refused',
+    /already a date on 2026-09-21/.test(submit('2 Day MVA Trials')));
+  check('nothing posted', posted.length, 0);
+
+  // threshold earlier than anything offered is a real subscription
+  card = cardFor('2 Day MVA Trials');
+  card.querySelector('[data-email]').value = 'real@example.com';
+  card.querySelector('[data-by]').value = '2026-08-15';
+  submit('2 Day MVA Trials');
+  check('a genuine threshold posts', posted.length, 1);
+  check('to court_alerts',
+    posted[0].url.indexOf('/rest/v1/court_alerts') !== -1, true);
+  const body = JSON.parse(posted[0].body);
+  check('jurisdiction', body.jurisdiction, 'BC');
+  check('location code', body.location_code, 'VA');
+  check('location name', body.location_name, 'Vancouver');
+  check('hearing_code is the slug', body.hearing_code, '2-day-mva-trials');
+  check('threshold sent', body.wanted_by, '2026-08-15');
+  check('no status field is sent', body.status, undefined);
+  check('no notified_at is sent', body.notified_at, undefined);
+
+  // an empty list accepts a blank threshold
+  posted.length = 0;
+  card = cardFor('6-15 Day Civil Trials');
+  card.querySelector('[data-hp]').value = '';
+  card.querySelector('[data-email]').value = 'real@example.com';
+  submit('6-15 Day Civil Trials');
+  check('empty list accepts blank threshold', posted.length, 1);
+  check('wanted_by omitted entirely',
+    JSON.parse(posted[0].body).wanted_by, undefined);
 
   console.log('\n' + pass + ' passed, ' + fail + ' failed');
   process.exit(fail ? 1 : 0);

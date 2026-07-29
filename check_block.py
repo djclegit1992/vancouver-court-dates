@@ -139,10 +139,16 @@ def check(path):
         ok("every class carries the %s- prefix" % prefix)
 
     # -- email obfuscation -------------------------------------------
-    if re.search(r"[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", src):
-        bad("a bare email address appears; use 'admin [at] courtready.ca'")
+    # example.com and friends are RFC 2606 reserved for documentation.
+    # A placeholder in an input field is not a harvestable address.
+    found = [m for m in re.findall(
+        r"[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", src)
+        if not re.search(r"@example\.(com|org|net)$", m)]
+    if found:
+        bad("a bare email address appears (%s); use 'admin [at] "
+            "courtready.ca'" % found[0])
     else:
-        ok("no bare email address")
+        ok("no harvestable email address")
 
     # -- CSS trap 1: specificity against the reset -------------------
     # Reset selector scores (1,0,2). Any rule styling text must include
