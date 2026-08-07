@@ -1,0 +1,30 @@
+{
+  "category_raw": "6-15 Days, Family",
+  "content_hash": "04f294a3d278de32c4f71df54265cd5983e9aaf5a0dc0ed7af072f8b97c46779",
+  "date_created": "2026-08-07T11:03",
+  "dates": [
+    "2027-03-01",
+    "2028-01-04",
+    "2028-01-10",
+    "2028-01-17",
+    "2028-01-24"
+  ],
+  "dates_offered": 5,
+  "earliest_date": "2027-03-01",
+  "last_date": "2028-01-24",
+  "length": "6-15 Days",
+  "matter": "Family",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 5,
+  "unqualified_dates": [
+    "2027-03-01",
+    "2028-01-04",
+    "2028-01-10",
+    "2028-01-17",
+    "2028-01-24"
+  ]
+}
