@@ -1304,7 +1304,7 @@
         "2028-01-24"
       ],
       "dates_offered": 5,
-      "days_since_change": 2,
+      "days_since_change": 3,
       "earliest_date": "2027-03-01",
       "is_instruction": false,
       "kind": "pdf",
@@ -1827,7 +1827,7 @@
         "2027-02-26"
       ],
       "dates_offered": 120,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-08-17",
       "is_instruction": false,
       "kind": "pdf",
@@ -1888,7 +1888,7 @@
         "2026-12-18"
       ],
       "dates_offered": 36,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-09-10",
       "is_instruction": false,
       "kind": "pdf",
@@ -2083,11 +2083,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-08-09T23:16:29+00:00",
+  "generated_at": "2026-08-10T00:16:28+00:00",
   "grid": {
-    "as_at": "2026-08-09",
+    "as_at": "2026-08-10",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-08-09T23:16:29",
+    "generated_at": "2026-08-10T00:16:28",
     "grid": [
       {
         "cells": [
@@ -2099,7 +2099,7 @@
             "length": "2 Days",
             "length_label": "2 days",
             "state": "available",
-            "wait_days": 199
+            "wait_days": 198
           },
           {
             "band": "months",
@@ -2109,7 +2109,7 @@
             "length": "3 Days",
             "length_label": "3 days",
             "state": "available",
-            "wait_days": 199
+            "wait_days": 198
           },
           {
             "band": "months",
@@ -2124,8 +2124,8 @@
             ],
             "qualified_dates": 4,
             "state": "available",
-            "unqualified_wait_days": 407,
-            "wait_days": 359
+            "unqualified_wait_days": 406,
+            "wait_days": 358
           },
           {
             "band": "months",
@@ -2135,7 +2135,7 @@
             "length": "6-15 Days",
             "length_label": "6-15 days",
             "state": "available",
-            "wait_days": 513
+            "wait_days": 512
           },
           {
             "band": "months",
@@ -2145,7 +2145,7 @@
             "length": "16+ Days",
             "length_label": "16+ days",
             "state": "available",
-            "wait_days": 316
+            "wait_days": 315
           }
         ],
         "earliest_in_row": "2027-02-24",
@@ -2162,7 +2162,7 @@
             "length": "2 Days",
             "length_label": "2 days",
             "state": "available",
-            "wait_days": 66
+            "wait_days": 65
           },
           {
             "band": "months",
@@ -2172,7 +2172,7 @@
             "length": "3 Days",
             "length_label": "3 days",
             "state": "available",
-            "wait_days": 66
+            "wait_days": 65
           },
           {
             "band": "months",
@@ -2187,8 +2187,8 @@
             ],
             "qualified_dates": 6,
             "state": "available",
-            "unqualified_wait_days": 113,
-            "wait_days": 113
+            "unqualified_wait_days": 112,
+            "wait_days": 112
           },
           {
             "band": "months",
@@ -2198,7 +2198,7 @@
             "length": "6-15 Days",
             "length_label": "6-15 days",
             "state": "available",
-            "wait_days": 204
+            "wait_days": 203
           },
           {
             "band": "months",
@@ -2208,7 +2208,7 @@
             "length": "16+ Days",
             "length_label": "16+ days",
             "state": "available",
-            "wait_days": 225
+            "wait_days": 224
           }
         ],
         "earliest_in_row": "2026-10-14",
@@ -2225,7 +2225,7 @@
             "length": "2 Days",
             "length_label": "2 days",
             "state": "available",
-            "wait_days": 53
+            "wait_days": 52
           },
           {
             "band": "months",
@@ -2235,7 +2235,7 @@
             "length": "3 Days",
             "length_label": "3 days",
             "state": "available",
-            "wait_days": 65
+            "wait_days": 64
           },
           {
             "band": "months",
@@ -2250,8 +2250,8 @@
             ],
             "qualified_dates": 7,
             "state": "available",
-            "unqualified_wait_days": 78,
-            "wait_days": 65
+            "unqualified_wait_days": 77,
+            "wait_days": 64
           },
           {
             "band": "months",
@@ -2261,7 +2261,7 @@
             "length": "6-15 Days",
             "length_label": "6-15 days",
             "state": "available",
-            "wait_days": 183
+            "wait_days": 182
           },
           {
             "band": "months",
@@ -2271,7 +2271,7 @@
             "length": "16+ Days",
             "length_label": "16+ days",
             "state": "available",
-            "wait_days": 225
+            "wait_days": 224
           }
         ],
         "earliest_in_row": "2026-10-01",
@@ -2304,8 +2304,8 @@
     "summary": {
       "cells_available": 15,
       "cells_total": 15,
-      "longest_wait_days": 513,
-      "shortest_wait_days": 53
+      "longest_wait_days": 512,
+      "shortest_wait_days": 52
     },
     "timezone": "America/Vancouver"
   },
@@ -2313,7 +2313,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20260809T231525Z",
+  "run_id": "20260810T001525Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 31
