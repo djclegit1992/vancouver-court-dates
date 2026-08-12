@@ -1,0 +1,18 @@
+{
+  "category_raw": ",",
+  "content_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "date_created": "2026-08-12T10:04",
+  "dates": [],
+  "dates_offered": 0,
+  "earliest_date": null,
+  "last_date": null,
+  "length": null,
+  "matter": null,
+  "notes": [],
+  "parse_reason": "envelope intact, court is offering no dates",
+  "parse_status": "NO_DATES",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 0,
+  "unqualified_dates": []
+}
