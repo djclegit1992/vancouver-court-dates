@@ -6,8 +6,8 @@
   "documents": [
     {
       "category": "16+ Days, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:09 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:23 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-06-21",
         "2028-01-10",
@@ -26,7 +26,7 @@
       "previous_earliest_date": "2028-01-04",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 36493,
+      "size_bytes": 36826,
       "slug": "16-day-over-civil-trials",
       "status": "REEXPORTED",
       "title": "16 Day & Over Civil Trials",
@@ -34,8 +34,8 @@
     },
     {
       "category": "16+ Days, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:26 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:40 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-03-22",
         "2027-04-05",
@@ -66,7 +66,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 39218,
+      "size_bytes": 39201,
       "slug": "16-day-over-family-trials",
       "status": "REEXPORTED",
       "title": "16 Day & Over Family Trials",
@@ -74,8 +74,8 @@
     },
     {
       "category": "16+ Days, MVA",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:25 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:39 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-03-22",
         "2027-03-30",
@@ -106,7 +106,7 @@
       "previous_earliest_date": "2027-02-08",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 39207,
+      "size_bytes": 39192,
       "slug": "16-day-over-mva-trials",
       "status": "REEXPORTED",
       "title": "16 Day & Over MVA Trials",
@@ -114,8 +114,8 @@
     },
     {
       "category": "2 Days, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:04 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:19 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-02-22",
         "2027-02-23",
@@ -239,7 +239,7 @@
       "previous_earliest_date": "2027-02-24",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 41324,
+      "size_bytes": 41303,
       "slug": "2-day-civil-trials",
       "status": "REEXPORTED",
       "title": "2 Day Civil Trials",
@@ -247,8 +247,8 @@
     },
     {
       "category": "2 Days, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:05 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:20 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-10-14",
         "2026-10-15",
@@ -427,7 +427,7 @@
       "previous_earliest_date": "2026-09-23",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 42731,
+      "size_bytes": 42721,
       "slug": "2-day-family-trials",
       "status": "REEXPORTED",
       "title": "2 Day Family Trials",
@@ -435,8 +435,8 @@
     },
     {
       "category": "2 Days, MVA",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:16 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:30 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-10-01",
         "2026-10-13",
@@ -650,7 +650,7 @@
       "previous_earliest_date": "2026-09-21",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 44589,
+      "size_bytes": 44562,
       "slug": "2-day-mva-trials",
       "status": "REEXPORTED",
       "title": "2 Day MVA Trials",
@@ -658,8 +658,8 @@
     },
     {
       "category": "3 Days, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:07 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:22 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-02-22",
         "2027-02-23",
@@ -748,7 +748,7 @@
       "previous_earliest_date": "2027-02-24",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 40819,
+      "size_bytes": 40782,
       "slug": "3-day-civil-trials",
       "status": "REEXPORTED",
       "title": "3 Day Civil Trials",
@@ -756,8 +756,8 @@
     },
     {
       "category": "3 Days, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:02 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:18 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-10-14",
         "2026-10-27",
@@ -891,7 +891,7 @@
       "previous_earliest_date": "2026-09-23",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 41592,
+      "size_bytes": 41573,
       "slug": "3-day-family-trials",
       "status": "REEXPORTED",
       "title": "3 Day Family Trials",
@@ -899,8 +899,8 @@
     },
     {
       "category": "3 Days, MVA",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:20 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:34 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-10-13",
         "2026-10-14",
@@ -1061,7 +1061,7 @@
       "previous_earliest_date": "2026-09-21",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 42556,
+      "size_bytes": 42536,
       "slug": "3-day-mva-trials",
       "status": "REEXPORTED",
       "title": "3 Day MVA Trials",
@@ -1069,8 +1069,8 @@
     },
     {
       "category": "4-5 Days, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:00 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:17 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-02-22",
         "2027-08-03",
@@ -1106,7 +1106,7 @@
         "2028-01-04"
       ],
       "readable": true,
-      "size_bytes": 39843,
+      "size_bytes": 39816,
       "slug": "4-5-day-civil-trials",
       "status": "REEXPORTED",
       "title": "4-5 Day Civil Trials",
@@ -1114,8 +1114,8 @@
     },
     {
       "category": "4-5 Days, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:03:58 GMT",
-      "date_created": "2026-08-14T11:03",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:16 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-12-07",
         "2027-02-01",
@@ -1176,7 +1176,7 @@
         "2028-01-04"
       ],
       "readable": true,
-      "size_bytes": 40438,
+      "size_bytes": 40415,
       "slug": "4-5-day-family-trials",
       "status": "REEXPORTED",
       "title": "4-5 Day Family Trials",
@@ -1184,8 +1184,8 @@
     },
     {
       "category": "4-5 Days, MVA",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:00 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:31 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-10-13",
         "2026-10-26",
@@ -1261,7 +1261,7 @@
         "2028-01-04"
       ],
       "readable": true,
-      "size_bytes": 41481,
+      "size_bytes": 41457,
       "slug": "4-5-day-mva-trials",
       "status": "REEXPORTED",
       "title": "4-5 Day MVA Trials",
@@ -1269,8 +1269,8 @@
     },
     {
       "category": "6-15 Days, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:14 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:28 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2028-01-04",
         "2028-01-31"
@@ -1288,16 +1288,16 @@
       "previous_earliest_date": "2027-07-26",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 37110,
+      "size_bytes": 37445,
       "slug": "6-15-day-civil-trials",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "6-15 Day Civil Trials",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/6-15%20Day%20Civil%20Trials.pdf"
     },
     {
       "category": "6-15 Days, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:03:56 GMT",
-      "date_created": "2026-08-14T11:03",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:15 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-01-04",
         "2027-10-04",
@@ -1320,16 +1320,16 @@
       "previous_earliest_date": "2027-10-04",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 37967,
+      "size_bytes": 37892,
       "slug": "6-15-day-family-trials",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "6-15 Day Family Trials",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/6-15%20Day%20Family%20Trials.pdf"
     },
     {
       "category": "6-15 Days, MVA",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:19 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:14 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2027-02-08",
         "2027-02-16",
@@ -1384,7 +1384,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 41257,
+      "size_bytes": 41227,
       "slug": "6-15-day-mva-trials",
       "status": "REEXPORTED",
       "title": "6-15 Day MVA Trials",
@@ -1392,8 +1392,8 @@
     },
     {
       "category": "Long Chambers, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:23 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:37 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 17,
@@ -1408,7 +1408,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 37338,
+      "size_bytes": 37688,
       "slug": "assize-chambers-dates",
       "status": "REEXPORTED",
       "title": "Assize Chambers Dates",
@@ -1416,8 +1416,8 @@
     },
     {
       "category": "Bankruptcy Discharge, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:31 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:45 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-09-02",
         "2026-09-16",
@@ -1441,7 +1441,7 @@
       "previous_earliest_date": "2026-08-05",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 51934,
+      "size_bytes": 51919,
       "slug": "bankruptcy-discharge",
       "status": "REEXPORTED",
       "title": "Bankruptcy Discharge",
@@ -1521,8 +1521,8 @@
     },
     {
       "category": "CPC, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:12 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:26 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-12-11",
         "2026-12-14",
@@ -1542,7 +1542,7 @@
       "previous_earliest_date": "2026-10-26",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 57217,
+      "size_bytes": 57190,
       "slug": "case-planning-conference-available-dates",
       "status": "REEXPORTED",
       "title": "Case Planning Conference Available Dates",
@@ -1550,8 +1550,8 @@
     },
     {
       "category": "Long Chambers, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:21 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:17 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 17,
@@ -1566,7 +1566,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 34943,
+      "size_bytes": 35290,
       "slug": "civil-lengthy-chambers-available-dates",
       "status": "REEXPORTED",
       "title": "Civil Lengthy Chambers Available Dates",
@@ -1574,8 +1574,8 @@
     },
     {
       "category": "Long Chambers, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:22 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:36 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 17,
@@ -1590,7 +1590,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 34950,
+      "size_bytes": 35295,
       "slug": "family-lengthy-chambers-available-dates",
       "status": "REEXPORTED",
       "title": "Family Lengthy Chambers Available Dates",
@@ -1598,8 +1598,8 @@
     },
     {
       "category": "JCC, Family",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:13 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:27 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-11-24",
         "2026-11-25",
@@ -1632,16 +1632,16 @@
       "previous_earliest_date": "2026-11-23",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 60180,
+      "size_bytes": 60163,
       "slug": "judicial-case-conference-available-dates",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "Judicial Case Conference Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Judicial%20Case%20Conference%20Available%20Dates.pdf"
     },
     {
       "category": "Registar, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:28 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:42 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-11-03"
       ],
@@ -1658,7 +1658,7 @@
       "previous_earliest_date": "2026-09-08",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 31295,
+      "size_bytes": 31640,
       "slug": "one-day-over-registrar-dates",
       "status": "REEXPORTED",
       "title": "One Day & Over Registrar Dates",
@@ -1666,8 +1666,8 @@
     },
     {
       "category": "PHC, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:24 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:37 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-08-24",
         "2026-09-10",
@@ -1693,7 +1693,7 @@
       "previous_earliest_date": "2026-12-11",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 58503,
+      "size_bytes": 58491,
       "slug": "pre-hearing-conference-available",
       "status": "REEXPORTED",
       "title": "Pre Hearing Conference Available",
@@ -1701,8 +1701,8 @@
     },
     {
       "category": "PTC Criminal, Criminal",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:30 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:44 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-08-18",
         "2026-08-19",
@@ -1836,7 +1836,7 @@
       "previous_earliest_date": "2026-08-17",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 54393,
+      "size_bytes": 54375,
       "slug": "pre-trial-conference-available-dates",
       "status": "REEXPORTED",
       "title": "Pre-Trial Conference Available Dates",
@@ -1844,8 +1844,8 @@
     },
     {
       "category": "Registrars, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:29 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:43 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-09-01",
         "2026-09-03",
@@ -1898,7 +1898,7 @@
       "earliest_date": "2026-09-01",
       "is_instruction": false,
       "kind": "pdf",
-      "last_changed": "2026-08-14T18:16:48+00:00",
+      "last_changed": "2026-08-14T19:16:48+00:00",
       "last_date": "2026-12-18",
       "notes": [],
       "parse_status": "PARSED",
@@ -1906,7 +1906,7 @@
       "previous_earliest_date": "2026-09-03",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 52971,
+      "size_bytes": 52964,
       "slug": "registrar-available-dates",
       "status": "UPDATED",
       "title": "Registrar Available Dates",
@@ -1914,8 +1914,8 @@
     },
     {
       "category": "Summary Conviction Appeal, Criminal",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:08 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:05 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
         "2026-08-19",
         "2026-08-26",
@@ -1999,7 +1999,7 @@
       "previous_earliest_date": "2026-08-12",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 60628,
+      "size_bytes": 60611,
       "slug": "sca-available-dates",
       "status": "REEXPORTED",
       "title": "SCA Available Dates",
@@ -2007,8 +2007,8 @@
     },
     {
       "category": ",",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:09 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:23 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 17,
@@ -2023,7 +2023,7 @@
       "previous_earliest_date": null,
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 53697,
+      "size_bytes": 54214,
       "slug": "settlement-conference-available-dates",
       "status": "REEXPORTED",
       "title": "Settlement Conference Available Dates",
@@ -2031,9 +2031,10 @@
     },
     {
       "category": "TMC, Civil",
-      "court_last_modified": "Fri, 14 Aug 2026 18:04:11 GMT",
-      "date_created": "2026-08-14T11:04",
+      "court_last_modified": "Fri, 14 Aug 2026 19:04:25 GMT",
+      "date_created": "2026-08-14T12:04",
       "dates": [
+        "2026-09-11",
         "2026-10-27",
         "2026-10-28",
         "2026-10-30",
@@ -2065,31 +2066,31 @@
         "2026-12-16",
         "2026-12-18"
       ],
-      "dates_offered": 30,
+      "dates_offered": 31,
       "days_since_change": 0,
-      "earliest_date": "2026-10-27",
+      "earliest_date": "2026-09-11",
       "is_instruction": false,
       "kind": "pdf",
-      "last_changed": "2026-08-14T17:16:35+00:00",
+      "last_changed": "2026-08-14T19:16:48+00:00",
       "last_date": "2026-12-18",
       "notes": [],
       "parse_status": "PARSED",
       "possibly_stale": false,
-      "previous_earliest_date": "2026-09-02",
+      "previous_earliest_date": "2026-10-27",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 59641,
+      "size_bytes": 60852,
       "slug": "trial-management-conference-available-dates",
-      "status": "REEXPORTED",
+      "status": "UPDATED",
       "title": "Trial Management Conference Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-08-14T18:16:48+00:00",
+  "generated_at": "2026-08-14T19:16:48+00:00",
   "grid": {
     "as_at": "2026-08-14",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-08-14T18:16:48",
+    "generated_at": "2026-08-14T19:16:48",
     "grid": [
       {
         "cells": [
@@ -2315,12 +2316,12 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20260814T181541Z",
+  "run_id": "20260814T191531Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
-    "REEXPORTED": 24,
+    "REEXPORTED": 26,
     "UNCHANGED": 3,
-    "UPDATED": 4
+    "UPDATED": 2
   },
   "timezone": "America/Vancouver"
 }

@@ -1,0 +1,22 @@
+{
+  "category_raw": "Registar, Civil",
+  "content_hash": "69f7fb6c7a06b0de3b89fe58dff7e618ab8e27e80041ebc65c271577a511a14b",
+  "date_created": "2026-08-14T12:04",
+  "dates": [
+    "2026-11-03"
+  ],
+  "dates_offered": 1,
+  "earliest_date": "2026-11-03",
+  "last_date": "2026-11-03",
+  "length": "Registar",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 1,
+  "unqualified_dates": [
+    "2026-11-03"
+  ]
+}
