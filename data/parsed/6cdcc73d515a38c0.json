@@ -1,0 +1,28 @@
+{
+  "category_raw": "16+ Days, Civil",
+  "content_hash": "b47f2433c1abe27f609443b4b9f2d25feaddf3f03a4a8d35a5968b366e40e3e0",
+  "date_created": "2026-08-17T09:03",
+  "dates": [
+    "2027-06-21",
+    "2027-09-27",
+    "2028-01-10",
+    "2028-01-31"
+  ],
+  "dates_offered": 4,
+  "earliest_date": "2027-06-21",
+  "last_date": "2028-01-31",
+  "length": "16+ Days",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 4,
+  "unqualified_dates": [
+    "2027-06-21",
+    "2027-09-27",
+    "2028-01-10",
+    "2028-01-31"
+  ]
+}
