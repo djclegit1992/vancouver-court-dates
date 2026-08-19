@@ -1,0 +1,18 @@
+{
+  "category_raw": null,
+  "content_hash": null,
+  "date_created": null,
+  "dates": [],
+  "dates_offered": 0,
+  "earliest_date": null,
+  "last_date": null,
+  "length": null,
+  "matter": null,
+  "notes": [],
+  "parse_reason": "pdfplumber failed: PdfminerException: No /Root object! - Is this really a PDF?",
+  "parse_status": "UNREADABLE",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 0,
+  "unqualified_dates": []
+}
