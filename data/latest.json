@@ -2021,11 +2021,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-08-27T01:04:26+00:00",
+  "generated_at": "2026-08-27T10:32:12+00:00",
   "grid": {
     "as_at": "2026-08-27",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-08-27T01:04:26",
+    "generated_at": "2026-08-27T10:32:12",
     "grid": [
       {
         "cells": [
@@ -2247,7 +2247,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20260827T010322Z",
+  "run_id": "20260827T103109Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 31
