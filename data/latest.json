@@ -1380,7 +1380,7 @@
       "date_created": "2026-08-28T17:02",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 31,
+      "days_since_change": 32,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1509,7 +1509,7 @@
       "date_created": "2026-08-28T17:02",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 8,
+      "days_since_change": 9,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1557,7 +1557,7 @@
       "date_created": "2026-08-28T17:02",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 31,
+      "days_since_change": 32,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1951,7 +1951,7 @@
       "date_created": "2026-08-28T17:02",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 31,
+      "days_since_change": 32,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -2020,11 +2020,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-08-29T16:16:51+00:00",
+  "generated_at": "2026-08-29T17:16:40+00:00",
   "grid": {
     "as_at": "2026-08-29",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-08-29T16:16:51",
+    "generated_at": "2026-08-29T17:16:40",
     "grid": [
       {
         "cells": [
@@ -2246,7 +2246,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20260829T161538Z",
+  "run_id": "20260829T171538Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 31
