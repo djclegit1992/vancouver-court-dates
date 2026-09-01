@@ -1,0 +1,24 @@
+{
+  "category_raw": "PHC, Civil",
+  "content_hash": "2b1661ce044ee4a051745913ae4a73013380487bd761146a781f180f547dcee7",
+  "date_created": "2026-09-01T12:03",
+  "dates": [
+    "2026-12-11",
+    "2026-12-16"
+  ],
+  "dates_offered": 2,
+  "earliest_date": "2026-12-11",
+  "last_date": "2026-12-16",
+  "length": "PHC",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 2,
+  "unqualified_dates": [
+    "2026-12-11",
+    "2026-12-16"
+  ]
+}
