@@ -1,0 +1,38 @@
+{
+  "category_raw": "JCC, Family",
+  "content_hash": "c72da4461f3ea4514650f2a6512909b2cf45329396d3dbda1d0cc3d7b171d0c0",
+  "date_created": "2026-09-09T15:03",
+  "dates": [
+    "2026-10-13",
+    "2026-10-30",
+    "2026-11-10",
+    "2026-11-12",
+    "2026-11-13",
+    "2026-11-18",
+    "2026-12-15",
+    "2026-12-16",
+    "2026-12-18"
+  ],
+  "dates_offered": 9,
+  "earliest_date": "2026-10-13",
+  "last_date": "2026-12-18",
+  "length": "JCC",
+  "matter": "Family",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 15,
+  "unqualified_dates": [
+    "2026-10-13",
+    "2026-10-30",
+    "2026-11-10",
+    "2026-11-12",
+    "2026-11-13",
+    "2026-11-18",
+    "2026-12-15",
+    "2026-12-16",
+    "2026-12-18"
+  ]
+}
