@@ -1,0 +1,32 @@
+{
+  "category_raw": "Bankruptcy Discharge, Civil",
+  "content_hash": "cc35e1915ac5ae29937358037d775e3a913648ffee17979bdec7a8cb2118a9f9",
+  "date_created": "2026-09-18T11:03",
+  "dates": [
+    "2026-10-14",
+    "2026-10-28",
+    "2026-11-18",
+    "2026-11-25",
+    "2026-12-02",
+    "2026-12-09"
+  ],
+  "dates_offered": 6,
+  "earliest_date": "2026-10-14",
+  "last_date": "2026-12-09",
+  "length": "Bankruptcy Discharge",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 6,
+  "unqualified_dates": [
+    "2026-10-14",
+    "2026-10-28",
+    "2026-11-18",
+    "2026-11-25",
+    "2026-12-02",
+    "2026-12-09"
+  ]
+}
