@@ -1,0 +1,26 @@
+{
+  "category_raw": "CPC, Civil",
+  "content_hash": "ef1e3436de43ceab833399c2d2fb8eca6ff0bd21ad734b33bd234e2c45a28a72",
+  "date_created": "2026-09-24T16:02",
+  "dates": [
+    "2026-12-07",
+    "2026-12-09",
+    "2026-12-11"
+  ],
+  "dates_offered": 3,
+  "earliest_date": "2026-12-07",
+  "last_date": "2026-12-11",
+  "length": "CPC",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 3,
+  "unqualified_dates": [
+    "2026-12-07",
+    "2026-12-09",
+    "2026-12-11"
+  ]
+}
