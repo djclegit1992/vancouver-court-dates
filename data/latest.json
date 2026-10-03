@@ -49,7 +49,7 @@
         "2028-03-27"
       ],
       "dates_offered": 12,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-06-21",
       "is_instruction": false,
       "kind": "pdf",
@@ -87,7 +87,7 @@
         "2028-03-27"
       ],
       "dates_offered": 13,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-06-14",
       "is_instruction": false,
       "kind": "pdf",
@@ -240,7 +240,7 @@
         "2028-03-30"
       ],
       "dates_offered": 128,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-03-22",
       "is_instruction": false,
       "kind": "pdf",
@@ -683,7 +683,7 @@
         "2028-03-30"
       ],
       "dates_offered": 211,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-12-01",
       "is_instruction": false,
       "kind": "pdf",
@@ -795,7 +795,7 @@
         "2028-03-29"
       ],
       "dates_offered": 87,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-03-22",
       "is_instruction": false,
       "kind": "pdf",
@@ -1131,7 +1131,7 @@
         "2028-03-29"
       ],
       "dates_offered": 155,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-12-01",
       "is_instruction": false,
       "kind": "pdf",
@@ -1171,7 +1171,7 @@
         "2028-03-27"
       ],
       "dates_offered": 15,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-09-07",
       "is_instruction": false,
       "kind": "pdf",
@@ -1328,7 +1328,7 @@
         "2028-03-27"
       ],
       "dates_offered": 52,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-12-07",
       "is_instruction": false,
       "kind": "pdf",
@@ -1393,7 +1393,7 @@
         "2028-03-27"
       ],
       "dates_offered": 4,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2028-01-04",
       "is_instruction": false,
       "kind": "pdf",
@@ -2043,11 +2043,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-10-03T15:16:35+00:00",
+  "generated_at": "2026-10-03T16:16:31+00:00",
   "grid": {
     "as_at": "2026-10-03",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-10-03T15:16:35",
+    "generated_at": "2026-10-03T16:16:31",
     "grid": [
       {
         "cells": [
@@ -2273,7 +2273,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20261003T151536Z",
+  "run_id": "20261003T161532Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 29
