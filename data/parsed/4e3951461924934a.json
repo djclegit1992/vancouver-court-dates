@@ -1,0 +1,24 @@
+{
+  "category_raw": "6-15 Days, Civil",
+  "content_hash": "39bf3e0f348d3bccc4bf50ad38e426982bb2974d1396482d4e12c4a4e299ecc3",
+  "date_created": "2026-10-05T17:04",
+  "dates": [
+    "2027-06-28",
+    "2027-10-18"
+  ],
+  "dates_offered": 2,
+  "earliest_date": "2027-06-28",
+  "last_date": "2027-10-18",
+  "length": "6-15 Days",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 2,
+  "unqualified_dates": [
+    "2027-06-28",
+    "2027-10-18"
+  ]
+}
