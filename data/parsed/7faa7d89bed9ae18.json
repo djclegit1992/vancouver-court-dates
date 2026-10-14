@@ -1,0 +1,34 @@
+{
+  "category_raw": "TMC, Civil",
+  "content_hash": "8072796cbc6cee0183eeaa3ef8abffa6e3545f5919f9aaebb0ca2ec37a7a669c",
+  "date_created": "2026-10-14T15:04",
+  "dates": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-12-21",
+    "2026-12-22",
+    "2026-12-23",
+    "2026-12-24"
+  ],
+  "dates_offered": 7,
+  "earliest_date": "2026-11-16",
+  "last_date": "2026-12-24",
+  "length": "TMC",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 22,
+  "unqualified_dates": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-12-21",
+    "2026-12-22",
+    "2026-12-23",
+    "2026-12-24"
+  ]
+}
