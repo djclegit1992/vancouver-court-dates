@@ -229,7 +229,7 @@
         "2028-03-30"
       ],
       "dates_offered": 123,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2027-03-24",
       "is_instruction": false,
       "kind": "pdf",
@@ -744,7 +744,7 @@
         "2028-03-29"
       ],
       "dates_offered": 82,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2027-06-02",
       "is_instruction": false,
       "kind": "pdf",
@@ -1309,7 +1309,7 @@
         "2028-03-06"
       ],
       "dates_offered": 2,
-      "days_since_change": 2,
+      "days_since_change": 3,
       "earliest_date": "2028-01-04",
       "is_instruction": false,
       "kind": "pdf",
@@ -1484,7 +1484,7 @@
         "2026-12-31"
       ],
       "dates_offered": 6,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2026-12-22",
       "is_instruction": false,
       "kind": "pdf",
@@ -1793,7 +1793,7 @@
         "2026-12-31"
       ],
       "dates_offered": 14,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2026-11-24",
       "is_instruction": false,
       "kind": "pdf",
@@ -1952,7 +1952,7 @@
         "2026-12-31"
       ],
       "dates_offered": 13,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2026-11-13",
       "is_instruction": false,
       "kind": "pdf",
@@ -1971,11 +1971,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-10-17T21:16:42+00:00",
+  "generated_at": "2026-10-17T22:16:37+00:00",
   "grid": {
     "as_at": "2026-10-17",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-10-17T21:16:42",
+    "generated_at": "2026-10-17T22:16:37",
     "grid": [
       {
         "cells": [
@@ -2193,7 +2193,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20261017T211544Z",
+  "run_id": "20261017T221537Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 29
