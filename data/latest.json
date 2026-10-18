@@ -10,7 +10,7 @@
       "date_created": "2026-10-16T17:04",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1095,7 +1095,7 @@
         "2028-03-27"
       ],
       "dates_offered": 15,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2027-09-07",
       "is_instruction": false,
       "kind": "pdf",
@@ -1405,7 +1405,7 @@
         "2026-12-09"
       ],
       "dates_offered": 5,
-      "days_since_change": 4,
+      "days_since_change": 5,
       "earliest_date": "2026-10-28",
       "is_instruction": false,
       "kind": "pdf",
@@ -1511,7 +1511,7 @@
         "2026-10-19"
       ],
       "dates_offered": 2,
-      "days_since_change": 1,
+      "days_since_change": 2,
       "earliest_date": "2026-10-16",
       "is_instruction": false,
       "kind": "pdf",
@@ -1535,7 +1535,7 @@
       "date_created": "2026-10-16T17:04",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 81,
+      "days_since_change": 82,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1914,7 +1914,7 @@
       "date_created": "2026-09-22T15:03",
       "dates": [],
       "dates_offered": 0,
-      "days_since_change": 81,
+      "days_since_change": 82,
       "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
@@ -1971,11 +1971,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-10-18T16:16:33+00:00",
+  "generated_at": "2026-10-18T17:16:46+00:00",
   "grid": {
     "as_at": "2026-10-18",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-10-18T16:16:33",
+    "generated_at": "2026-10-18T17:16:46",
     "grid": [
       {
         "cells": [
@@ -2193,7 +2193,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20261018T161534Z",
+  "run_id": "20261018T171546Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 29
