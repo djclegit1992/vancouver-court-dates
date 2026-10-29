@@ -65,7 +65,21 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      # Start from the LATEST data on main, not the commit that was
+      # current when this run was triggered.
+      #
+      # By default checkout uses the triggering commit. GitHub delays the
+      # backup schedule unpredictably, so it often lands just before the
+      # :15 run. The concurrency group makes the second run wait, but it
+      # then started from a stale snapshot: it re-scraped, could not merge
+      # its data over the first run's, and failed. That was 18 failures.
+      #
+      # With ref: main, a queued run starts only after the earlier one has
+      # pushed, picks up its data, and either skips (the backup sees fresh
+      # data) or builds cleanly on top of it.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
