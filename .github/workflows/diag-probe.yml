@@ -1,10 +1,6 @@
 name: diag-probe
 
-# Diagnostic only. Lives on the diag/court-probe branch and never on main.
-# Each push to that branch runs three probes in parallel on three
-# separate GitHub machines (usually three different IP addresses), and
-# commits their reports to diag/ on the same branch. Does not touch
-# data/, does not publish, does not send alerts.
+# Diagnostic only. Lives on the diag/court-probe branch, never on main.
 
 on:
   push:
@@ -13,43 +9,26 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: diag-probe
-  cancel-in-progress: false
-
 jobs:
-  probe:
+  cert:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        label: [a, b, c]
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
-      - name: Install
-        run: |
-          pip install -r requirements.txt
-          sudo apt-get install -y -qq dnsutils whois traceroute > /dev/null 2>&1 || true
-      - name: Probe
-        env:
-          PROBE_LABEL: ${{ matrix.label }}
-          SKIP_TLS_CHECK: '0'
+      - run: pip install -r requirements.txt
+      - name: Fetch intermediate
         run: |
           mkdir -p diag
-          python -u diag_probe.py 2>&1 | tee "diag/${{ matrix.label }}-$(date -u +%H%M).txt"
-      - name: Save report
+          python -u diag_cert.py 2>&1 | tee diag/intermediate.txt
+      - name: Save
         if: always()
         run: |
           git config user.name  "courtready-bot"
           git config user.email "admin@courtready.ca"
           git add diag/
-          git commit -m "diag: probe ${{ matrix.label }}" || exit 0
-          for i in 1 2 3 4 5; do
-            git pull --rebase -q && git push -q && break
-            sleep $((RANDOM % 7 + 2))
-          done
+          git commit -m "diag: intermediate certificate" || exit 0
+          git pull --rebase -q && git push -q
