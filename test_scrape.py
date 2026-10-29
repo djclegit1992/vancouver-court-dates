@@ -326,6 +326,63 @@ def main():
     scrape.main()
     after = sum(len(f) for _, _, f in os.walk("data/raw"))
     check("re-export adds no archive copy", after - before, 0)
+
+    # -- the court's hourly rebuild: only the Date Created stamp moves --
+    # This is the case that grew the archive to 17,706 PDFs. The court
+    # prints its own build time inside every document, so before the
+    # stamp was excluded from text_hash, every rebuild was archived and
+    # parsed again even when not one date had changed.
+    print("\ncourt rebuild with an unchanged list")
+
+    def count(d):
+        return sum(len(f) for _, _, f in os.walk(d))
+
+    dates = ["2027-03-22", "2027-03-29"]
+    first = testpdf.make_bcsc_pdf("2 Days, Civil", dates,
+                                  "Monday, July 27, 2026 5:03 pm")
+    t, stamp = scrape.extract_text_and_stamp(first, "pdf")
+    check("stamp is read separately", stamp, "2026-07-27T17:03")
+    check("and removed from the hashed text", "Date Created" in t, False)
+    check("but the dates stay in it", "22 Mar 2027" in t, True)
+
+    sess.put(U2, first, '"rebuild1:0"')
+    scrape.main()
+    raw0, parsed0 = count("data/raw"), count("data/parsed")
+
+    rebuilt = testpdf.make_bcsc_pdf("2 Days, Civil", dates,
+                                    "Tuesday, July 28, 2026 9:04 am")
+    check("the rebuild really is a different file", rebuilt != first, True)
+    sess.put(U2, rebuilt, '"rebuild2:0"')
+    scrape.main()
+    st = scrape.load_json("data/state.json", {})[U2]
+    check("rebuild adds no archive copy", count("data/raw") - raw0, 0)
+    check("rebuild adds no parse cache entry",
+          count("data/parsed") - parsed0, 0)
+    check("rebuild is not reported as a change", st["status"], "REEXPORTED")
+    check("court's build time still moves forward",
+          st["date_created"], "2026-07-28T09:04")
+    latest = scrape.load_json("data/latest.json", {})
+    shown = [d["date_created"] for d in latest["documents"]
+             if d["title"] == "2 Day Civil Trials"]
+    check("and reaches the published page", shown, ["2026-07-28T09:04"])
+
+    # A 304 must carry the stamp forward, not drop it.
+    scrape.main()
+    st = scrape.load_json("data/state.json", {})[U2]
+    check("304 keeps the court's build time", st["date_created"],
+          "2026-07-28T09:04")
+
+    # A real change must still be archived and alerted on.
+    moved = testpdf.make_bcsc_pdf("2 Days, Civil", ["2027-03-29"],
+                                  "Tuesday, July 28, 2026 10:04 am")
+    sess.put(U2, moved, '"rebuild3:0"')
+    scrape.main()
+    st = scrape.load_json("data/state.json", {})[U2]
+    check("a real change is archived", count("data/raw") - raw0, 1)
+    check("and reported", st["status"], "UPDATED")
+    check("with the new earliest date", st["earliest_date"], "2027-03-29")
+    check("and the new build time", st["date_created"], "2026-07-28T10:04")
+
     with open("data/history.csv") as f:
         rows = len(f.readlines())
     check("history has a header plus rows", rows > 20, True)
