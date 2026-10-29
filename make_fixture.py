@@ -56,6 +56,13 @@ def from_state(state_path, src, out):
 
 def build(docs, src, out):
     """Shared tail: parse each archived PDF and emit the payload."""
+    # Parse into a throwaway cache. In from_state mode this runs inside
+    # the real repository (CI calls it via test_alerts.py before every
+    # scrape), and parse_document writes its cache to scrape.PARSED.
+    # Left pointing at data/parsed, every CI run quietly added cache
+    # entries for arbitrary old archive copies, which the scrape step
+    # then committed as if they were real data.
+    scrape.PARSED = tempfile.mkdtemp(prefix="vcdfix-parsed-")
     on_disk = {}
     for root, _d, files in os.walk(scrape.RAW):
         for fn in files:

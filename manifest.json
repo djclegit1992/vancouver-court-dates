@@ -12,7 +12,7 @@
   "diagnose_tls.py": "b25092f3659e2303",
   "dump_text.py": "05e5fab14830187f",
   "grid.py": "f01d6930c6e9bd4e",
-  "make_fixture.py": "19ad0b49ad4efa94",
+  "make_fixture.py": "b1c45d7463ccb73f",
   "migrations/002_confirmation_trigger_bc.sql": "457e4680c1578055",
   "parse.py": "ab2a596acd751748",
   "preflight.py": "b005b2642727bd8e",
