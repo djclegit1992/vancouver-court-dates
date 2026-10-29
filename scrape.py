@@ -271,18 +271,35 @@ def fetch(session, url, headers=None):
     raise last
 
 
-def extract_text(content, kind):
-    """
-    Normalised text for text_hash. Returns None when unreadable.
+# The court prints its own generation time inside every document:
+#   "Date Created: Monday, July 27, 2026 5:03 pm"
+# It changes on every hourly rebuild even when nothing else does.
+STAMP_LINE = re.compile(r"(?m)^\s*Date Created:.*$")
 
-    An empty extraction counts as unreadable, not as readable-and-blank.
-    Court PDFs assembled by hand are sometimes scans or image-only
-    exports, and those yield "". Hashing "" would give every such
-    document an identical text_hash, so a real content change would
-    read as REEXPORTED and never alert. Silent, and the worst kind.
+
+def extract_text_and_stamp(content, kind):
+    """
+    Return (text, stamp) for a document.
+
+    text is the normalised text that text_hash is computed from, with the
+    court's "Date Created" line REMOVED. That line changes on every
+    hourly rebuild, so leaving it in made every rebuild look like a new
+    version: each one was archived again and parsed again, and the
+    archive grew to 17,706 PDFs (787 MB) in three months when only a few
+    hundred versions genuinely differed.
+
+    stamp is that removed line, parsed to an ISO datetime in court-local
+    time, or None. It is still needed: it is the court's own "lists last
+    built" time shown on the page, so it is carried separately rather
+    than lost.
+
+    An empty extraction counts as unreadable (text None), not as
+    readable-and-blank. Hashing "" would give every image-only document
+    an identical text_hash, so a real change would read as REEXPORTED and
+    never alert. Silent, and the worst kind.
     """
     if kind != "pdf":
-        return None
+        return None, None
     try:
         import pdfplumber
         import io
@@ -290,10 +307,26 @@ def extract_text(content, kind):
         with pdfplumber.open(io.BytesIO(content)) as pdf:
             for page in pdf.pages:
                 chunks.append(page.extract_text() or "")
-        text = " ".join(" ".join(chunks).split())
-        return text if text else None
+        raw = "\n".join(chunks)
     except Exception:
-        return None
+        return None, None
+
+    stamp = None
+    m = STAMP_LINE.search(raw)
+    if m:
+        try:
+            import parse as parser
+            stamp = parser._parse_created(m.group(0).split(":", 1)[1])
+        except Exception:
+            stamp = None
+
+    text = " ".join(STAMP_LINE.sub("", raw).split())
+    return (text if text else None), stamp
+
+
+def extract_text(content, kind):
+    """Normalised text for text_hash, stamp removed. None when unreadable."""
+    return extract_text_and_stamp(content, kind)[0]
 
 
 def check_document(session, doc, prev):
@@ -325,6 +358,7 @@ def check_document(session, doc, prev):
         "last_modified": None,
         "etag": None,
         "readable": None,
+        "date_created": None,
         "note": None,
     }
 
@@ -347,7 +381,7 @@ def check_document(session, doc, prev):
     if r.status_code == 304:
         rec["status"] = "UNCHANGED"
         for k in ("bytes_hash", "text_hash", "size_bytes",
-                  "last_modified", "etag", "readable"):
+                  "last_modified", "etag", "readable", "date_created"):
             rec[k] = prev.get(k)
         # The archived copy is still on disk under the carried hash, so
         # a stale-schema cache entry can be re-derived without a fetch.
@@ -374,7 +408,7 @@ def check_document(session, doc, prev):
     rec["last_modified"] = r.headers.get("Last-Modified")
     rec["etag"] = r.headers.get("ETag")
 
-    text = extract_text(content, doc["kind"])
+    text, rec["date_created"] = extract_text_and_stamp(content, doc["kind"])
     rec["readable"] = text is not None
     rec["text_hash"] = sha256(text.encode("utf-8")) if text is not None else None
     rec["archive_path"] = archive(content, rec, doc)
@@ -541,6 +575,13 @@ def archive(content, rec, doc):
     Keying on content keeps exactly one copy per distinct version,
     which is what reprocessing actually needs.
 
+    That only holds because text_hash EXCLUDES the court's "Date Created"
+    line (see extract_text_and_stamp). Until October 2026 it did not, so
+    every hourly rebuild produced a new key and a new copy: 17,706 PDFs
+    in three months. The copy kept for each version is the first one
+    seen, so its stamp is the earliest; the current stamp is recorded in
+    state separately.
+
     Unreadable files fall back to bytes_hash, since content is the one
     thing we cannot compare on those.
     """
@@ -671,6 +712,16 @@ def build_state(records, prev_state, run_id):
             if (prev_earliest and info.get("earliest_date")
                     and prev_earliest != info["earliest_date"]):
                 entry["previous_earliest_date"] = prev_earliest
+
+        # The court's own build time comes from THIS fetch, never from the
+        # parse cache. The cache is keyed on content with the stamp
+        # removed, so a rebuild with unchanged dates reuses the parse from
+        # the first time that content was seen, and that parse carries the
+        # old stamp. Taking it from there would freeze "Court's lists last
+        # built" on the page and blind the staleness check that compares
+        # our last check against the court's last rebuild.
+        if rec.get("date_created"):
+            entry["date_created"] = rec["date_created"]
 
         entry.setdefault("first_seen", ts)
         if rec["status"] in ("UPDATED", "FIRST_SEEN"):
