@@ -90,9 +90,12 @@ def ensure_tls(host):
 # Per-jurisdiction constants. See playbook section 11.
 # --------------------------------------------------------------------------
 
-CONTACT_EMAIL = "admin@courtready.ca"
-PROJECT_URL = "https://courtready.ca"
-USER_AGENT = "CourtreadyBot/1.0 (+%s; %s)" % (PROJECT_URL, CONTACT_EMAIL)
+# Plain browser headers. The court has confirmed we do not need to
+# identify ourselves while monitoring, so requests carry no bot name and
+# no contact address. (Tested 29 Oct 2026: the server's slow spells hit
+# bot and browser headers alike, so this is not what decides success.)
+USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
 
 BASE = "https://www.bccourts.ca"
 INDEX_URL = "https://www.bccourts.ca/supreme_court/scheduling/index.aspx"
@@ -111,8 +114,24 @@ LOCATION_PATH_FRAGMENT = "/scheduling/lists/vancouver/"
 MIN_DOCUMENTS = 25
 
 REQUEST_DELAY = 2.0
-REQUEST_TIMEOUT = 45
-RETRIES = 3
+
+# Patience for a slow server. Measured on 29 Oct 2026 from three GitHub
+# regions: bccourts.ca is a single server (scjweb01.courts.gov.bc.ca),
+# and on a bad day a connection takes 1 to 10 seconds, a TLS handshake
+# up to 34, and a PDF up to 48, while most requests still succeed. The
+# old single 45 second timeout with three quick retries gave up on runs
+# that patience would have saved.
+CONNECT_TIMEOUT = 30      # TCP connect plus TLS handshake
+READ_TIMEOUT = 60         # waiting for the reply
+RETRIES = 3               # attempts per document
+INDEX_RETRIES = 5         # the index is the one request we cannot skip
+
+# Hard ceiling on the whole run. The job is killed at 20 minutes, and a
+# killed job saves nothing. Stopping at 12 leaves time to commit, and
+# whatever was collected is published if few enough documents failed
+# (MAX_FAILURE_RATIO); a document not reached keeps its last good dates.
+RUN_BUDGET_SECONDS = 12 * 60
+MIN_ATTEMPT_SECONDS = 15  # do not start an attempt with less time left
 SKIP_GUARD_MINUTES = 20
 # Bump when the shape of a cached parse record changes. Entries written
 # by an older version are discarded and re-derived rather than trusted.
@@ -250,24 +269,54 @@ def make_session():
     s = requests.Session()
     s.headers.update({
         "User-Agent": USER_AGENT,
-        "From": CONTACT_EMAIL,
-        "Accept": "*/*",
+        "Accept": "text/html,application/xhtml+xml,application/pdf,"
+                  "*/*;q=0.8",
+        "Accept-Language": "en-CA,en;q=0.9",
     })
     return s
 
 
-def fetch(session, url, headers=None):
-    """Fetch with retries. Returns the response or raises."""
+class OutOfTime(requests.RequestException):
+    """The run budget is spent. Raised instead of starting an attempt
+    that could not finish, so the caller records FETCH_FAILED and the
+    run moves on to publishing what it has."""
+
+
+_DEADLINE = [None]
+
+
+def start_clock(budget=None):
+    _DEADLINE[0] = time.time() + (RUN_BUDGET_SECONDS if budget is None
+                                  else budget)
+
+
+def time_left():
+    if _DEADLINE[0] is None:
+        return float("inf")
+    return _DEADLINE[0] - time.time()
+
+
+def fetch(session, url, headers=None, attempts=None):
+    """Fetch with retries inside the run budget. Returns the response
+    or raises. Backoff grows between attempts (5 s, then 10 s) to give
+    a struggling server room rather than hammering it."""
+    attempts = attempts or RETRIES
     last = None
-    for attempt in range(RETRIES):
+    for attempt in range(attempts):
+        left = time_left()
+        if left < MIN_ATTEMPT_SECONDS:
+            raise last or OutOfTime("run budget spent")
+        read = min(READ_TIMEOUT, max(5, left - CONNECT_TIMEOUT))
         try:
-            r = session.get(url, headers=headers or {},
-                            timeout=REQUEST_TIMEOUT, allow_redirects=True)
-            return r
+            return session.get(url, headers=headers or {},
+                               timeout=(CONNECT_TIMEOUT, read),
+                               allow_redirects=True)
         except requests.RequestException as e:
             last = e
-            if attempt < RETRIES - 1:
-                time.sleep(REQUEST_DELAY * (attempt + 2))
+            if attempt < attempts - 1:
+                pause = REQUEST_DELAY * 2.5 * (attempt + 1)
+                if time_left() - pause >= MIN_ATTEMPT_SECONDS:
+                    time.sleep(pause)
     raise last
 
 
@@ -835,15 +884,27 @@ def main():
               % SKIP_GUARD_MINUTES)
         return 0
 
+    start_clock()
     run_id = now().strftime("%Y%m%dT%H%M%SZ")
     print("run %s" % run_id)
     print("tls: %s | %s" % (TRUST_STORE,
                             ensure_tls(urlparse(INDEX_URL).hostname)))
     session = make_session()
 
-    # One request for the index.
+    # One request for the index, retried harder than the rest: without
+    # it there is nothing to check.
     try:
-        r = fetch(session, INDEX_URL)
+        try:
+            r = fetch(session, INDEX_URL, attempts=INDEX_RETRIES)
+        except requests.exceptions.SSLError:
+            # The stored intermediate no longer fits (the court changed
+            # certificate authority). Rebuild the chain live, once.
+            if os.environ.get("SKIP_TLS_CHECK") == "1":
+                raise
+            import tlsfix
+            print("tls: stored intermediate rejected, live repair: %s"
+                  % tlsfix.ensure(urlparse(INDEX_URL).hostname, live=True))
+            r = fetch(session, INDEX_URL, attempts=INDEX_RETRIES)
         r.raise_for_status()
     except Exception as e:
         print("FATAL: could not load index: %s" % e, file=sys.stderr)
@@ -864,18 +925,46 @@ def main():
 
     prev_state = load_json(os.path.join(DATA, "state.json"), {})
 
-    records = []
-    for i, doc in enumerate(docs):
-        if i:
-            time.sleep(REQUEST_DELAY)
+    def process(doc, label):
         prev = prev_state.get(doc["url"])
+        t = time.time()
         rec = check_document(session, doc, prev)
         if not doc["is_instruction"]:
             rec["parse"] = parse_document(rec, doc, prev)
             finalize_status(rec, prev)
-        records.append(rec)
         flag = "" if rec["status"] in ("UNCHANGED", "REEXPORTED") else "  <-"
-        print("  %-12s %s%s" % (rec["status"], rec["title"], flag))
+        why = "  (%s)" % rec["note"] if rec["status"] == "FETCH_FAILED" else ""
+        print("  %-6s %-12s %5.1fs  %s%s%s"
+              % (label, rec["status"], time.time() - t, rec["title"],
+                 flag, why))
+        return rec
+
+    records = []
+    for i, doc in enumerate(docs):
+        if i:
+            time.sleep(REQUEST_DELAY)
+        records.append(process(doc, "%d/%d" % (i + 1, len(docs))))
+
+    # Second pass. On a slow day failures are scattered at random, so a
+    # document that timed out a few minutes ago usually comes through
+    # now. Only transport errors and server errors are retried: a 404 or
+    # a wrong content type will not fix itself in five minutes.
+    def retryable(rec):
+        note = rec.get("note") or ""
+        return (rec["status"] == "FETCH_FAILED" and
+                (rec["http_status"] is None or rec["http_status"] >= 500)
+                and not note.startswith("content-type"))
+
+    again = [i for i, r_ in enumerate(records) if retryable(r_)]
+    if again:
+        print("second pass: retrying %d document(s), %.0fs left"
+              % (len(again), time_left()))
+    for i in again:
+        if time_left() < MIN_ATTEMPT_SECONDS + 30:
+            print("second pass: out of time")
+            break
+        time.sleep(REQUEST_DELAY)
+        records[i] = process(docs[i], "retry")
 
     failures = sum(1 for r_ in records if r_["status"] == "FETCH_FAILED")
     ratio = failures / float(len(records)) if records else 1.0
