@@ -1,6 +1,8 @@
 name: diag-probe
 
 # Diagnostic only. Lives on the diag/court-probe branch, never on main.
+# Dress rehearsal: runs the fix/slow-court scraper against the real court
+# site, then throws its data away. Commits only the log. No alerts.
 
 on:
   push:
@@ -10,25 +12,41 @@ permissions:
   contents: write
 
 jobs:
-  cert:
+  rehearsal:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: fix/slow-court
+          path: candidate
+      - uses: actions/checkout@v4
+        with:
+          path: diagrepo
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
-      - run: pip install -r requirements.txt
-      - name: Fetch intermediate
+          cache-dependency-path: candidate/requirements.txt
+      - run: pip install -r candidate/requirements.txt
+      - name: Rehearse
+        working-directory: candidate
+        env:
+          FORCE_RUN: '1'
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python test_scrape.py > /dev/null && echo "tests ok"
+          set +e
+          ( time python scrape.py ) 2>&1 | tee ../rehearsal.txt
+          echo "exit ${PIPESTATUS[0]}" | tee -a ../rehearsal.txt
+      - name: Save log
+        if: always()
+        working-directory: diagrepo
         run: |
           mkdir -p diag
-          python -u diag_cert.py 2>&1 | tee diag/intermediate.txt
-      - name: Save
-        if: always()
-        run: |
+          cp ../rehearsal.txt "diag/rehearsal-$(date -u +%H%M).txt" || true
           git config user.name  "courtready-bot"
           git config user.email "admin@courtready.ca"
           git add diag/
-          git commit -m "diag: intermediate certificate" || exit 0
+          git commit -m "diag: rehearsal log" || exit 0
           git pull --rebase -q && git push -q
