@@ -6,8 +6,8 @@
   "documents": [
     {
       "category": "16+ Days, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:19 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:21 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2028-02-22",
         "2028-03-27"
@@ -33,8 +33,8 @@
     },
     {
       "category": "16+ Days, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:18 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:21 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-09-13",
         "2027-09-20",
@@ -65,8 +65,8 @@
     },
     {
       "category": "16+ Days, MVA",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:17 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:20 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-06-07",
         "2027-06-14",
@@ -103,8 +103,8 @@
     },
     {
       "category": "2 Days, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:03 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:06 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-03-24",
         "2027-05-06",
@@ -254,8 +254,8 @@
     },
     {
       "category": "2 Days, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:04 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:07 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-02-16",
         "2027-02-17",
@@ -417,8 +417,8 @@
     },
     {
       "category": "2 Days, MVA",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:10 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:13 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-12-01",
         "2026-12-02",
@@ -653,8 +653,8 @@
     },
     {
       "category": "3 Days, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:05 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:08 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-06-02",
         "2027-06-21",
@@ -763,8 +763,8 @@
     },
     {
       "category": "3 Days, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:02 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:05 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-02-16",
         "2027-02-17",
@@ -888,8 +888,8 @@
     },
     {
       "category": "3 Days, MVA",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:14 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:16 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-12-01",
         "2026-12-02",
@@ -1068,8 +1068,8 @@
     },
     {
       "category": "4-5 Days, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:01 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:04 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-06-21",
         "2027-09-07",
@@ -1117,8 +1117,8 @@
     },
     {
       "category": "4-5 Days, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:03:59 GMT",
-      "date_created": "2026-10-30T15:03",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:03 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-02-16",
         "2027-03-30",
@@ -1185,8 +1185,8 @@
     },
     {
       "category": "4-5 Days, MVA",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:11 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:14 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-12-07",
         "2026-12-14",
@@ -1272,25 +1272,23 @@
     },
     {
       "category": "6-15 Days, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:08 GMT",
-      "date_created": "2026-10-30T15:04",
-      "dates": [
-        "2028-01-04"
-      ],
-      "dates_offered": 1,
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:12 GMT",
+      "date_created": "2026-10-30T16:03",
+      "dates": [],
+      "dates_offered": 0,
       "days_since_change": 0,
-      "earliest_date": "2028-01-04",
+      "earliest_date": null,
       "is_instruction": false,
       "kind": "pdf",
-      "last_changed": "2026-10-30T22:16:30+00:00",
-      "last_date": "2028-01-04",
+      "last_changed": "2026-10-30T23:16:27+00:00",
+      "last_date": null,
       "notes": [],
-      "parse_status": "PARSED",
+      "parse_status": "NO_DATES",
       "possibly_stale": false,
       "previous_earliest_date": "2027-09-27",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 36644,
+      "size_bytes": 35358,
       "slug": "6-15-day-civil-trials",
       "status": "UPDATED",
       "title": "6-15 Day Civil Trials",
@@ -1298,8 +1296,8 @@
     },
     {
       "category": "6-15 Days, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:03:58 GMT",
-      "date_created": "2026-10-30T15:03",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:02 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2028-01-04",
         "2028-03-06"
@@ -1317,7 +1315,7 @@
       "previous_earliest_date": "2027-11-29",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 37267,
+      "size_bytes": 37261,
       "slug": "6-15-day-family-trials",
       "status": "REEXPORTED",
       "title": "6-15 Day Family Trials",
@@ -1325,8 +1323,8 @@
     },
     {
       "category": "6-15 Days, MVA",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:12 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:15 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2027-04-05",
         "2027-04-12",
@@ -1392,8 +1390,8 @@
     },
     {
       "category": "Bankruptcy Discharge, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:22 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:25 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-11-18",
         "2026-11-25",
@@ -1469,8 +1467,8 @@
     },
     {
       "category": "CPC, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:07 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:10 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-12-24",
         "2026-12-29",
@@ -1492,19 +1490,19 @@
       "readable": true,
       "size_bytes": 57127,
       "slug": "case-planning-conference-available-dates",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "Case Planning Conference Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Case%20Planning%20Conference%20Available%20Dates.pdf"
     },
     {
       "category": "Long Chambers, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:15 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:17 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-10-30"
       ],
       "dates_offered": 1,
-      "days_since_change": 0,
+      "days_since_change": 1,
       "earliest_date": "2026-10-30",
       "is_instruction": false,
       "kind": "pdf",
@@ -1524,8 +1522,8 @@
     },
     {
       "category": "Long Chambers, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:16 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:18 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 94,
@@ -1548,8 +1546,8 @@
     },
     {
       "category": "JCC, Family",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:08 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:11 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-12-30",
         "2026-12-31"
@@ -1569,14 +1567,14 @@
       "readable": true,
       "size_bytes": 56696,
       "slug": "judicial-case-conference-available-dates",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "Judicial Case Conference Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Judicial%20Case%20Conference%20Available%20Dates.pdf"
     },
     {
       "category": "Registar, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:20 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:22 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 11,
@@ -1599,8 +1597,8 @@
     },
     {
       "category": ",",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:16 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:18 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [],
       "dates_offered": 0,
       "days_since_change": 0,
@@ -1623,8 +1621,8 @@
     },
     {
       "category": "PTC Criminal, Criminal",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:21 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:24 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-11-09",
         "2026-11-10",
@@ -1753,24 +1751,23 @@
     },
     {
       "category": "Registrars, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:21 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:23 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-11-03",
         "2026-11-19",
-        "2026-11-24",
         "2026-12-02",
         "2026-12-09",
         "2026-12-15",
         "2026-12-16",
         "2026-12-31"
       ],
-      "dates_offered": 8,
+      "dates_offered": 7,
       "days_since_change": 0,
       "earliest_date": "2026-11-03",
       "is_instruction": false,
       "kind": "pdf",
-      "last_changed": "2026-10-30T20:09:01+00:00",
+      "last_changed": "2026-10-30T23:16:27+00:00",
       "last_date": "2026-12-31",
       "notes": [],
       "parse_status": "PARSED",
@@ -1778,16 +1775,16 @@
       "previous_earliest_date": "2026-11-30",
       "qualified_dates": [],
       "readable": true,
-      "size_bytes": 49553,
+      "size_bytes": 49547,
       "slug": "registrar-available-dates",
-      "status": "REEXPORTED",
+      "status": "UPDATED",
       "title": "Registrar Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Registrar%20Available%20Dates.pdf"
     },
     {
       "category": "Summary Conviction Appeal, Criminal",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:05 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:09 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-11-13",
         "2026-11-18",
@@ -1903,8 +1900,8 @@
     },
     {
       "category": "TMC, Civil",
-      "court_last_modified": "Fri, 30 Oct 2026 22:04:06 GMT",
-      "date_created": "2026-10-30T15:04",
+      "court_last_modified": "Fri, 30 Oct 2026 23:03:09 GMT",
+      "date_created": "2026-10-30T16:03",
       "dates": [
         "2026-11-17",
         "2026-11-18",
@@ -1931,16 +1928,16 @@
       "readable": true,
       "size_bytes": 57800,
       "slug": "trial-management-conference-available-dates",
-      "status": "UPDATED",
+      "status": "REEXPORTED",
       "title": "Trial Management Conference Available Dates",
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-10-30T22:16:30+00:00",
+  "generated_at": "2026-10-30T23:16:27+00:00",
   "grid": {
     "as_at": "2026-10-30",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-10-30T22:16:30",
+    "generated_at": "2026-10-30T23:16:27",
     "grid": [
       {
         "cells": [
@@ -1981,14 +1978,10 @@
             "wait_days": 234
           },
           {
-            "band": "months",
-            "dates_offered": 1,
-            "earliest_date": "2028-01-04",
-            "last_date": "2028-01-04",
             "length": "6-15 Days",
             "length_label": "6-15 days",
-            "state": "available",
-            "wait_days": 431
+            "reason": "envelope intact, court is offering no dates",
+            "state": "none"
           },
           {
             "band": "months",
@@ -2155,7 +2148,7 @@
       }
     ],
     "summary": {
-      "cells_available": 15,
+      "cells_available": 14,
       "cells_total": 15,
       "longest_wait_days": 480,
       "shortest_wait_days": 32
@@ -2166,12 +2159,12 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20261030T221530Z",
+  "run_id": "20261030T231528Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
-    "REEXPORTED": 22,
+    "REEXPORTED": 24,
     "UNCHANGED": 3,
-    "UPDATED": 4
+    "UPDATED": 2
   },
   "timezone": "America/Vancouver"
 }
