@@ -89,12 +89,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Diagnose TLS chain
-        # bccourts.ca appears to omit an intermediate certificate.
-        # Windows hides this by fetching it via AIA; OpenSSL does not.
-        # Non-fatal: this only reports what the server presents.
-        continue-on-error: true
-        run: python diagnose_tls.py
+      # No TLS diagnosis step any more. The missing intermediate is
+      # stored in certs/, so nothing needs probing before the scrape,
+      # and on a slow day that extra connection only added load and
+      # delay. diagnose_tls.py is still in the repo for manual use.
 
       - name: Run tests
         # Fast and offline. If the diff logic is broken we would rather
@@ -110,6 +108,9 @@ jobs:
           # A dispatched run is the primary and must not be skipped.
           # A scheduled run is the backup and should defer to the guard.
           FORCE_RUN: ${{ github.event_name == 'schedule' && '0' || '1' }}
+          # Print each document as it is checked, not all at the end,
+          # so a slow run shows exactly where it is waiting.
+          PYTHONUNBUFFERED: '1'
         run: python scrape.py
 
       - name: Commit data

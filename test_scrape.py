@@ -72,6 +72,7 @@ class FakeSession(object):
         self.files = {}      # url -> (content, etag, last_modified)
         self.fail = set()    # urls that raise
         self.bad_type = set()
+        self.flaky = {}      # url -> number of attempts that fail first
         self.calls = 0
 
     def put(self, url, content, etag, lm="Mon, 27 Jul 2026 17:03:45 GMT"):
@@ -87,6 +88,10 @@ class FakeSession(object):
 
         if url in self.fail:
             raise scrape.requests.ConnectionError("simulated")
+
+        if self.flaky.get(url):
+            self.flaky[url] -= 1
+            raise scrape.requests.ReadTimeout("simulated slow server")
 
         if url not in self.files:
             return FakeResponse(404, b"", {}, url)
@@ -134,6 +139,45 @@ def main():
     tmp = tempfile.mkdtemp(prefix="vanwatch-")
     os.chdir(tmp)
     print("workspace %s\n" % tmp)
+
+    # -- what the court sees: no bot name, no contact address --------
+    print("request headers")
+    real = scrape.make_session()
+    hdrs = {k.lower(): v for k, v in real.headers.items()}
+    check("no From header", "from" in hdrs, False)
+    check("no bot name or contact in User-Agent",
+          any(w in hdrs["user-agent"].lower()
+              for w in ("courtready", "bot", "@")), False)
+    check("looks like a browser", hdrs["user-agent"].startswith("Mozilla/"),
+          True)
+
+    # -- stored intermediate: TLS ready with no network at all --------
+    print("\nstored intermediate")
+    import socket as _s0
+    real_conn = _s0.create_connection
+    def no_conn(*a, **k):
+        raise AssertionError("TLS setup opened a connection")
+    _s0.create_connection = no_conn
+    saved = {k: os.environ.get(k)
+             for k in ("REQUESTS_CA_BUNDLE", "SSL_CERT_FILE")}
+    try:
+        import tlsfix
+        how = tlsfix.ensure("www.bccourts.ca")
+        check("uses the stored copy without connecting",
+              how.startswith("stored intermediate"), True)
+        bundle = os.environ.get("REQUESTS_CA_BUNDLE") or ""
+        with open(bundle) as f:
+            body = f.read()
+        check("bundle has the trusted roots and the stored copy",
+              body.count("BEGIN CERTIFICATE") > 100, True)
+    finally:
+        _s0.create_connection = real_conn
+        for k, v in saved.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+    print()
 
     sess = FakeSession()
     scrape.make_session = lambda: sess
@@ -382,6 +426,34 @@ def main():
     check("and reported", st["status"], "UPDATED")
     check("with the new earliest date", st["earliest_date"], "2027-03-29")
     check("and the new build time", st["date_created"], "2026-07-28T10:04")
+
+    # -- slow server: a timeout on the first pass is retried later ----
+    print("\nslow server")
+    scrape.SKIP_GUARD_MINUTES = 0
+    sess.flaky[U3] = scrape.RETRIES          # every first-pass attempt
+    rc = scrape.main()
+    check("document that timed out comes through on the second pass",
+          statuses()["3 Day Civil Trials"] != "FETCH_FAILED", True)
+    check("and the run succeeds", rc, 0)
+
+    sess.flaky[U3] = scrape.RETRIES * 2      # fails both passes
+    scrape.main()
+    check("still failing after both passes is recorded honestly",
+          statuses()["3 Day Civil Trials"], "FETCH_FAILED")
+    sess.flaky.clear()
+
+    # -- run budget: never start what cannot finish -------------------
+    print("\nrun budget")
+    before = sess.calls
+    scrape.start_clock(budget=1)
+    try:
+        scrape.fetch(sess, U2)
+        got = "no exception"
+    except scrape.OutOfTime:
+        got = "OutOfTime"
+    check("no attempt started with the budget spent", got, "OutOfTime")
+    check("and nothing was sent", sess.calls - before, 0)
+    scrape.start_clock(budget=10 ** 6)
 
     with open("data/history.csv") as f:
         rows = len(f.readlines())

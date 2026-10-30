@@ -30,6 +30,23 @@ CACHE = os.path.join(tempfile.gettempdir(), "courtready-ca-bundle.pem")
 TIMEOUT = 20
 MAX_DEPTH = 4
 
+# A stored copy of the intermediate the court's server fails to send.
+# Public, published by Entrust for anyone to download, and contains
+# nothing about us. With it, no network round trip is needed before the
+# scrape starts. That round trip used to be the weakest link: on a slow
+# day the court's server could take 30 seconds to complete a handshake,
+# the repair timed out, and every request after it failed verification
+# even though the server would have answered. (29 Oct 2026: this is what
+# sank the 1:15 pm run and two of three diagnostic probes.)
+#
+# Safety is unchanged. The stored certificate is only an extra link
+# offered to the verifier; it must still chain to a root certifi
+# already trusts, and the court's own certificate must still be signed
+# by it. If the court changes certificate authority this file simply
+# stops being used and the live repair below takes over.
+PINNED = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                      "certs", "bccourts-intermediate.pem")
+
 
 def _presented_chain(host, port):
     """Every certificate the server actually sends, in DER form."""
@@ -63,7 +80,7 @@ def _fetch(url):
     from cryptography import x509
     from cryptography.hazmat.primitives.serialization import pkcs7
 
-    req = urllib.request.Request(url, headers={"User-Agent": "CourtreadyBot"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
         data = r.read()
 
@@ -164,14 +181,57 @@ def verify_works(host, port=443, bundle=None):
         return False
 
 
-def ensure(host, port=443):
+def pinned_bundle(pinned=PINNED, cache=CACHE):
     """
-    Make verification of `host` work if it currently does not.
+    certifi's roots plus the stored intermediate, written to `cache`.
+    No network. Returns (path, expiry) or (None, reason).
+    """
+    try:
+        import certifi
+        from datetime import datetime, timezone
+        from cryptography import x509
+        with open(pinned, "rb") as f:
+            pem = f.read()
+        cert = x509.load_pem_x509_certificate(pem)
+        expires = cert.not_valid_after_utc
+        if expires <= datetime.now(timezone.utc):
+            return None, "stored intermediate expired %s" % expires.date()
+        with open(certifi.where(), "rb") as f:
+            roots = f.read()
+        with open(cache, "wb") as f:
+            f.write(roots)
+            if not roots.endswith(b"\n"):
+                f.write(b"\n")
+            f.write(pem)
+        return cache, expires
+    except Exception as e:
+        return None, "stored intermediate unusable: %s" % e
+
+
+def use_bundle(bundle):
+    os.environ["REQUESTS_CA_BUNDLE"] = bundle
+    os.environ["SSL_CERT_FILE"] = bundle
+
+
+def ensure(host, port=443, live=False):
+    """
+    Make verification of `host` work.
+
+    By default uses the stored intermediate and touches no network. The
+    live path (live=True, or no usable stored copy) probes the server
+    and follows AIA as before; the scraper falls back to it only if a
+    request fails verification with the stored copy in place.
 
     Returns a description of what happened, for logging. The bundle
-    path, if one was built, is exported through REQUESTS_CA_BUNDLE so
-    requests picks it up automatically.
+    path is exported through REQUESTS_CA_BUNDLE so requests picks it up
+    automatically.
     """
+    if not live:
+        bundle, info = pinned_bundle()
+        if bundle:
+            use_bundle(bundle)
+            return "stored intermediate (valid to %s)" % info.date()
+        # fall through to the live repair, noting why
     if verify_works(host, port):
         return "ok: chain verifies normally"
 
@@ -180,8 +240,7 @@ def ensure(host, port=443):
         return "FAILED: chain incomplete and no issuer could be fetched"
 
     if verify_works(host, port, bundle):
-        os.environ["REQUESTS_CA_BUNDLE"] = bundle
-        os.environ["SSL_CERT_FILE"] = bundle
+        use_bundle(bundle)
         return "repaired: fetched missing intermediate via AIA"
 
     return "FAILED: fetched an intermediate but the chain still fails"
