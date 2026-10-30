@@ -1,0 +1,53 @@
+checkout size: 101M
+QUARANTINED: 1 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+QUARANTINED: 1 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+QUARANTINED: 1 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+QUARANTINED: 1 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+BROKEN: 16 Day & Over MVA Trials has failed 3 consecutive runs
+QUARANTINED: 4 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+BROKEN: 16 Day & Over MVA Trials has failed 4 consecutive runs
+FATAL: found 1 documents, floor is 3. Index markup or the URL scheme has probably changed. Not publishing.
+QUARANTINED: 1 failures of 4 exceeds 20%. latest.json untouched, site keeps last good data.
+59 passed, 0 failed
+52 passed, 0 failed
+changes before scrape: 0
+run 20261030T131939Z
+tls: os | stored intermediate (valid to 2027-12-10)
+index: 29 Vancouver documents
+  1/29   UNCHANGED      0.1s  16 Day & Over Civil Trials
+  2/29   UNCHANGED      0.1s  16 Day & Over Family Trials
+  3/29   UNCHANGED      0.1s  16 Day & Over MVA Trials
+  4/29   UNCHANGED      0.1s  2 Day Civil Trials
+  5/29   UNCHANGED      0.1s  2 Day Family Trials
+  6/29   UNCHANGED      0.1s  2 Day MVA Trials
+  7/29   UNCHANGED      0.1s  3 Day Civil Trials
+  8/29   UNCHANGED      0.1s  3 Day Family Trials
+  9/29   UNCHANGED      0.1s  3 Day MVA Trials
+  10/29  UNCHANGED      0.1s  4-5 Day Civil Trials
+  11/29  UNCHANGED      0.1s  4-5 Day Family Trials
+  12/29  UNCHANGED      0.1s  4-5 Day MVA Trials
+  13/29  UNCHANGED      0.1s  6-15 Day Civil Trials
+  14/29  UNCHANGED      0.1s  6-15 Day Family Trials
+  15/29  UNCHANGED      0.1s  6-15 Day MVA Trials
+  16/29  UNCHANGED      0.1s  Bankruptcy Discharge
+  17/29  UNCHANGED      0.1s  Booking Lengthy Chambers
+  18/29  UNCHANGED      0.1s  Booking Trials
+  19/29  UNCHANGED      0.1s  Case Planning Conference Available Dates
+  20/29  UNCHANGED      0.1s  Civil Lengthy Chambers Available Dates
+  21/29  UNCHANGED      0.1s  Family Lengthy Chambers Available Dates
+  22/29  UNCHANGED      0.1s  Judicial Case Conference Available Dates
+  23/29  UNCHANGED      0.1s  One Day & Over Registrar Dates
+  24/29  UNCHANGED      0.1s  Pre Hearing Conference Available
+  25/29  UNCHANGED      0.1s  Pre-Trial Conference Available Dates
+  26/29  UNCHANGED      0.1s  Registrar Available Dates
+  27/29  UNCHANGED      0.1s  SCA Available Dates
+  28/29  UNCHANGED      0.1s  Settlement Conference Available Dates
+  29/29  UNCHANGED      0.1s  Trial Management Conference Available Dates
+published. 0 failures of 29
+
+real	0m58.352s
+user	0m0.365s
+sys	0m0.043s
+exit 0
+new archive files: 0
+new parse files:   0
