@@ -1,0 +1,61 @@
+name: diag-rehearsal
+
+# Diagnostic only, never merged. Runs the real scraper on the
+# chore/prune-archive branch, reports what it would add, throws the
+# data away. No alerts, no commit to any real branch.
+
+on:
+  push:
+    branches: [diag/prune-rehearsal]
+
+permissions:
+  contents: write
+
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout pruned branch
+        uses: actions/checkout@v4
+        with:
+          ref: chore/prune-archive
+          path: candidate
+      - uses: actions/checkout@v4
+        with:
+          path: diagrepo
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: candidate/requirements.txt
+      - run: pip install -r candidate/requirements.txt
+      - name: Rehearse
+        working-directory: candidate
+        env:
+          FORCE_RUN: '1'
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set +e
+          {
+            echo "checkout size: $(du -sh data | cut -f1)"
+            python test_scrape.py | tail -1
+            python test_alerts.py data/raw | tail -1
+            git status --short | wc -l | sed 's/^/changes before scrape: /'
+            ( time python scrape.py ) 2>&1
+            echo "exit $?"
+            echo "new archive files: $(git status --short --untracked-files=all data/raw | wc -l)"
+            echo "new parse files:   $(git status --short --untracked-files=all data/parsed | wc -l)"
+            git status --short --untracked-files=all data/raw data/parsed
+          } 2>&1 | tee ../rehearsal.txt
+      - name: Save log
+        if: always()
+        working-directory: diagrepo
+        run: |
+          mkdir -p diag
+          cp ../rehearsal.txt "diag/prune-rehearsal-$(date -u +%H%M).txt" || true
+          git config user.name  "courtready-bot"
+          git config user.email "admin@courtready.ca"
+          git add diag/
+          git commit -m "diag: prune rehearsal log" || exit 0
+          git pull --rebase -q && git push -q
