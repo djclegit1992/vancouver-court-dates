@@ -1,0 +1,22 @@
+{
+  "category_raw": "Long Chambers, Civil",
+  "content_hash": "71a01a6c3c3511289aa30ae54edbd366d4ae4868885240abbf66a8351af076ad",
+  "date_created": "2026-11-04T12:03",
+  "dates": [
+    "2026-12-18"
+  ],
+  "dates_offered": 1,
+  "earliest_date": "2026-12-18",
+  "last_date": "2026-12-18",
+  "length": "Long Chambers",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 1,
+  "unqualified_dates": [
+    "2026-12-18"
+  ]
+}
