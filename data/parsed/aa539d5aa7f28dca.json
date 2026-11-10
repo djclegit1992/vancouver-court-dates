@@ -1,0 +1,38 @@
+{
+  "category_raw": "16+ Days, Family",
+  "content_hash": "ffb99ab18bf129a70d3d9cca9deab36aa2814eafe150f4913d4e9b6dce7c9f0a",
+  "date_created": "2026-11-10T16:05",
+  "dates": [
+    "2027-09-13",
+    "2028-01-04",
+    "2028-01-10",
+    "2028-01-17",
+    "2028-01-31",
+    "2028-03-27",
+    "2028-04-03",
+    "2028-04-10",
+    "2028-04-24"
+  ],
+  "dates_offered": 9,
+  "earliest_date": "2027-09-13",
+  "last_date": "2028-04-24",
+  "length": "16+ Days",
+  "matter": "Family",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 9,
+  "unqualified_dates": [
+    "2027-09-13",
+    "2028-01-04",
+    "2028-01-10",
+    "2028-01-17",
+    "2028-01-31",
+    "2028-03-27",
+    "2028-04-03",
+    "2028-04-10",
+    "2028-04-24"
+  ]
+}
