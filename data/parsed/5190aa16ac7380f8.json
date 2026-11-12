@@ -1,0 +1,22 @@
+{
+  "category_raw": "Registrars, Civil",
+  "content_hash": "76846d7f7f304439cb36f96f89f15518c09f7c3b555f96829b29aef1f859e1ae",
+  "date_created": "2026-11-12T14:03",
+  "dates": [
+    "2026-12-11"
+  ],
+  "dates_offered": 1,
+  "earliest_date": "2026-12-11",
+  "last_date": "2026-12-11",
+  "length": "Registrars",
+  "matter": "Civil",
+  "notes": [],
+  "parse_reason": null,
+  "parse_status": "PARSED",
+  "qualified_dates": [],
+  "schema": 2,
+  "slot_count": 1,
+  "unqualified_dates": [
+    "2026-12-11"
+  ]
+}
