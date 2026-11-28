@@ -324,7 +324,7 @@
     },
     {
       "category": "2 Days, MVA",
-      "court_last_modified": "Sat, 28 Nov 2026 00:03:37 GMT",
+      "court_last_modified": "Sat, 28 Nov 2026 00:03:30 GMT",
       "date_created": "2026-11-27T17:03",
       "dates": [
         "2027-03-08",
@@ -1112,7 +1112,7 @@
     },
     {
       "category": "6-15 Days, MVA",
-      "court_last_modified": "Sat, 28 Nov 2026 00:03:40 GMT",
+      "court_last_modified": "Sat, 28 Nov 2026 00:03:33 GMT",
       "date_created": "2026-11-27T17:03",
       "dates": [
         "2027-05-31",
@@ -1172,7 +1172,7 @@
     },
     {
       "category": "Bankruptcy Discharge, Civil",
-      "court_last_modified": "Sat, 28 Nov 2026 00:03:52 GMT",
+      "court_last_modified": "Sat, 28 Nov 2026 00:03:45 GMT",
       "date_created": "2026-11-27T17:03",
       "dates": [
         "2026-12-02",
@@ -1247,7 +1247,7 @@
     },
     {
       "category": ",",
-      "court_last_modified": "Sat, 28 Nov 2026 00:03:34 GMT",
+      "court_last_modified": "Sat, 28 Nov 2026 00:03:27 GMT",
       "date_created": "2026-11-27T17:03",
       "dates": [],
       "dates_offered": 0,
@@ -1343,7 +1343,7 @@
     },
     {
       "category": "Registar, Civil",
-      "court_last_modified": "Sat, 28 Nov 2026 00:03:49 GMT",
+      "court_last_modified": "Sat, 28 Nov 2026 00:03:42 GMT",
       "date_created": "2026-11-27T17:03",
       "dates": [],
       "dates_offered": 0,
@@ -1696,11 +1696,11 @@
       "url": "https://www.bccourts.ca/supreme_court/scheduling/lists/Vancouver/Trial%20Management%20Conference%20Available%20Dates.pdf"
     }
   ],
-  "generated_at": "2026-11-28T04:59:26+00:00",
+  "generated_at": "2026-11-28T08:27:42+00:00",
   "grid": {
     "as_at": "2026-11-28",
     "date_format": "YYYY-MM-DD",
-    "generated_at": "2026-11-28T04:59:26",
+    "generated_at": "2026-11-28T08:27:42",
     "grid": [
       {
         "cells": [
@@ -1918,7 +1918,7 @@
   "jurisdiction": "BC",
   "location_code": "VA",
   "location_name": "Vancouver",
-  "run_id": "20261128T045827Z",
+  "run_id": "20261128T082644Z",
   "source_url": "https://www.bccourts.ca/supreme_court/scheduling/index.aspx",
   "status_counts": {
     "UNCHANGED": 29
